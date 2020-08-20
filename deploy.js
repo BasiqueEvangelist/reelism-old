@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const child_process = require("child_process");
 
 const walkDir = function (dir) {
     var results = [];
@@ -48,6 +49,10 @@ for (const dp of datapacks) {
     var stat = fs.statSync(dp);
     if (stat && !stat.isDirectory())
         continue;
+
+    if (fs.existsSync(path.join(dp, "build.js"))) {
+        child_process.execSync("node build.js", { cwd: dp, stdio: "inherit" })
+    }
 
     if (fs.existsSync(path.join(dp, "out")))
         copyDir(path.join(dp, "out", dp), path.join(devPath, dp));
