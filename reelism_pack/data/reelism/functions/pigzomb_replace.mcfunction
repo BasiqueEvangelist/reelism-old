@@ -1,0 +1,1 @@
+replaceitem entity @e[type=zombie_pigman] weapon.mainhand minecraft:stone_sword

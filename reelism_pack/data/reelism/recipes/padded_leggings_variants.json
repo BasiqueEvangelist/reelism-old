@@ -1,0 +1,20 @@
+{
+    "group": "padded_leggings",
+    "type": "crafting_shaped",
+    "pattern": [
+        "XXX",
+        "Y Y",
+        "X X"
+    ],
+    "key": {
+        "X": {
+            "item": "minecraft:leather"
+        },
+        "Y": {
+            "tag": "minecraft:wool"
+        }
+    },
+    "result": {
+        "item": "minecraft:golden_leggings"
+    }
+}

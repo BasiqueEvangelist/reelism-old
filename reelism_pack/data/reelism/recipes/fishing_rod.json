@@ -1,0 +1,22 @@
+{
+    "type": "crafting_shaped",
+    "pattern": [
+        "  #",
+        " #X",
+        "# Y"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:stick"
+        },
+        "X": {
+            "item": "minecraft:string"
+        },
+        "Y": {
+            "tag": "reelism:fishing_hooks"
+        }
+    },
+    "result": {
+        "item": "minecraft:fishing_rod"
+    }
+}

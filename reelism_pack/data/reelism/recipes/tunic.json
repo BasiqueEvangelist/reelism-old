@@ -1,0 +1,17 @@
+{
+  "group": "tunic",
+  "type": "crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:brown_carpet"
+    }
+  },
+  "result": {
+    "item": "minecraft:leather_chestplate"
+  }
+}

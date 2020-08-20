@@ -1,0 +1,17 @@
+{
+    "type": "crafting_shaped",
+    "pattern": [
+        "XYX"
+    ],
+    "key": {
+        "X": {
+            "item": "minecraft:diamond"
+        },
+        "Y": {
+            "item": "minecraft:iron_pickaxe"
+        }
+    },
+  "result": {
+    "item": "minecraft:diamond_pickaxe"
+  }
+}

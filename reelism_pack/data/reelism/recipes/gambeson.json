@@ -1,0 +1,20 @@
+{
+    "group": "gambeson",
+    "type": "crafting_shaped",
+    "pattern": [
+        "X X",
+        "XYX",
+        "XYX"
+    ],
+    "key": {
+        "X": {
+            "item": "minecraft:leather"
+        },
+        "Y": {
+            "item": "minecraft:black_wool"
+        }
+    },
+    "result": {
+        "item": "minecraft:golden_chestplate"
+    }
+}

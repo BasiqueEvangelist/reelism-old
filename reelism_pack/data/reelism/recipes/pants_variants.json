@@ -1,0 +1,17 @@
+{
+  "group": "pants",
+  "type": "crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "tag": "minecraft:carpets"
+    }
+  },
+  "result": {
+    "item": "minecraft:leather_leggings"
+  }
+}
