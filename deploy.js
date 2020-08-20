@@ -19,9 +19,12 @@ for (const dp of datapacks) {
         child_process.execSync("node build.js", { cwd: dp, stdio: "inherit" })
     }
 
+    const outPath = path.join(devPath, dp);
+    pathEx.removeDir(outPath)
+
     if (fs.existsSync(path.join(dp, "out")))
-        pathEx.copyDir(path.join(dp, "out", dp), path.join(devPath, dp));
+        pathEx.copyDir(path.join(dp, "out", dp), outPath);
     else
-        pathEx.copyDir(dp, path.join(devPath, dp));
+        pathEx.copyDir(dp, outPath);
     console.log(`[${dp}] Deployed to dev world`);
 }
