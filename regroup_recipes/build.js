@@ -1,3 +1,4 @@
+const fs = require("fs");
 
 function groupBanners(item) {
     var regex = /_banner_pattern/g;
@@ -26,9 +27,11 @@ function pipeline(item) {
     return item;
 }
 
+const buildinfo = JSON.parse(fs.readFileSync("../buildinfo.json"));
+
 var packInfo =
 {
-    basedOn: "C:/Prog/Minecraft/minecraft_1.16.2_datapack",
+    basedOn: buildinfo.original_datapack,
     pipeline: pipeline
 };
 

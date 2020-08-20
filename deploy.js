@@ -37,7 +37,7 @@ const copyDir = function (oldPath, newPath) {
     }
 }
 
-var devPath = "C:/Games/MCLaunch/data/profiles/minecraft/saves/ReeDev/datapacks";
+var devPath = JSON.parse(fs.readFileSync("buildinfo.json")).devpath;
 
 var datapacks = fs.readdirSync(".");
 for (const dp of datapacks) {
