@@ -1,5 +1,5 @@
 {
-  "type": "smelting",
+  "type": "minecraft:blasting",
   "ingredient": {
     "item": "minecraft:gold_ore"
   },
