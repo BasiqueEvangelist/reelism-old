@@ -1,5 +1,3 @@
-const fs = require("fs");
-
 function groupBanners(item) {
     var regex = /_banner_pattern/g;
     if (item.result
@@ -44,11 +42,8 @@ function pipeline(item) {
     return item;
 }
 
-const buildinfo = JSON.parse(fs.readFileSync("../buildinfo.json"));
-
 var packInfo =
 {
-    basedOn: buildinfo.original_datapack,
     pipeline: pipeline
 };
 

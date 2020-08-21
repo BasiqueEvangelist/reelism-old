@@ -25,14 +25,11 @@ module.exports = function (packinfo) {
 
     packname = packinfo.name;
 
-    if (!fs.existsSync(packinfo.basedOn)) {
-        log(`Based on what? Couldn't find path: ${packinfo.basedOn}.`);
-        process.exit(1);
-    }
+    const basedOn = JSON.parse(fs.readFileSync("../buildinfo.json")).original_datapack;
 
     log(`Preparing...`);
 
-    const baseFiles = pathEx.walkDir(packinfo.basedOn + "/data");
+    const baseFiles = pathEx.walkDir(basedOn + "/data");
     const outPath = path.join("out", packinfo.name);
     pathEx.removeDir("out");
     fs.mkdirSync(outPath, { recursive: true });
@@ -45,7 +42,7 @@ module.exports = function (packinfo) {
     log(`Prepared for processing in ${stopwatchLap()}ms`);
 
     for (const file of baseFiles) {
-        const newFileName = file.substring(packinfo.basedOn.length)
+        const newFileName = file.substring(basedOn.length)
         try {
             if (path.extname(file) != ".json")
                 continue;
