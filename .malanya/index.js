@@ -51,11 +51,11 @@ module.exports = function (packinfo) {
             const origData = fs.readFileSync(file);
 
             // newFilePath == "data/{namespace}/{type}/{path}"
-            const splitted = newFileName.split(path.sep).filter(x => x != "");
+            const splitted = newFileName.split("/").filter(x => x != "");
 
             const namespace = splitted[1];
             const type = splitted[2];
-            const subpath = splitted.slice(3).join(path.sep);
+            const subpath = splitted.slice(3).join("/");
 
             const transformed = packinfo.pipeline({
                 namespace,
