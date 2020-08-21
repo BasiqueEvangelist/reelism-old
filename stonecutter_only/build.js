@@ -1,5 +1,5 @@
 function pipeline(item) {
-    return item;
+    return item.data;
 }
 
 var packInfo =

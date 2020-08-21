@@ -12,11 +12,11 @@ function pipeline(item) {
         "minecraft:smelting"
     ]
 
-    if (banned_types.includes(item.type)
-        && banned_items.includes(item.result))
+    if (banned_types.includes(item.data.type)
+        && banned_items.includes(item.data.result))
         return {};
 
-    return item;
+    return item.data;
 }
 
 var packInfo =

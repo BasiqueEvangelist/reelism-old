@@ -11,16 +11,15 @@ const forbidden = [
 
 function noLowTempSmelting(item) {
 
-    if (item.type == "minecraft:smelting"
-        && forbidden.includes(item.result)) {
-        return {}
+    if (item.data.type == "minecraft:smelting"
+        && forbidden.includes(item.data.result)) {
+        item.data = {};
     }
-    return item;
 }
 
 function pipeline(item) {
-    item = noLowTempSmelting(item);
-    return item;
+    noLowTempSmelting(item);
+    return item.data;
 }
 
 var packInfo =

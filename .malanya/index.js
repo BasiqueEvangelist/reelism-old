@@ -50,7 +50,19 @@ module.exports = function (packinfo) {
             const newFilePath = path.join(outPath, newFileName);
             const origData = fs.readFileSync(file);
 
-            const transformed = packinfo.pipeline(JSON.parse(origData));
+            // newFilePath == "data/{namespace}/{type}/{path}"
+            const splitted = newFileName.split(path.sep).filter(x => x != "");
+
+            const namespace = splitted[1];
+            const type = splitted[2];
+            const subpath = splitted.slice(3).join(path.sep);
+
+            const transformed = packinfo.pipeline({
+                namespace,
+                type,
+                subpath,
+                data: JSON.parse(origData)
+            });
             const transformedString = JSON.stringify(transformed, null, 1);
 
             if (JSON.stringify(JSON.parse(origData), null, 1) == transformedString)
