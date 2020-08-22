@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const forbidden = [
     "minecraft:iron_ingot",
     "minecraft:iron_nugget",
@@ -22,8 +24,11 @@ function pipeline(item) {
     return item.data;
 }
 
+const buildinfo = JSON.parse(fs.readFileSync("../buildinfo.json"));
+
 var packInfo =
 {
+    basedOn: buildinfo.original_datapack,
     pipeline: pipeline
 };
 
