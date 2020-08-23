@@ -1,0 +1,1 @@
+FOR %%I in (*.decoded.json) DO node encode.js %%I 

@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "block/fachwerk_box",
+        "side": "block/fachwerk_long"
+    }
+}
