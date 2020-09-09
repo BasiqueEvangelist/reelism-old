@@ -1,0 +1,71 @@
+{
+    "profession": "minecraft:wandering_trader",
+    "career_level": 1,
+    "trades": [
+        {
+            "type": "minecraft:sell_enchanted_tool",
+            "tool": {
+                "item": "minecraft:diamond_sword"
+            },
+            "base_price": 16,
+            "max_uses": 2,
+            "experience": 15,
+            "multiplier": 0.2
+        },
+        {
+            "type": "minecraft:sell_enchanted_tool",
+            "tool": {
+                "item": "minecraft:diamond_axe"
+            },
+            "base_price": 12,
+            "max_uses": 2,
+            "experience": 15,
+            "multiplier": 0.2
+        },
+        {
+            "type": "minecraft:sell_enchanted_tool",
+            "tool": {
+                "item": "minecraft:bow"
+            },
+            "base_price": 16,
+            "max_uses": 2,
+            "experience": 15,
+            "multiplier": 0.2
+        },
+        {
+            "type": "minecraft:sell_item",
+            "sell": {
+                "item": "minecraft:arrow"
+            },
+            "price": 8,
+            "count": 64,
+            "max_uses": 8,
+            "experience": 2,
+            "multiplier": 0.2
+        },
+        {
+            "type": "minecraft:sell_item",
+            "sell": {
+                "item": "minecraft:lingering_potion",
+                "data": "{Potion:\"minecraft:strong_poison\"}"
+            },
+            "price": 16,
+            "count": 1,
+            "max_uses": 3,
+            "experience": 2,
+            "multiplier": 0.2
+        },
+        {
+            "type": "minecraft:sell_item",
+            "sell": {
+                "item": "minecraft:lingering_potion",
+                "data": "{Potion:\"minecraft:strong_harming\"}"
+            },
+            "price": 16,
+            "count": 1,
+            "max_uses": 3,
+            "experience": 2,
+            "multiplier": 0.2
+        }
+    ]
+}
