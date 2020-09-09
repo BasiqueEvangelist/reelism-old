@@ -1,0 +1,8 @@
+{
+    "type": "potion",
+    "input": "minecraft:water",
+    "ingredient": {
+        "item": "minecraft:slime_ball"
+    },
+    "output": "minecraft:thick"
+}

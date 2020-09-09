@@ -1,0 +1,8 @@
+{
+    "type": "potion",
+    "input": "minecraft:thick",
+    "ingredient": {
+        "item": "minecraft:fermented_spider_eye"
+    },
+    "output": "minecraft:weakness"
+}
