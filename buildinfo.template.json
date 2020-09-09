@@ -1,4 +1,5 @@
 {
     "devpath": "",
-    "original_datapack": ""
+    "original_datapack": "",
+    "datapackify_datapack": "<datapackify>/src/main/resources"
 }

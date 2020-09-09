@@ -1,5 +1,4 @@
-
-
+const fs = require("fs");
 
 function pipeline(item) {
 
@@ -16,9 +15,11 @@ function pipeline(item) {
     return item.data;
 }
 
+const buildinfo = JSON.parse(fs.readFileSync("../buildinfo.json"));
+
 var packInfo =
 {
-    basedOn: "C:/Prog/Minecraft/datapackify/src/main/resources",
+    basedOn: buildinfo.datapackify_datapack,
     pipeline: pipeline
 };
 
