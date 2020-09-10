@@ -1,6 +1,6 @@
-const path = require("path");
-const fs = require("fs");
-const pathEx = require("./pathExtra");
+import * as path from "path";
+import * as fs from "fs";
+import * as pathEx from "./pathExtra";
 
 var startTs = Date.now();
 var lastTs = startTs;
@@ -18,7 +18,20 @@ function log(msg) {
     console.log(`[${packname}] ${msg}`)
 }
 
-module.exports = function (packinfo) {
+export interface Item {
+    namespace: string,
+    type: string,
+    subpath: string,
+    data: any
+}
+
+export interface PackInformation {
+    basedOn: string[] | string,
+    name?: string,
+    pipeline: (i: Item) => any
+}
+
+export function run(packinfo: PackInformation) {
 
     if (!packinfo.name)
         packinfo.name = path.basename(process.cwd());
@@ -56,7 +69,7 @@ module.exports = function (packinfo) {
                 continue;
 
             const newFilePath = path.join(outPath, newFileName);
-            const origData = fs.readFileSync(file);
+            const origData = fs.readFileSync(file, "utf-8");
 
             // newFilePath == "data/{namespace}/{type}/{path}"
             const splitted = newFileName.split("/").filter(x => x != "");
@@ -79,7 +92,7 @@ module.exports = function (packinfo) {
             log(`Processing ${newFileName}`);
 
             pathEx.createPath(newFilePath);
-            fs.writeFileSync(newFilePath, transformedString, { encoding: "UTF-8" });
+            fs.writeFileSync(newFilePath, transformedString, { encoding: "utf-8" });
         }
         catch (ex) {
             log(`Error when processing ${newFileName}! Skipping;\n` + ex);

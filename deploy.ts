@@ -1,9 +1,10 @@
-const fs = require("fs");
-const path = require("path");
-const child_process = require("child_process");
-const pathEx = require("./.malanya/pathExtra");
+import * as fs from "fs";
+import * as path from "path";
+import * as child_process from "child_process";
+import * as pathEx from "./.malanya/pathExtra";
+import { BuildInformation } from "./.malanya/types";
 
-var devPath = JSON.parse(fs.readFileSync("buildinfo.json")).devpath;
+var buildInfo = <BuildInformation>JSON.parse(fs.readFileSync("buildinfo.json", "utf-8"));
 
 var datapacks = fs.readdirSync(".");
 for (const dp of datapacks) {
@@ -19,7 +20,7 @@ for (const dp of datapacks) {
         child_process.execSync("node build.js", { cwd: dp, stdio: "inherit" })
     }
 
-    const outPath = path.join(devPath, dp);
+    const outPath = path.join(buildInfo.devpath, dp);
     pathEx.removeDir(outPath)
 
     if (fs.existsSync(path.join(dp, "out")))

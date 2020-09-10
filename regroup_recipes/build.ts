@@ -1,4 +1,6 @@
-const fs = require("fs");
+import * as fs from "fs";
+import { BuildInformation } from "../.malanya/types"
+import { run } from "../.malanya"
 
 function groupBanners(item) {
     var regex = /_banner_pattern/g;
@@ -44,7 +46,7 @@ function pipeline(item) {
     return item.data;
 }
 
-const buildinfo = JSON.parse(fs.readFileSync("../buildinfo.json"));
+const buildinfo = <BuildInformation>JSON.parse(fs.readFileSync("../buildinfo.json", "utf-8"));
 
 var packInfo =
 {
@@ -52,4 +54,4 @@ var packInfo =
     pipeline: pipeline
 };
 
-require("../.malanya")(packInfo);
+run(packInfo);

@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "lib": [
+            "ES2015"
+        ]
+    },
+    "include": [
+        "deploy.ts",
+        "*/*.ts",
+        ".malanya/*.ts"
+    ],
+    "exclude": [
+        "node_modules/**"
+    ]
+}

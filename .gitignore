@@ -1,2 +1,4 @@
 **/out
 buildinfo.json
+*.js
+node_modules

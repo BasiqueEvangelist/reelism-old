@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
+import * as fs from "fs";
+import * as path from "path";
 
-exports.walkDir = function (dir) {
+export function walkDir(dir: fs.PathLike): string[] {
     var results = [];
     var list = fs.readdirSync(dir);
     list.forEach(function (file) {
@@ -18,7 +18,7 @@ exports.walkDir = function (dir) {
     return results;
 }
 
-exports.removeDir = function (dir) {
+export function removeDir(dir: fs.PathLike) {
     if (!fs.existsSync(dir))
         return;
 
@@ -36,14 +36,14 @@ exports.removeDir = function (dir) {
     fs.rmdirSync(dir);
 }
 
-exports.createPath = function (filepath) {
+export function createPath(filepath: string) {
     var dirname = path.dirname(filepath);
     if (!fs.existsSync(dirname))
         fs.mkdirSync(dirname, { recursive: true });
 
 }
 
-exports.copyDir = function (oldPath, newPath) {
+export function copyDir(oldPath: string, newPath: string) {
     if (!fs.existsSync(oldPath))
         return;
     var tree = exports.walkDir(oldPath);
@@ -54,5 +54,3 @@ exports.copyDir = function (oldPath, newPath) {
         fs.copyFileSync(file, newName);
     }
 }
-
-
