@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import { BuildInformation } from "../.malanya/types"
-import { run } from "../.malanya"
+import { Item, run } from "../.malanya"
+import { purgeFromLootTables } from "../.malanya/transformers";
 
 const forbidden = [
     "minecraft:iron_ingot",
@@ -21,8 +22,26 @@ function noLowTempSmelting(item) {
     }
 }
 
+const WHITELISTED_GOLD = [
+    "chests/bastion_bridge.json",
+    "chests/bastion_other.json",
+    "chests/nether_bridge.json",
+    "chests/ruined_portal.json"
+];
+
+function noOverworldGoldArmor(item: Item) {
+    if (!WHITELISTED_GOLD.includes(item.subpath)) {
+        item.data = purgeFromLootTables("minecraft:golden_helmet")(item);
+        item.data = purgeFromLootTables("minecraft:golden_chestplate")(item);
+        item.data = purgeFromLootTables("minecraft:golden_leggings")(item);
+        item.data = purgeFromLootTables("minecraft:golden_boots")(item);
+    }
+}
+
+
 function pipeline(item) {
     noLowTempSmelting(item);
+    noOverworldGoldArmor(item);
     return item.data;
 }
 
