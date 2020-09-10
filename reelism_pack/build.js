@@ -28,7 +28,7 @@ const buildinfo = JSON.parse(fs.readFileSync("../buildinfo.json"));
 
 var packInfo =
 {
-    basedOn: buildinfo.original_datapack,
+    basedOn: [buildinfo.original_datapack, buildinfo.datapackify_datapack],
     pipeline: pipeline
 };
 

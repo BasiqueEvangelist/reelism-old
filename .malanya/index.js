@@ -25,14 +25,20 @@ module.exports = function (packinfo) {
 
     packname = packinfo.name;
 
-    if (!fs.existsSync(packinfo.basedOn)) {
-        log(`Based on what? Couldn't find path: ${packinfo.basedOn}.`);
-        process.exit(1);
-    }
+    const existsDirs = packinfo.basedOn instanceof Array ? packinfo.basedOn : [packinfo.basedOn];
+
+    for (const dir of existsDirs)
+        if (!fs.existsSync(dir)) {
+            log(`Based on what? Couldn't find path: ${dir}.`);
+            process.exit(1);
+        }
 
     log(`Preparing...`);
 
-    const baseFiles = pathEx.walkDir(packinfo.basedOn + "/data");
+    var baseFiles = [];
+    for (const dir of existsDirs) {
+        baseFiles = baseFiles.concat(pathEx.walkDir(dir + "/data").map(x => [x, x.substring(dir.length)]));
+    }
     const outPath = path.join("out", packinfo.name);
     pathEx.removeDir("out");
     fs.mkdirSync(outPath, { recursive: true });
@@ -44,8 +50,7 @@ module.exports = function (packinfo) {
 
     log(`Prepared for processing in ${stopwatchLap()}ms`);
 
-    for (const file of baseFiles) {
-        const newFileName = file.substring(packinfo.basedOn.length)
+    for (const [file, newFileName] of baseFiles) {
         try {
             if (path.extname(file) != ".json")
                 continue;
