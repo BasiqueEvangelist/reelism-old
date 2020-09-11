@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ml.porez.reelism.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "BookItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
