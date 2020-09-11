@@ -11,6 +11,8 @@ for (const dp of datapacks) {
 
     if (dp.startsWith("."))
         continue;
+    if (dp == "node_modules")
+        continue;
 
     var stat = fs.statSync(dp);
     if (stat && !stat.isDirectory())
