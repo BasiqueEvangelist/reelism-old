@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:book"
+    },
+    "addition": {
+        "item": "minecraft:quartz"
+    },
+    "result": {
+        "item": "minecraft:enchanted_book",
+        "data": "{StoredEnchantments:[{id:\"minecraft:sharpness\", lvl:1}]}"
+    }
+}

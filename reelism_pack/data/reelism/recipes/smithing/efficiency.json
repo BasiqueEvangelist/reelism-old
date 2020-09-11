@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:book"
+    },
+    "addition": {
+        "item": "minecraft:redstone"
+    },
+    "result": {
+        "item": "minecraft:enchanted_book",
+        "data": "{StoredEnchantments:[{id:\"minecraft:efficiency\", lvl:1}]}"
+    }
+}
