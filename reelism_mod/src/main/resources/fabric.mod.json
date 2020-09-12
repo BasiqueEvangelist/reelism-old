@@ -12,6 +12,9 @@
   "entrypoints": {
     "main": [
       "ml.porez.reelism.Reelism"
+    ],
+    "client": [
+      "ml.porez.reelism.client.ClientReelism"
     ]
   },
   "mixins": ["reelism.mixins.json"],

@@ -1,0 +1,26 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "reelism:item/crystal_of_power_0"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "reelism:charge": 0.25
+      },
+      "model": "reelism:item/gem_of_holding_charge_1"
+    },
+    {
+      "predicate": {
+        "reelism:charge": 0.5
+      },
+      "model": "reelism:item/gem_of_holding_charge_2"
+    },
+    {
+      "predicate": {
+        "reelism:charge": 0.75
+      },
+      "model": "reelism:item/gem_of_holding_charge_3"
+    }
+  ]
+}
