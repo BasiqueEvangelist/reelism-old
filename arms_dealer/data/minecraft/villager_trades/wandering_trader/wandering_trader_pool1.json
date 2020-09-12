@@ -47,7 +47,7 @@
             "type": "minecraft:sell_item",
             "sell": {
                 "item": "minecraft:lingering_potion",
-                "data": "{Potion:\"minecraft:strong_poison\"}"
+                "nbt": "{Potion:\"minecraft:strong_poison\"}"
             },
             "price": 16,
             "count": 1,
@@ -59,7 +59,7 @@
             "type": "minecraft:sell_item",
             "sell": {
                 "item": "minecraft:lingering_potion",
-                "data": "{Potion:\"minecraft:strong_harming\"}"
+                "nbt": "{Potion:\"minecraft:strong_harming\"}"
             },
             "price": 16,
             "count": 1,

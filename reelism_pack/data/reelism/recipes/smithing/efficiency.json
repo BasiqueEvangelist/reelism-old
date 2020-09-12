@@ -8,6 +8,6 @@
     },
     "result": {
         "item": "minecraft:enchanted_book",
-        "data": "{StoredEnchantments:[{id:\"minecraft:efficiency\", lvl:1}]}"
+        "nbt": "{StoredEnchantments:[{id:\"minecraft:efficiency\", lvl:1}]}"
     }
 }
