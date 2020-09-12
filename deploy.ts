@@ -19,7 +19,7 @@ for (const dp of datapacks) {
         continue;
 
     if (fs.existsSync(path.join(dp, "build.gradle"))) {
-        child_process.execSync(process.platform === "win32" ? "./gradlew.bat build" : "./gradlew build", { cwd: dp, stdio: "inherit" })
+        child_process.execSync(process.platform === "win32" ? ".\\gradlew.bat build" : "./gradlew build", { cwd: dp, stdio: "inherit" })
 
         const binsPath = path.join(dp, "build", "libs");
         const bins = fs.readdirSync(binsPath);
