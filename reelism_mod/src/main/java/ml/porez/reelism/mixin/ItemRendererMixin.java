@@ -31,6 +31,6 @@ public class ItemRendererMixin {
         if (is.getItem() == ReeItems.GEM_OF_HOLDING)
             return GemOfHoldingItem.MAX_CHARGE;
         else
-            return is.getDamage();
+            return is.getMaxDamage();
     }
 }
