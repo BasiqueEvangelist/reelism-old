@@ -1,5 +1,6 @@
 package ml.porez.reelism.mixin;
 
+import ml.porez.reelism.Reelism;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
@@ -13,6 +14,7 @@ import java.util.function.Consumer;
 public class SwordItemMixin {
     @Redirect(method = "postMine", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V"))
     public void noDamageOnHit(ItemStack st, int amount, LivingEntity entity, Consumer<LivingEntity> onBreak) {
-
+        if (!Reelism.getConfig().swordNotDamagedOnBreakBlock)
+            st.damage(amount, entity, onBreak);
     }
 }

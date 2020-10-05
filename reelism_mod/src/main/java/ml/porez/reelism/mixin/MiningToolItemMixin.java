@@ -1,5 +1,6 @@
 package ml.porez.reelism.mixin;
 
+import ml.porez.reelism.Reelism;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -26,12 +27,13 @@ public abstract class MiningToolItemMixin extends Item {
 
     @Redirect(method = "postHit", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V"))
     public void noDamageOnHit(ItemStack st, int amount, LivingEntity entity, Consumer<LivingEntity> onBreak) {
-
+        if (!Reelism.getConfig().toolNotDamagedOnHit)
+            st.damage(amount, entity, onBreak);
     }
 
     @Redirect(method = "postMine", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V"))
     public void noDamageOnNonEffective(ItemStack st, int amount, LivingEntity entity, Consumer<LivingEntity> onBreak, ItemStack st2, World world, BlockState state) {
-        if (isEffectiveOn(state) || effectiveBlocks.contains(state.getBlock()))
+        if (!Reelism.getConfig().toolNotDamagedOnNonEffectiveBreakBlock && (isEffectiveOn(state) || effectiveBlocks.contains(state.getBlock())))
             st.damage(amount, entity, onBreak);
     }
 }

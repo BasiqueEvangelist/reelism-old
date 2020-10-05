@@ -8,9 +8,10 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 public class ReeItems {
-    public static final GemOfHoldingItem GEM_OF_HOLDING = new GemOfHoldingItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON).group(Reelism.GROUP));
+    public static GemOfHoldingItem GEM_OF_HOLDING;
 
     public static void register() {
-        Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "gem_of_holding"), GEM_OF_HOLDING);
+        if (Reelism.getConfig().gemOfHoldingItem)
+        GEM_OF_HOLDING = Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "gem_of_holding"), new GemOfHoldingItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON).group(Reelism.GROUP)));
     }
 }

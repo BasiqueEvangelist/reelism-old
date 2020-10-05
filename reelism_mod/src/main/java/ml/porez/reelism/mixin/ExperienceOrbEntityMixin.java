@@ -1,15 +1,16 @@
 package ml.porez.reelism.mixin;
 
+import ml.porez.reelism.Reelism;
 import ml.porez.reelism.items.GemOfHoldingItem;
-import ml.porez.reelism.items.ReeItems;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.EntityView;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -29,7 +30,7 @@ public class ExperienceOrbEntityMixin {
 
     @Redirect(method = "tick", at = @At(value="INVOKE", target="Lnet/minecraft/world/World;getClosestPlayer(Lnet/minecraft/entity/Entity;D)Lnet/minecraft/entity/player/PlayerEntity;"))
     public PlayerEntity onlyPlayersWithGemsOfHolding(World w, Entity e, double maxDistance) {
-        return w.getClosestPlayer(e.getX(), e.getY(), e.getZ(), maxDistance, (en) -> {
+        return w.getClosestPlayer(e.getX(), e.getY(), e.getZ(), maxDistance, delegateToVanilla() ? EntityPredicates.EXCEPT_SPECTATOR : (en) -> {
             if (en instanceof PlayerEntity) {
                 return GemOfHoldingItem.doGravitate((ExperienceOrbEntity)(Object) this, (PlayerEntity)en);
             }
@@ -39,13 +40,16 @@ public class ExperienceOrbEntityMixin {
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void checkTargetHasGem(CallbackInfo cb) {
-        if (target != null)
+        if (!delegateToVanilla() && target != null)
             if (!GemOfHoldingItem.doGravitate((ExperienceOrbEntity)(Object)this, target))
                 target = null;
     }
 
     @Inject(method = "onPlayerCollision", at = @At("HEAD"), cancellable = true)
     public void checkCollidedHasGem(PlayerEntity pe, CallbackInfo cb) {
+        if (delegateToVanilla())
+            return;
+
         if (pe.world.isClient)
             cb.cancel();
         if (!GemOfHoldingItem.doGravitate((ExperienceOrbEntity)(Object)this, pe))
@@ -54,18 +58,26 @@ public class ExperienceOrbEntityMixin {
 
     @Redirect(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;chooseEquipmentWith(Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/entity/LivingEntity;Ljava/util/function/Predicate;)Ljava/util/Map$Entry;"))
     public Map.Entry<EquipmentSlot, ItemStack> disableMending(Enchantment enchantment, LivingEntity entity, Predicate<ItemStack> condition) {
-        return null;
+        return delegateToVanilla() ? EnchantmentHelper.chooseEquipmentWith(enchantment, entity, condition) : null;
     }
 
     @Redirect(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;addExperience(I)V"))
     public void fillGem(PlayerEntity to, int amount) {
+        if (delegateToVanilla()) {
+            to.addExperience(amount);
+            return;
+        }
         ItemStack is = to.getOffHandStack();
         this.amount -= GemOfHoldingItem.fill(is, amount);
     }
 
     @Redirect(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ExperienceOrbEntity;remove()V"))
     public void removeIfEmpty(ExperienceOrbEntity experienceOrbEntity) {
-        if (amount <= 0)
+        if (delegateToVanilla() || amount <= 0)
             ((ExperienceOrbEntity)(Object)this).remove();
+    }
+
+    private boolean delegateToVanilla() {
+        return !Reelism.getConfig().replaceXpOrbBehavior;
     }
 }

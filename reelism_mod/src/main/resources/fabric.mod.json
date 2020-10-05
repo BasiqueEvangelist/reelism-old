@@ -15,6 +15,9 @@
     ],
     "client": [
       "ml.porez.reelism.client.ClientReelism"
+    ],
+    "modmenu": [
+      "ml.porez.reelism.ReelismModMenu"
     ]
   },
   "mixins": ["reelism.mixins.json"],
