@@ -6,7 +6,9 @@
   "mixins": [
     "BookItemMixin",
     "ExperienceOrbEntityMixin",
-    "ItemRendererMixin"
+    "ItemRendererMixin",
+    "MiningToolItemMixin",
+    "SwordItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
