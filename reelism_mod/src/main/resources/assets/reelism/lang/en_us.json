@@ -5,8 +5,14 @@
   "text.autoconfig.reelism.title": "Reelism Configuration",
   "text.autoconfig.reelism.option.replaceXpOrbBehavior": "Replace vanilla xp orb behavior",
   "text.autoconfig.reelism.option.noEnchantedBooks": "Non-enchantable books",
-  "text.autoconfig.reelism.option.swordNotDamagedOnBreakBlock": "Swords not damaged after breaking block",
-  "text.autoconfig.reelism.option.toolNotDamagedOnHit": "Tools not damaged after hitting mob",
-  "text.autoconfig.reelism.option.toolNotDamagedOnNonEffectiveBreakBlock": "Tools not damaged after breaking block tool is not effective on",
-  "text.autoconfig.reelism.option.gemOfHoldingItem": "Gem Of Holding"
+  "text.autoconfig.reelism.option.toolDamage": "Tool damage",
+  "text.autoconfig.reelism.option.toolDamage.swordNotDamagedOnBreakBlock": "Swords not damaged after breaking block",
+  "text.autoconfig.reelism.option.toolDamage.miningToolNotDamagedOnHit": "Tools not damaged after hitting mob",
+  "text.autoconfig.reelism.option.toolDamage.miningToolNotDamagedOnNonEffectiveBreakBlock": "Tools not damaged after breaking block tool is not effective on",
+  "text.autoconfig.reelism.option.gemOfHoldingItem": "Gem Of Holding",
+  "text.autoconfig.reelism.option.noFunnyLightning": "No funny lightning",
+  "text.autoconfig.reelism.option.noFunnyLightning.forMooshrooms": "Don't convert mooshrooms on lightning strike",
+  "text.autoconfig.reelism.option.noFunnyLightning.forPigs": "Don't convert pigs on lightning strike",
+  "text.autoconfig.reelism.option.noFunnyLightning.forVillagers": "Don't convert villagers on lightning strike",
+  "text.autoconfig.reelism.option.noFunnyLightning.forCreepers": "Don't charge creepers on lightning strike"
 }

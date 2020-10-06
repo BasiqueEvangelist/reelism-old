@@ -8,9 +8,23 @@ import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
 public class ReelismConfig implements ConfigData {
     public boolean replaceXpOrbBehavior = true;
     public boolean noEnchantedBooks = true;
-    public boolean swordNotDamagedOnBreakBlock = true;
-    public boolean toolNotDamagedOnHit = true;
-    public boolean toolNotDamagedOnNonEffectiveBreakBlock = true;
+    @ConfigEntry.Gui.CollapsibleObject
+    public FunnyLightningConfig noFunnyLightning = new FunnyLightningConfig();
+    @ConfigEntry.Gui.CollapsibleObject
+    public ToolDamageConfig toolDamage = new ToolDamageConfig();
     @ConfigEntry.Gui.RequiresRestart
     public boolean gemOfHoldingItem = true;
+
+    public static class FunnyLightningConfig {
+        public boolean forMooshrooms = true;
+        public boolean forPigs = true;
+        public boolean forVillagers = true;
+        public boolean forCreepers = true;
+    }
+
+    public static class ToolDamageConfig {
+        public boolean miningToolNotDamagedOnHit = true;
+        public boolean miningToolNotDamagedOnNonEffectiveBreakBlock = true;
+        public boolean swordNotDamagedOnBreakBlock = true;
+    }
 }

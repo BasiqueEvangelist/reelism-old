@@ -5,10 +5,14 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BookItemMixin",
+    "CreeperEntityMixin",
     "ExperienceOrbEntityMixin",
     "ItemRendererMixin",
     "MiningToolItemMixin",
-    "SwordItemMixin"
+    "MooshroomEntityMixin",
+    "PigEntityMixin",
+    "SwordItemMixin",
+    "VillagerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
