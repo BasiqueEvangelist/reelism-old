@@ -6,12 +6,14 @@
   "mixins": [
     "BookItemMixin",
     "CreeperEntityMixin",
+    "EnchantmentHelperMixin",
     "ExperienceOrbEntityMixin",
     "ItemRendererMixin",
     "MiningToolItemMixin",
     "MooshroomEntityMixin",
     "PigEntityMixin",
     "ServerPlayerEntityMixin",
+    "SilkTouchEnchantmentMixin",
     "SwordItemMixin",
     "VillagerEntityMixin"
   ],

@@ -15,6 +15,7 @@ public class ReelismConfig implements ConfigData {
     @ConfigEntry.Gui.RequiresRestart
     public boolean gemOfHoldingItem = true;
     public boolean disableSleep = true;
+    public boolean noSilkTouchOnShovels = true;
 
     public static class FunnyLightningConfig {
         public boolean forMooshrooms = true;
