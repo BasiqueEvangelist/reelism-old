@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { BuildInformation } from "../.malanya/types"
 import { Item, run } from "../.malanya"
-import { purgeFromLootTables } from "../.malanya/transformers";
+import { assumeConditionTrue, purgeItem } from "../.malanya/lootTables";
 
 const forbidden = [
     "minecraft:iron_ingot",
@@ -31,17 +31,56 @@ const WHITELISTED_GOLD = [
 
 function noOverworldGoldArmor(item: Item) {
     if (!WHITELISTED_GOLD.includes(item.subpath)) {
-        item.data = purgeFromLootTables("minecraft:golden_helmet")(item);
-        item.data = purgeFromLootTables("minecraft:golden_chestplate")(item);
-        item.data = purgeFromLootTables("minecraft:golden_leggings")(item);
-        item.data = purgeFromLootTables("minecraft:golden_boots")(item);
+        item.data = purgeItem("minecraft:golden_helmet")(item);
+        item.data = purgeItem("minecraft:golden_chestplate")(item);
+        item.data = purgeItem("minecraft:golden_leggings")(item);
+        item.data = purgeItem("minecraft:golden_boots")(item);
     }
 }
 
+const BLACKLISTED_SILKTOUCH = [
+    "blocks/grass_block.json",
+    "blocks/glass.json",
+    "blocks/grass_path.json",
+    "blocks/ender_chest.json"
+];
+
+function noStrangeSilkTouch(item: Item) {
+    if (BLACKLISTED_SILKTOUCH.includes(item.subpath)) {
+        item.data = assumeConditionTrue(c => {
+            if (c.condition != "minecraft:match_tool")
+                return false;
+            if (!(c.predicate.enchantments))
+                return false;
+            if (!c.predicate.enchantments.some(e => e.enchantment == "minecraft:silk_touch"))
+                return false;
+            return true;
+        })(item);
+    }
+}
+
+const ALWAYS_SURVIVE_EXPLOSION = [
+    "blocks/coarse_dirt.json",
+    "blocks/dirt.json",
+    "blocks/farmland.json",
+    "blocks/gold_ore.json",
+    "blocks/grass_block.json",
+    "blocks/grass_path.json",
+    "blocks/iron_ore.json",
+    "blocks/podzol.json",
+    "blocks/sand.json"
+];
+
+function removeSurvivesExplosion(item: Item) {
+    if (ALWAYS_SURVIVE_EXPLOSION.includes(item.subpath))
+        item.data = assumeConditionTrue(c => c.condition == "minecraft:survives_explosion")(item);
+}
 
 function pipeline(item) {
     noLowTempSmelting(item);
     noOverworldGoldArmor(item);
+    noStrangeSilkTouch(item);
+    removeSurvivesExplosion(item);
     return item.data;
 }
 

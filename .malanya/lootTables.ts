@@ -1,6 +1,6 @@
 import { Item } from "./index"
 
-export function purgeFromLootTables(id: string): (Item) => any {
+export function purgeItem(id: string): (Item) => any {
     function checkCondition(conds: any[]): boolean {
         for (let condition of conds) {
             if (condition.condition == "minecraft:match_tool") {
@@ -53,6 +53,38 @@ export function purgeFromLootTables(id: string): (Item) => any {
                 }
 
         }
+        return i.data;
+    };
+}
+
+export function assumeConditionTrue(filter: (any) => boolean): (Item) => any {
+    function fixConditions(conds: any[]) {
+        for (let i = 0; i < conds.length; i++) {
+            let condition = conds[i];
+            if (filter(condition)) {
+                i--;
+                conds.splice(i, 1);
+            }
+        }
+    }
+    function fixEntry(entry: any) {
+        if (["minecraft:group", "minecraft:alternatives", "minecraft:sequence"].includes(entry.type))
+            for (let subEntry of entry.children)
+                fixEntry(subEntry);
+        if (entry.conditions)
+            fixConditions(entry.conditions);
+    }
+
+    return function (i: Item) {
+        if (i.type == "loot_tables")
+            if (i.data.pools)
+                for (let pool of i.data.pools) {
+                    if (pool.conditions)
+                        fixConditions(pool.conditions);
+                    for (let entry of pool.entries)
+                        fixEntry(entry);
+                    return i.data
+                };
         return i.data;
     };
 }
