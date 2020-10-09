@@ -32,7 +32,7 @@ public abstract class CreeperEntityMixin extends HostileEntity {
         if (Reelism.getConfig().creeperPoisonCloud) {
             AreaEffectCloudEntity cloud = new AreaEffectCloudEntity(world, getX(), getY() + 0.25, getZ());
             cloud.setOwner(this);
-            cloud.setRadius(3.0F);
+            cloud.setRadius(4.0F);
             cloud.setRadiusOnUse(0);
             cloud.setWaitTime(15);
             cloud.setRadiusGrowth(-cloud.getRadius() / (float)cloud.getDuration());
