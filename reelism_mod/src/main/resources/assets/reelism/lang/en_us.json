@@ -14,5 +14,6 @@
   "text.autoconfig.reelism.option.noFunnyLightning.forMooshrooms": "Don't convert mooshrooms on lightning strike",
   "text.autoconfig.reelism.option.noFunnyLightning.forPigs": "Don't convert pigs on lightning strike",
   "text.autoconfig.reelism.option.noFunnyLightning.forVillagers": "Don't convert villagers on lightning strike",
-  "text.autoconfig.reelism.option.noFunnyLightning.forCreepers": "Don't charge creepers on lightning strike"
+  "text.autoconfig.reelism.option.noFunnyLightning.forCreepers": "Don't charge creepers on lightning strike",
+  "text.autoconfig.reelism.option.disableSleep": "Disable sleep"
 }

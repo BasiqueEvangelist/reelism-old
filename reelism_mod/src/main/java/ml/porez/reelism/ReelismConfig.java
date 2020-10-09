@@ -14,6 +14,7 @@ public class ReelismConfig implements ConfigData {
     public ToolDamageConfig toolDamage = new ToolDamageConfig();
     @ConfigEntry.Gui.RequiresRestart
     public boolean gemOfHoldingItem = true;
+    public boolean disableSleep = true;
 
     public static class FunnyLightningConfig {
         public boolean forMooshrooms = true;

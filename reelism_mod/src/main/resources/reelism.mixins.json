@@ -11,6 +11,7 @@
     "MiningToolItemMixin",
     "MooshroomEntityMixin",
     "PigEntityMixin",
+    "ServerPlayerEntityMixin",
     "SwordItemMixin",
     "VillagerEntityMixin"
   ],
