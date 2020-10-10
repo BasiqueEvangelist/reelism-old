@@ -17,7 +17,7 @@ public class ReelismConfig implements ConfigData {
     public boolean gemOfHoldingItem = true;
     public boolean disableSleep = true;
     public boolean noSilkTouchOnShovels = true;
-    public boolean creeperPoisonCloud = true;
+    public boolean plantCreepers = true;
     @ConfigEntry.Gui.RequiresRestart
     public boolean searchByEnglishAlso = true;
 

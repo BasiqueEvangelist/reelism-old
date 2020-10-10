@@ -8,6 +8,7 @@
     "CreeperEntityMixin",
     "EnchantmentHelperMixin",
     "ExperienceOrbEntityMixin",
+    "ExplosionMixin",
     "ItemRendererMixin",
     "LivingEntityMixin",
     "MiningToolItemMixin",
@@ -19,8 +20,8 @@
     "VillagerEntityMixin"
   ],
   "client": [
-    "client.MinecraftClientMixin",
-    "client.LanguageManagerMixin"
+    "client.LanguageManagerMixin",
+    "client.MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
