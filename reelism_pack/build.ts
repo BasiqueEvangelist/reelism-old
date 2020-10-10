@@ -64,10 +64,7 @@ const ALWAYS_SURVIVE_EXPLOSION = [
     "blocks/dirt.json",
     "blocks/farmland.json",
     "blocks/gold_ore.json",
-    "blocks/grass_block.json",
-    "blocks/grass_path.json",
     "blocks/iron_ore.json",
-    "blocks/podzol.json",
     "blocks/sand.json"
 ];
 
