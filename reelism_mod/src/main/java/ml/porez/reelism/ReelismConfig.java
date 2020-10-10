@@ -7,6 +7,7 @@ import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
 @Config(name = "reelism")
 public class ReelismConfig implements ConfigData {
     public boolean replaceXpOrbBehavior = true;
+    public boolean disableMending = true;
     public boolean noEnchantedBooks = true;
     @ConfigEntry.Gui.CollapsibleObject
     public FunnyLightningConfig noFunnyLightning = new FunnyLightningConfig();

@@ -59,7 +59,7 @@ public class ExperienceOrbEntityMixin {
 
     @Redirect(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;chooseEquipmentWith(Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/entity/LivingEntity;Ljava/util/function/Predicate;)Ljava/util/Map$Entry;"))
     public Map.Entry<EquipmentSlot, ItemStack> disableMending(Enchantment enchantment, LivingEntity entity, Predicate<ItemStack> condition) {
-        return delegateToVanilla() ? EnchantmentHelper.chooseEquipmentWith(enchantment, entity, condition) : null;
+        return Reelism.getConfig().disableMending ? null : EnchantmentHelper.chooseEquipmentWith(enchantment, entity, condition);
     }
 
     @Redirect(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;addExperience(I)V"))
@@ -78,6 +78,7 @@ public class ExperienceOrbEntityMixin {
             ((ExperienceOrbEntity)(Object)this).remove();
     }
 
+    @Unique
     private boolean delegateToVanilla() {
         return !Reelism.getConfig().replaceXpOrbBehavior;
     }
