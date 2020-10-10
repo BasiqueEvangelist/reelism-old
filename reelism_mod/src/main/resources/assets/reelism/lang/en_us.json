@@ -17,5 +17,7 @@
   "text.autoconfig.reelism.option.noFunnyLightning.forCreepers": "Don't charge creepers on lightning strike",
   "text.autoconfig.reelism.option.disableSleep": "Disable sleep",
   "text.autoconfig.reelism.option.noSilkTouchOnShovels": "No silk touch on shovels",
-  "text.autoconfig.reelism.option.creeperPoisonCloud": "Creepers create poison cloud on explosion"
+  "text.autoconfig.reelism.option.creeperPoisonCloud": "Creepers create poison cloud on explosion",
+  "text.autoconfig.reelism.option.searchByEnglishAlso": "Search by english as well"
+
 }

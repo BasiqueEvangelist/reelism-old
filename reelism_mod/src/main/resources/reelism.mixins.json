@@ -18,6 +18,10 @@
     "SwordItemMixin",
     "VillagerEntityMixin"
   ],
+  "client": [
+    "client.MinecraftClientMixin",
+    "client.LanguageManagerMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
