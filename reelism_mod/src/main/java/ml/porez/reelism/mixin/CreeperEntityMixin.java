@@ -1,7 +1,11 @@
 package ml.porez.reelism.mixin;
 
+import com.google.common.collect.ImmutableList;
 import ml.porez.reelism.Reelism;
 import ml.porez.reelism.access.ExplosionAccess;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -13,10 +17,12 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.potion.Potions;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -27,6 +33,9 @@ import java.util.List;
 
 @Mixin(CreeperEntity.class)
 public abstract class CreeperEntityMixin extends HostileEntity {
+    @Unique
+    private boolean exploding = false;
+
     protected CreeperEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -54,13 +63,25 @@ public abstract class CreeperEntityMixin extends HostileEntity {
     @Unique
     private static final List<Block> REPLACABLE_BLOCKS = ImmutableList.of(Blocks.GRASS_BLOCK, Blocks.GRASS_PATH, Blocks.PODZOL);
 
+    @Shadow
+    protected abstract void explode();
+
     @Redirect(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"))
     public Explosion diffExplosion(World w, Entity e, double x, double y, double z, float power, Explosion.DestructionType type) {
+        exploding = true;
         if (!Reelism.getConfig().plantCreepers)
             return w.createExplosion(e, x, y, z, power, type);
         Explosion expl = w.createExplosion(e, x, y, z, power, Explosion.DestructionType.NONE);
         for (Entity aff : ((ExplosionAccess)expl).reelism$getAffectedEntities()) {
-            if (aff instanceof LivingEntity) {
+            if (aff instanceof CreeperEntity && !((CreeperEntityMixin)aff).exploding) {
+                if (aff.isAlive()) {
+                    ((CreeperEntity) aff).ignite();
+                    ((CreeperEntity) aff).setFuseSpeed(5);
+                }
+                else
+                    ((CreeperEntityMixin) aff).explode();
+            }
+            else if (aff instanceof LivingEntity) {
                 LivingEntity liv = (LivingEntity) aff;
                 if (!liv.isBlocking())
                     liv.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 10 * 20));
