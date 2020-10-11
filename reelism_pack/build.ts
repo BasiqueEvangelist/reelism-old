@@ -42,7 +42,10 @@ const BLACKLISTED_SILKTOUCH = [
     "blocks/grass_block.json",
     "blocks/glass.json",
     "blocks/grass_path.json",
-    "blocks/ender_chest.json"
+    "blocks/ender_chest.json",
+    "blocks/bookshelf.json",
+    "blocks/campfire.json",
+    "blocks/soul_campfire.json",
 ];
 
 function noStrangeSilkTouch(item: Item) {
