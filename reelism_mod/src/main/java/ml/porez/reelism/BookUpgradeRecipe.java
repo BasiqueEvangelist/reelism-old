@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class BookUpgradeRecipe extends SmithingRecipe {
     public static void register() {
-        Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Reelism.NAMESPACE, "smithing_special_book_upgrade"), new Serializer());
+        Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Reelism.NAMESPACE, "smithing_special_book_upgrade"), Serializer.INSTANCE);
     }
 
     public BookUpgradeRecipe(Identifier id) {
@@ -45,7 +45,7 @@ public class BookUpgradeRecipe extends SmithingRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return new Serializer();
+        return Serializer.INSTANCE;
     }
 
     @Override
@@ -64,7 +64,9 @@ public class BookUpgradeRecipe extends SmithingRecipe {
         return ItemStack.EMPTY;
     }
 
-    public static class Serializer implements RecipeSerializer<BookUpgradeRecipe> {
+    public enum Serializer implements RecipeSerializer<BookUpgradeRecipe> {
+        INSTANCE;
+
         @Override
         public BookUpgradeRecipe read(Identifier id, JsonObject json) {
             return new BookUpgradeRecipe(id);
