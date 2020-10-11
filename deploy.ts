@@ -17,7 +17,6 @@ for (const dp of datapacks) {
     var stat = fs.statSync(dp);
     if (stat && !stat.isDirectory())
         continue;
-
     if (fs.existsSync(path.join(dp, "build.gradle"))) {
         child_process.execSync(process.platform === "win32" ? ".\\gradlew.bat build" : "./gradlew build", { cwd: dp, stdio: "inherit" })
 
@@ -35,14 +34,18 @@ for (const dp of datapacks) {
         if (fs.existsSync(path.join(dp, "build.js"))) {
             child_process.execSync("node build.js", { cwd: dp, stdio: "inherit" })
         }
+        if (fs.existsSync(path.join(dp, "out"))) {
+            const outPath = path.join(buildInfo.devpath, dp);
+            pathEx.removeDir(outPath)
 
-        const outPath = path.join(buildInfo.devpath, dp);
-        pathEx.removeDir(outPath)
-
-        if (fs.existsSync(path.join(dp, "out")))
             pathEx.copyDir(path.join(dp, "out", dp), outPath);
-        else
+        }
+        if (fs.existsSync(path.join(dp, "assets"))) {
+            const outPath = path.join(buildInfo.respath, dp);
+            pathEx.removeDir(outPath)
+
             pathEx.copyDir(dp, outPath);
+        }
         console.log(`[${dp}] Deployed to dev world`);
     }
 }

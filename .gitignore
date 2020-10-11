@@ -3,3 +3,4 @@ buildinfo.json
 *.js
 *.js.map
 node_modules
+!reelism_res/**
