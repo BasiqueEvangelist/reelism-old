@@ -15,11 +15,29 @@ public class ReelismConfig implements ConfigData {
     public ToolDamageConfig toolDamage = new ToolDamageConfig();
     @ConfigEntry.Gui.RequiresRestart
     public boolean gemOfHoldingItem = true;
+    @ConfigEntry.Gui.CollapsibleObject
+    public BattleAxeConfig battleAxe = new BattleAxeConfig();
     public boolean disableSleep = true;
     public boolean noSilkTouchOnShovels = true;
     public boolean plantCreepers = true;
     @ConfigEntry.Gui.RequiresRestart
     public boolean searchByEnglishAlso = true;
+
+    public static class BattleAxeConfig {
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean wooden = true;
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean stone = true;
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean golden = true;
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean iron = true;
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean diamond = true;
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean netherite = true;
+        public boolean breaksShields = true;
+    }
 
     public static class FunnyLightningConfig {
         public boolean forMooshrooms = true;
