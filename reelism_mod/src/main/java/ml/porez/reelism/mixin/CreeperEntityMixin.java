@@ -42,13 +42,13 @@ public abstract class CreeperEntityMixin extends HostileEntity {
 
     @Redirect(method = "onStruckByLightning", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/data/DataTracker;set(Lnet/minecraft/entity/data/TrackedData;Ljava/lang/Object;)V"))
     public void noFunnyLightning(DataTracker tracker, TrackedData<Object> data, Object to) {
-        if (!Reelism.getConfig().noFunnyLightning.forCreepers)
+        if (!Reelism.CONFIG.noFunnyLightning.forCreepers)
             tracker.set(data, to);
     }
 
     @Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/CreeperEntity;remove()V"))
     public void poisonCloud(CallbackInfo cb) {
-        if (Reelism.getConfig().plantCreepers) {
+        if (Reelism.CONFIG.plantCreepers) {
             AreaEffectCloudEntity cloud = new AreaEffectCloudEntity(world, getX(), getY() + 0.25, getZ());
             cloud.setOwner(this);
             cloud.setRadius(4.0F);
@@ -69,7 +69,7 @@ public abstract class CreeperEntityMixin extends HostileEntity {
     @Redirect(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"))
     public Explosion diffExplosion(World w, Entity e, double x, double y, double z, float power, Explosion.DestructionType type) {
         exploding = true;
-        if (!Reelism.getConfig().plantCreepers)
+        if (!Reelism.CONFIG.plantCreepers)
             return w.createExplosion(e, x, y, z, power, type);
         Explosion expl = w.createExplosion(e, x, y, z, power, Explosion.DestructionType.NONE);
         for (Entity aff : ((ExplosionAccess)expl).reelism$getAffectedEntities()) {

@@ -17,6 +17,6 @@ public abstract class SilkTouchEnchantmentMixin extends Enchantment {
 
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        return super.isAcceptableItem(stack) && !(stack.getItem() instanceof ShovelItem && Reelism.getConfig().noSilkTouchOnShovels);
+        return super.isAcceptableItem(stack) && !(stack.getItem() instanceof ShovelItem && Reelism.CONFIG.noSilkTouchOnShovels);
     }
 }

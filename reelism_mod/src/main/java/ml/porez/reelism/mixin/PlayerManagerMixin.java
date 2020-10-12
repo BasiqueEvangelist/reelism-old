@@ -18,7 +18,7 @@ public class PlayerManagerMixin {
 
     @Inject(method = "onPlayerConnect", at = @At("TAIL"))
     public void giveRecipes(ClientConnection conn, ServerPlayerEntity player, CallbackInfo cb) {
-        if (Reelism.getConfig().autoUnlockRecipes)
+        if (Reelism.CONFIG.autoUnlockRecipes)
             player.unlockRecipes(server.getRecipeManager().values());
     }
 }

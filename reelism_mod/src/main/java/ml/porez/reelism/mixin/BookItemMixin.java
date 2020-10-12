@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class BookItemMixin {
     @Inject(method = "isEnchantable(Lnet/minecraft/item/ItemStack;)Z", at = @At("HEAD"), cancellable = true)
     public void notEnchantable(CallbackInfoReturnable<Boolean> cb) {
-        if (Reelism.getConfig().noEnchantedBooks)
+        if (Reelism.CONFIG.noEnchantedBooks)
             cb.setReturnValue(false);
     }
 }

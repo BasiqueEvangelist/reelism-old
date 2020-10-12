@@ -12,6 +12,6 @@ import java.util.Random;
 public class HostileEntityMixin {
     @Redirect(method = "isSpawnDark", at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 1))
     private static int getMaxSpawn(Random r, int i) {
-        return r.nextInt(Reelism.getConfig().spawnLightLevel);
+        return r.nextInt(Reelism.CONFIG.spawnLightLevel);
     }
 }

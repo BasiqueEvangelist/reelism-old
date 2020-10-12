@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 public class SwordItemMixin {
     @Redirect(method = "postMine", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V"))
     public void noDamageOnHit(ItemStack st, int amount, LivingEntity entity, Consumer<LivingEntity> onBreak) {
-        if (!Reelism.getConfig().toolDamage.swordNotDamagedOnBreakBlock)
+        if (!Reelism.CONFIG.toolDamage.swordNotDamagedOnBreakBlock)
             st.damage(amount, entity, onBreak);
     }
 }

@@ -25,6 +25,8 @@ public class ReelismConfig implements ConfigData {
     @ConfigEntry.BoundedDiscrete(min = 1, max = 16)
     public int spawnLightLevel = 8;
     public boolean autoUnlockRecipes = true;
+    @ConfigEntry.Gui.RequiresRestart
+    public boolean torchesBurnOut = true;
 
     public static class BattleAxeConfig {
         @ConfigEntry.Gui.RequiresRestart

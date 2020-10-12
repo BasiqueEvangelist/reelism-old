@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class PlayerEntityMixin {
     @Redirect(method = "takeShieldHit", at = @At(value = "JUMP", shift = At.Shift.BEFORE))
     public boolean onInstanceOf(Object o, Class<?> axe) {
-        return o instanceof AxeItem || (Reelism.getConfig().battleAxe.breaksShields && o instanceof BattleAxeItem);
+        return o instanceof AxeItem || (Reelism.CONFIG.battleAxe.breaksShields && o instanceof BattleAxeItem);
     }
 }

@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class VillagerEntityMixin {
     @Redirect(method = "onStruckByLightning", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;getDifficulty()Lnet/minecraft/world/Difficulty;"))
     public Difficulty noFunnyLightning(ServerWorld w) {
-        return Reelism.getConfig().noFunnyLightning.forVillagers ? Difficulty.PEACEFUL : w.getDifficulty();
+        return Reelism.CONFIG.noFunnyLightning.forVillagers ? Difficulty.PEACEFUL : w.getDifficulty();
     }
 }

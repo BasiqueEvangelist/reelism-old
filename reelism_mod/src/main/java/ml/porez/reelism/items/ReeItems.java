@@ -19,20 +19,20 @@ public class ReeItems {
     public static final BattleAxeItem NETHERITE_BATTLE_AXE = new BattleAxeItem(ToolMaterials.NETHERITE, 5.0F, -3.0F, new FabricItemSettings().group(ItemGroup.COMBAT));
 
     public static void register() {
-        if (Reelism.getConfig().gemOfHoldingItem)
+        if (Reelism.CONFIG.gemOfHoldingItem)
             Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "gem_of_holding"), GEM_OF_HOLDING);
 
-        if (Reelism.getConfig().battleAxe.wooden)
+        if (Reelism.CONFIG.battleAxe.wooden)
             Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "wooden_battle_axe"), WOODEN_BATTLE_AXE);
-        if (Reelism.getConfig().battleAxe.stone)
+        if (Reelism.CONFIG.battleAxe.stone)
             Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "stone_battle_axe"), STONE_BATTLE_AXE);
-        if (Reelism.getConfig().battleAxe.golden)
+        if (Reelism.CONFIG.battleAxe.golden)
             Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "golden_battle_axe"), GOLDEN_BATTLE_AXE);
-        if (Reelism.getConfig().battleAxe.iron)
+        if (Reelism.CONFIG.battleAxe.iron)
             Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "iron_battle_axe"), IRON_BATTLE_AXE);
-        if (Reelism.getConfig().battleAxe.diamond)
+        if (Reelism.CONFIG.battleAxe.diamond)
             Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "diamond_battle_axe"), DIAMOND_BATTLE_AXE);
-        if (Reelism.getConfig().battleAxe.netherite)
+        if (Reelism.CONFIG.battleAxe.netherite)
             Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "netherite_battle_axe"), NETHERITE_BATTLE_AXE);
     }
 }

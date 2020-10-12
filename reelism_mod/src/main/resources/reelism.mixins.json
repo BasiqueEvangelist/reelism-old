@@ -21,7 +21,9 @@
     "ServerPlayerEntityMixin",
     "SilkTouchEnchantmentMixin",
     "SwordItemMixin",
-    "VillagerEntityMixin"
+    "TorchBlockMixin",
+    "VillagerEntityMixin",
+    "WallTorchBlockMixin"
   ],
   "client": [
     "client.LanguageManagerMixin",

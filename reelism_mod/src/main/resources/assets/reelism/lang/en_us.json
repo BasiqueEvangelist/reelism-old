@@ -35,5 +35,6 @@
   "text.autoconfig.reelism.option.plantCreepers": "Plant creepers",
   "text.autoconfig.reelism.option.searchByEnglishAlso": "Search by english as well",
   "text.autoconfig.reelism.option.spawnLightLevel": "Minimum non-spawning light level",
-  "text.autoconfig.reelism.option.autoUnlockRecipes": "Unlock all recipes on reload and join"
+  "text.autoconfig.reelism.option.autoUnlockRecipes": "Unlock all recipes on reload and join",
+  "text.autoconfig.reelism.option.torchesBurnOut": "Torches burn out"
 }

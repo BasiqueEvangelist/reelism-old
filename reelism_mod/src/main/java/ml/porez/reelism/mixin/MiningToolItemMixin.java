@@ -29,13 +29,13 @@ public abstract class MiningToolItemMixin extends Item {
 
     @Redirect(method = "postHit", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V"))
     public void noDamageOnHit(ItemStack st, int amount, LivingEntity entity, Consumer<LivingEntity> onBreak) {
-        if (!Reelism.getConfig().toolDamage.miningToolNotDamagedOnHit)
+        if (!Reelism.CONFIG.toolDamage.miningToolNotDamagedOnHit)
             st.damage(amount, entity, onBreak);
     }
 
     @Redirect(method = "postMine", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V"))
     public void noDamageOnNonEffective(ItemStack st, int amount, LivingEntity entity, Consumer<LivingEntity> onBreak, ItemStack st2, World world, BlockState state) {
-        if (!Reelism.getConfig().toolDamage.miningToolNotDamagedOnNonEffectiveBreakBlock || isEffectiveOn(state) || effectiveBlocks.contains(state.getBlock()) || getMiningSpeedMultiplier(st, state) != 1.0F)
+        if (!Reelism.CONFIG.toolDamage.miningToolNotDamagedOnNonEffectiveBreakBlock || isEffectiveOn(state) || effectiveBlocks.contains(state.getBlock()) || getMiningSpeedMultiplier(st, state) != 1.0F)
             st.damage(amount, entity, onBreak);
     }
 }

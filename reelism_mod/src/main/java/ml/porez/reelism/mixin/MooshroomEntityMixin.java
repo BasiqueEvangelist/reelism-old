@@ -12,7 +12,7 @@ import java.util.UUID;
 public class MooshroomEntityMixin {
     @Redirect(method = "onStruckByLightning", at = @At(value = "INVOKE", target = "Ljava/util/UUID;equals(Ljava/lang/Object;)Z"))
     public boolean noFunnyLightning(UUID u, Object other) {
-        if (Reelism.getConfig().noFunnyLightning.forMooshrooms)
+        if (Reelism.CONFIG.noFunnyLightning.forMooshrooms)
             return true;
         return u.equals(other);
     }

@@ -14,7 +14,7 @@ public class MinecraftClientMixin {
     @Redirect(method = "method_1581", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/Text;getString()Ljava/lang/String;"))
     private static String stringifyTooltip(Text t) {
         StringBuilder s = new StringBuilder().append(t.getString());
-        if (Reelism.getConfig().searchByEnglishAlso && ClientReelism.ENGLISH != null) {
+        if (Reelism.CONFIG.searchByEnglishAlso && ClientReelism.ENGLISH != null) {
             Language l = Language.getInstance();
             Language.setInstance(ClientReelism.ENGLISH);
             s.append(";");
