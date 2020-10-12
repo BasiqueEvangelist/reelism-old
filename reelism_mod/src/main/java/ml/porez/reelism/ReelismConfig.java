@@ -24,6 +24,7 @@ public class ReelismConfig implements ConfigData {
     public boolean searchByEnglishAlso = true;
     @ConfigEntry.BoundedDiscrete(min = 1, max = 16)
     public int spawnLightLevel = 8;
+    public boolean autoUnlockRecipes = true;
 
     public static class BattleAxeConfig {
         @ConfigEntry.Gui.RequiresRestart

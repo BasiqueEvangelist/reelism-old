@@ -17,6 +17,7 @@
     "MooshroomEntityMixin",
     "PigEntityMixin",
     "PlayerEntityMixin",
+    "PlayerManagerMixin",
     "ServerPlayerEntityMixin",
     "SilkTouchEnchantmentMixin",
     "SwordItemMixin",
