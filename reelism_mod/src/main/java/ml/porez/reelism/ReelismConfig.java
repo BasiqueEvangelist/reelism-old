@@ -22,6 +22,8 @@ public class ReelismConfig implements ConfigData {
     public boolean plantCreepers = true;
     @ConfigEntry.Gui.RequiresRestart
     public boolean searchByEnglishAlso = true;
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 16)
+    public int spawnLightLevel = 8;
 
     public static class BattleAxeConfig {
         @ConfigEntry.Gui.RequiresRestart

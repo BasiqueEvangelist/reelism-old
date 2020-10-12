@@ -10,6 +10,7 @@
     "EnchantmentHelperMixin",
     "ExperienceOrbEntityMixin",
     "ExplosionMixin",
+    "HostileEntityMixin",
     "ItemRendererMixin",
     "LivingEntityMixin",
     "MiningToolItemMixin",
