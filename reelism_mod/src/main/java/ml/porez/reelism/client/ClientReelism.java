@@ -13,6 +13,7 @@ public class ClientReelism implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ClientRuntimeResources.register();
         if (Reelism.CONFIG.gemOfHoldingItem)
             FabricModelPredicateProviderRegistry.register(ReeItems.GEM_OF_HOLDING, new Identifier(Reelism.NAMESPACE, "charge"), (stack, world, entity) ->
                 (float)GemOfHoldingItem.getCharge(stack) / (float)GemOfHoldingItem.MAX_CHARGE
