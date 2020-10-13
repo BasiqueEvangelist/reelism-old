@@ -44,6 +44,15 @@ public class RuntimeResources {
                     });
                 });
             }
+            if (Reelism.CONFIG.tntIsPowderKeg) {
+                b.addShapedRecipe(new Identifier("tnt"), r -> {
+                    r.pattern("GSG", "GBG", "GGG");
+                    r.ingredientItem('G', new Identifier("gunpowder"));
+                    r.ingredientItem('S', new Identifier("string"));
+                    r.ingredientItem('B', new Identifier("barrel"));
+                    r.result(new Identifier("tnt"), 1);
+                });
+            }
         });
         Artifice.registerData(new Identifier(Reelism.NAMESPACE, "runtime_data"), data);
         ArtificeResourcePack res = ArtificeResourcePack.ofAssets(b -> {
