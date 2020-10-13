@@ -1,5 +1,7 @@
 package ml.porez.reelism.mixin;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TorchBlock;
@@ -25,6 +27,7 @@ public abstract class WallTorchBlockMixin extends Block {
         super.appendProperties(builder);
     }
 
+    @Environment(EnvType.CLIENT)
     @Redirect(method = "randomDisplayTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V"))
     public void particleReplace(World w, ParticleEffect par, double x, double y, double z, double velocityX, double velocityY, double velocityZ, BlockState bs) {
         if (((TorchBlockMixin)(Object)this).isTorch && bs.get(Properties.AGE_25) == 25)

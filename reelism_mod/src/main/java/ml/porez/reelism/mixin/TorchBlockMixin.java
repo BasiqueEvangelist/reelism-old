@@ -1,6 +1,8 @@
 package ml.porez.reelism.mixin;
 
 import ml.porez.reelism.Reelism;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.RedstoneTorchBlock;
@@ -12,6 +14,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Intrinsic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
@@ -59,6 +62,7 @@ public abstract class TorchBlockMixin extends Block {
             builder.add(Properties.AGE_25);
     }
 
+    @Environment(EnvType.CLIENT)
     @Redirect(method = "randomDisplayTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V"))
     public void particleReplace(World w, ParticleEffect par, double x, double y, double z, double velocityX, double velocityY, double velocityZ, BlockState bs) {
         if (isTorch && bs.get(Properties.AGE_25) == 25)
