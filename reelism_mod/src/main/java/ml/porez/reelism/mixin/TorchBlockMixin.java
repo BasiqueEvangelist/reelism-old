@@ -59,7 +59,7 @@ public abstract class TorchBlockMixin extends Block {
             builder.add(Properties.AGE_25);
     }
 
-    @Redirect(method = "randomDisplayTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V", ordinal = 1))
+    @Redirect(method = "randomDisplayTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V"))
     public void particleReplace(World w, ParticleEffect par, double x, double y, double z, double velocityX, double velocityY, double velocityZ, BlockState bs) {
         if (!isTorch || bs.get(Properties.AGE_25) == 25)
             return;
