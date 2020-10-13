@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "AxeItemMixin",
+    "BlockSettingsMixin",
     "BookItemMixin",
     "CreeperEntityMixin",
     "EnchantmentHelperMixin",
@@ -21,6 +22,7 @@
     "ServerPlayerEntityMixin",
     "SilkTouchEnchantmentMixin",
     "SwordItemMixin",
+    "TntBlockMixin",
     "TorchBlockMixin",
     "VillagerEntityMixin",
     "WallTorchBlockMixin"

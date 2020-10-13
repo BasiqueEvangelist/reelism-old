@@ -3,6 +3,7 @@ package ml.porez.reelism;
 import com.swordglowsblue.artifice.api.Artifice;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import com.swordglowsblue.artifice.api.builder.JsonObjectBuilder;
+import net.minecraft.client.resource.language.LanguageDefinition;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 
@@ -74,6 +75,20 @@ public class RuntimeResources {
                     }
                 });
             }
+            if (Reelism.CONFIG.tntIsPowderKeg) {
+                b.addBlockModel(new Identifier("tnt"), m -> {
+                    m.parent(new Identifier("block/cube_bottom_top"));
+                    m.texture("top", new Identifier("reelism:block/powder_keg_top"));
+                    m.texture("bottom", new Identifier("reelism:block/powder_keg_bottom"));
+                    m.texture("side", new Identifier("reelism:block/powder_keg_side"));
+                });
+            }
+
+            b.addLanguage(new LanguageDefinition("en_us", "US", "English", false));
+            b.addTranslations(new Identifier("en_us"), l -> {
+                if (Reelism.CONFIG.tntIsPowderKeg)
+                    l.entry("block.minecraft.tnt", "Powder Keg");
+            });
         });
         Artifice.registerAssets(new Identifier(Reelism.NAMESPACE, "runtime_resources"), res);
     }

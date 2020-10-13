@@ -27,6 +27,8 @@ public class ReelismConfig implements ConfigData {
     public boolean autoUnlockRecipes = true;
     @ConfigEntry.Gui.RequiresRestart
     public boolean torchesBurnOut = true;
+    @ConfigEntry.Gui.RequiresRestart
+    public boolean tntIsPowderKeg = true;
 
     public static class BattleAxeConfig {
         @ConfigEntry.Gui.RequiresRestart

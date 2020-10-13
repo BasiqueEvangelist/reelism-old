@@ -6,7 +6,7 @@
   "item.reelism.iron_battle_axe": "Iron Battle Axe",
   "item.reelism.diamond_battle_axe": "Diamond Battle Axe",
   "item.reelism.netherite_battle_axe": "Netherite Battle Axe",
-  
+
   "itemGroup.reelism.reelism": "Reelism",
   "text.autoconfig.reelism.title": "Reelism Configuration",
   "text.autoconfig.reelism.option.replaceXpOrbBehavior": "Replace vanilla xp orb behavior",
@@ -36,5 +36,6 @@
   "text.autoconfig.reelism.option.searchByEnglishAlso": "Search by english as well",
   "text.autoconfig.reelism.option.spawnLightLevel": "Minimum non-spawning light level",
   "text.autoconfig.reelism.option.autoUnlockRecipes": "Unlock all recipes on reload and join",
-  "text.autoconfig.reelism.option.torchesBurnOut": "Torches burn out"
+  "text.autoconfig.reelism.option.torchesBurnOut": "Torches burn out",
+  "text.autoconfig.reelism.option.tntIsPowderKeg": "Tnt replaced by powder keg"
 }
