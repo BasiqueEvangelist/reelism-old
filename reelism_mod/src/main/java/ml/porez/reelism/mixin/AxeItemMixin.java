@@ -18,7 +18,7 @@ public abstract class AxeItemMixin extends MiningToolItem {
 
     @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0)
     private static float replaceAttackDamage(float attackDamage, ToolMaterial tm) {
-        return (tm.getAttackDamage() + attackDamage) / 2 - tm.getAttackDamage();
+        return (tm.getAttackDamage() + attackDamage + 1) / 2 - tm.getAttackDamage() - 1;
     }
 
     @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 1)
