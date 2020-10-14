@@ -56,6 +56,16 @@ public class ClientRuntimeResources {
                     l.entry("enchantment.minecraft.smite", "Fungicide");
                 }
             });
+
+            b.addTranslations(new Identifier("ru_ru"), l -> {
+                if (Reelism.CONFIG.tntIsPowderKeg) {
+                    l.entry("block.minecraft.tnt", "Пороховая бочка");
+                    l.entry("item.minecraft.tnt_minecart", "Вагонетка с пороховой бочкой");
+                }
+                if (Reelism.CONFIG.smiteIsFungicide) {
+                    l.entry("enchantment.minecraft.smite", "Фунгицид");
+                }
+            });
         });
     }
 
