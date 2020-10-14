@@ -48,8 +48,10 @@ public class ClientRuntimeResources {
 
             b.addLanguage(new LanguageDefinition("en_us", "US", "English", false));
             b.addTranslations(new Identifier("en_us"), l -> {
-                if (Reelism.CONFIG.tntIsPowderKeg)
+                if (Reelism.CONFIG.tntIsPowderKeg) {
                     l.entry("block.minecraft.tnt", "Powder Keg");
+                    l.entry("item.minecraft.tnt_minecart", "Minecart with Powder Keg");
+                }
             });
         });
     }
