@@ -82,6 +82,7 @@ for (const file of includedMods) {
     });
 }
 fs.writeFileSync(path.join(resultPath, "fabric.mod.json"), JSON.stringify(fabricModJson, null, 2));
+fs.copyFileSync("LICENSE", path.join(resultPath, "LICENSE"));
 zip(resultPath, path.join("out", "reelism_data.jar"));
 fs.copyFileSync(path.join("out", "reelism_data.jar"), path.join(buildInfo.modpath, "reelism_data.jar"));
 console.log("Copied to output directory");
