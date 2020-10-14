@@ -52,6 +52,9 @@ public class ClientRuntimeResources {
                     l.entry("block.minecraft.tnt", "Powder Keg");
                     l.entry("item.minecraft.tnt_minecart", "Minecart with Powder Keg");
                 }
+                if (Reelism.CONFIG.smiteIsFungicide) {
+                    l.entry("enchantment.minecraft.smite", "Fungicide");
+                }
             });
         });
     }

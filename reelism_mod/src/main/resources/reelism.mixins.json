@@ -16,6 +16,7 @@
     "ItemRendererMixin",
     "LivingEntityMixin",
     "MiningToolItemMixin",
+    "MobEntityMixin",
     "MooshroomEntityMixin",
     "PigEntityMixin",
     "PlayerEntityMixin",

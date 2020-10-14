@@ -37,5 +37,6 @@
   "text.autoconfig.reelism.option.spawnLightLevel": "Minimum non-spawning light level",
   "text.autoconfig.reelism.option.autoUnlockRecipes": "Unlock all recipes on reload and join",
   "text.autoconfig.reelism.option.torchesBurnOut": "Torches burn out",
-  "text.autoconfig.reelism.option.tntIsPowderKeg": "Tnt replaced by powder keg"
+  "text.autoconfig.reelism.option.tntIsPowderKeg": "Tnt replaced by powder keg",
+  "text.autoconfig.reelism.option.smiteIsFungicide": "Smite replaced by fungicide"
 }

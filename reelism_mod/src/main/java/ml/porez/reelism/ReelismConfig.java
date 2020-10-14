@@ -29,6 +29,8 @@ public class ReelismConfig implements ConfigData {
     public boolean torchesBurnOut = true;
     @ConfigEntry.Gui.RequiresRestart
     public boolean tntIsPowderKeg = true;
+    @ConfigEntry.Gui.RequiresRestart
+    public boolean smiteIsFungicide = true;
 
     public static class BattleAxeConfig {
         @ConfigEntry.Gui.RequiresRestart

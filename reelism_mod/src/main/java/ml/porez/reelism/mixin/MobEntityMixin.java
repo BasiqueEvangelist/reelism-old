@@ -1,14 +1,12 @@
 package ml.porez.reelism.mixin;
 
-import ml.porez.reelism.Reelism;
 import ml.porez.reelism.access.ExtendedDamageEnchantment;
-import ml.porez.reelism.items.BattleAxeItem;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.AxeItem;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -17,31 +15,29 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity {
-    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+import java.util.function.Consumer;
+
+@Mixin(MobEntity.class)
+public abstract class MobEntityMixin extends LivingEntity {
+    protected MobEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    @Redirect(method = "takeShieldHit", at = @At(value = "JUMP", shift = At.Shift.BEFORE))
-    public boolean onInstanceOf(Object o, Class<?> axe) {
-        return o instanceof AxeItem || (Reelism.CONFIG.battleAxe.breaksShields && o instanceof BattleAxeItem);
-    }
-
-    // Code duplication FTW
     /**
      * @reason Gets replaced with our implementation.
      */
-    @Redirect(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getAttackDamage(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityGroup;)F"))
+    @Redirect(method = "tryAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getAttackDamage(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityGroup;)F"))
     public float voidedAttackDamage(ItemStack is, EntityGroup g)  {
         return 0;
     }
 
-    @ModifyVariable(method = "attack", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getAttackDamage(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityGroup;)F"), ordinal = 1)
+    @ModifyVariable(method = "tryAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getAttackDamage(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityGroup;)F", shift = At.Shift.AFTER), ordinal = 0)
     public float addStuff(float f, Entity e) {
         LivingEntity liv = (LivingEntity)e; // We already know it's a LivingEntity.
         ItemStack is = getMainHandStack();
