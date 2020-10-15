@@ -4,6 +4,7 @@ import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.ConfigHolder;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.Toml4jConfigSerializer;
+import ml.porez.reelism.enchantment.ReeEnchantments;
 import ml.porez.reelism.items.ReeItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -28,6 +29,7 @@ public class Reelism implements ModInitializer {
 		RuntimeResources.register();
 		BookUpgradeRecipe.register();
 		ReeItems.register();
+		ReeEnchantments.register();
 
 		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, manager, success) -> {
 			if (Reelism.CONFIG.autoUnlockRecipes)

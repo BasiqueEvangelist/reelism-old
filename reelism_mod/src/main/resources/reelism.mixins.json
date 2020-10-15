@@ -4,6 +4,7 @@
   "package": "ml.porez.reelism.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AbstractBlockMixin",
     "AxeItemMixin",
     "BlockSettingsMixin",
     "BookItemMixin",

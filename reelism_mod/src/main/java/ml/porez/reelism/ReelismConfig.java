@@ -56,6 +56,8 @@ public class ReelismConfig implements ConfigData {
         public boolean noSilkTouchOnShovels = true;
         public boolean fortuneDecreasesSpeed = true;
         public boolean silkTouchDecreasesSpeed = true;
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean tunnelingEnchantment = true;
     }
 
     public static class FunnyLightningConfig {

@@ -6,6 +6,7 @@
   "item.reelism.iron_battle_axe": "Iron Battle Axe",
   "item.reelism.diamond_battle_axe": "Diamond Battle Axe",
   "item.reelism.netherite_battle_axe": "Netherite Battle Axe",
+  "enchantment.reelism.tunneling": "Tunneling",
 
   "itemGroup.reelism.reelism": "Reelism",
   "text.autoconfig.reelism.title": "Reelism Configuration",
@@ -38,6 +39,7 @@
   "text.autoconfig.reelism.option.enchantments.silkTouchEfficiencyConflict": "Silk touch and efficiency conflict",
   "text.autoconfig.reelism.option.enchantments.fortuneDecreasesSpeed": "Fortune decreases speed",
   "text.autoconfig.reelism.option.enchantments.silkTouchDecreasesSpeed": "Silk touch decreases speed",
+  "text.autoconfig.reelism.option.enchantments.tunnelingEnchantment": "Tunneling enchantment",
   "text.autoconfig.reelism.option.plantCreepers": "Plant creepers",
   "text.autoconfig.reelism.option.searchByEnglishAlso": "Search by english as well",
   "text.autoconfig.reelism.option.spawnLightLevel": "Minimum non-spawning light level",
