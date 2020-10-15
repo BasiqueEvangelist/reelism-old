@@ -31,6 +31,7 @@ public class ReelismConfig implements ConfigData {
     @ConfigEntry.Category("enchantments")
     @ConfigEntry.Gui.TransitiveObject
     public EnchantmentConfig enchantments = new EnchantmentConfig();
+    public boolean unbreakableAnvils = true;
 
     public static class BattleAxeConfig {
         @ConfigEntry.Gui.RequiresRestart
