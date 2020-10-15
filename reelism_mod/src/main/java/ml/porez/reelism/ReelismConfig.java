@@ -18,7 +18,6 @@ public class ReelismConfig implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
     public BattleAxeConfig battleAxe = new BattleAxeConfig();
     public boolean disableSleep = true;
-    public boolean noSilkTouchOnShovels = true;
     public boolean plantCreepers = true;
     @ConfigEntry.Gui.RequiresRestart
     public boolean searchByEnglishAlso = true;
@@ -31,6 +30,9 @@ public class ReelismConfig implements ConfigData {
     public boolean tntIsPowderKeg = true;
     @ConfigEntry.Gui.RequiresRestart
     public boolean smiteIsFungicide = true;
+    @ConfigEntry.Category("enchantments")
+    @ConfigEntry.Gui.TransitiveObject
+    public EnchantmentConfig enchantments = new EnchantmentConfig();
 
     public static class BattleAxeConfig {
         @ConfigEntry.Gui.RequiresRestart
@@ -46,6 +48,14 @@ public class ReelismConfig implements ConfigData {
         @ConfigEntry.Gui.RequiresRestart
         public boolean netherite = true;
         public boolean breaksShields = true;
+    }
+
+    public static class EnchantmentConfig {
+        public boolean silkTouchEfficiencyConflict = true;
+        public boolean fortuneEfficiencyConflict = true;
+        public boolean noSilkTouchOnShovels = true;
+        public boolean fortuneDecreasesSpeed = true;
+        public boolean silkTouchDecreasesSpeed = true;
     }
 
     public static class FunnyLightningConfig {

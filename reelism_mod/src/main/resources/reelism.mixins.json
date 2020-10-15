@@ -15,6 +15,7 @@
     "HostileEntityMixin",
     "ItemRendererMixin",
     "LivingEntityMixin",
+    "LuckEnchantmentMixin",
     "MiningToolItemMixin",
     "MobEntityMixin",
     "MooshroomEntityMixin",

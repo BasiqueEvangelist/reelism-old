@@ -1,8 +1,12 @@
 package ml.porez.reelism.mixin;
 
 import ml.porez.reelism.Reelism;
+import ml.porez.reelism.ReelismUtils;
 import ml.porez.reelism.access.ExtendedDamageEnchantment;
+import ml.porez.reelism.access.SpeedEnchantment;
 import ml.porez.reelism.items.BattleAxeItem;
+import net.minecraft.block.BlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
@@ -10,16 +14,17 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.mutable.MutableFloat;
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
@@ -46,22 +51,37 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         LivingEntity liv = (LivingEntity)e; // We already know it's a LivingEntity.
         ItemStack is = getMainHandStack();
         MutableFloat mut = new MutableFloat(f);
-        if (!is.isEmpty()) {
-            ListTag enchs = is.getEnchantments();
-            for (int i = 0; i < enchs.size(); i++) {
-                CompoundTag ench = enchs.getCompound(i);
-                Identifier enchId = new Identifier(ench.getString("id"));
-                int enchLevel = ench.getInt("lvl");
-                Registry.ENCHANTMENT.getOrEmpty(enchId).ifPresent(enchInst -> {
-                    if (enchInst instanceof ExtendedDamageEnchantment) {
-                        mut.add(((ExtendedDamageEnchantment) enchInst).reelism$getAttackDamage(enchLevel, liv));
-                    }
-                    else {
-                        mut.add(enchInst.getAttackDamage(enchLevel, liv.getGroup()));
-                    }
-                });
+        ReelismUtils.forEachEnchantment(is, (en, lvl) -> {
+            if (en instanceof ExtendedDamageEnchantment) {
+                mut.add(((ExtendedDamageEnchantment) en).reelism$getAttackDamage(lvl, liv));
             }
-        }
+            else {
+                mut.add(en.getAttackDamage(lvl, liv.getGroup()));
+            }
+        });
         return mut.floatValue();
+    }
+
+    @Redirect(method = "getBlockBreakingSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getEfficiency(Lnet/minecraft/entity/LivingEntity;)I"))
+    public int getEfficiency(LivingEntity liv) {
+        // Disable vanilla efficiency logic.
+        return -1;
+    }
+
+    @ModifyVariable(method = "getBlockBreakingSpeed", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getEfficiency(Lnet/minecraft/entity/LivingEntity;)I"))
+    public float changeSpeed(float f, BlockState bs) {
+        MutableInt mut = new MutableInt(EnchantmentHelper.getEfficiency(this));
+        ItemStack main = this.getMainHandStack();
+        ReelismUtils.forEachEnchantment(main, (en, lvl) -> {
+            if (en instanceof SpeedEnchantment)
+                mut.add(((SpeedEnchantment) en).reelism$getEfficiencyLevels(main, lvl));
+        });
+
+        if (mut.getValue() == 0)
+            return f;
+        else if (mut.getValue() > 0)
+            return f + (float)(mut.getValue() * mut.getValue() + 1);
+        else
+            return f - (float)(-mut.getValue() * -mut.getValue() + 1);
     }
 }
