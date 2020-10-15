@@ -11,16 +11,18 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "ml.porez.reelism.Reelism"
+      "me.basiqueevangelist.reelism.Reelism"
     ],
     "client": [
-      "ml.porez.reelism.client.ClientReelism"
+      "me.basiqueevangelist.reelism.client.ClientReelism"
     ],
     "modmenu": [
-      "ml.porez.reelism.ReelismModMenu"
+      "me.basiqueevangelist.reelism.ReelismModMenu"
     ]
   },
-  "mixins": ["reelism.mixins.json"],
+  "mixins": [
+    "reelism.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
