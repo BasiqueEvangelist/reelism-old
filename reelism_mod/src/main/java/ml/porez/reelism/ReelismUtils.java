@@ -27,4 +27,19 @@ public class ReelismUtils {
             }
         }
     }
+
+    public static int getExperienceFromLevels(int levels) {
+        if (levels < 0)
+            return -getExperienceFromLevels(-levels);
+
+        int total = 0;
+        for (int i = 0; i < levels; i++) {
+            if (i >= 30) {
+                total += 112 + (i - 30) * 9;
+            } else {
+                total += i >= 15 ? 37 + (i - 15) * 5 : 7 + i * 2;
+            }
+        }
+        return total;
+    }
 }

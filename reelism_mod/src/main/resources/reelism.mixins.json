@@ -6,6 +6,7 @@
   "mixins": [
     "AbstractBlockMixin",
     "AnvilBlockMixin",
+    "AnvilScreenHandlerMixin",
     "AxeItemMixin",
     "BlockSettingsMixin",
     "BookItemMixin",

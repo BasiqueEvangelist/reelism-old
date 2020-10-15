@@ -3,6 +3,7 @@ package ml.porez.reelism.items;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -11,6 +12,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -24,14 +26,22 @@ public class GemOfHoldingItem extends Item {
     }
 
     public static int fill(ItemStack stack, int amount) {
-        if (amount < 0)
-            return 0;
-
         int prevAmount = getCharge(stack);
 
-        setCharge(stack, Math.min(prevAmount + amount, MAX_CHARGE));
+        setCharge(stack, MathHelper.clamp(prevAmount + amount, 0, MAX_CHARGE));
 
-        return Math.min(MAX_CHARGE - prevAmount, amount);
+        return getCharge(stack) - prevAmount;
+    }
+
+    public static int getTotalExperience(PlayerInventory inventory) {
+        int total = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            ItemStack is = inventory.getStack(i);
+            if (is.getItem() == ReeItems.GEM_OF_HOLDING) {
+                total += getCharge(is);
+            }
+        }
+        return total;
     }
 
     public static int getCharge(ItemStack is) {

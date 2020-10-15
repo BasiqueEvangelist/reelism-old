@@ -5,6 +5,8 @@ import ml.porez.reelism.ReelismUtils;
 import ml.porez.reelism.access.ExtendedDamageEnchantment;
 import ml.porez.reelism.access.SpeedEnchantment;
 import ml.porez.reelism.items.BattleAxeItem;
+import ml.porez.reelism.items.GemOfHoldingItem;
+import ml.porez.reelism.items.ReeItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -12,12 +14,16 @@ import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.apache.commons.lang3.mutable.MutableInt;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -28,6 +34,10 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
+    @Shadow @Final public PlayerInventory inventory;
+
+    @Shadow public abstract void addExperience(int experience);
+
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -38,11 +48,12 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     // Code duplication FTW
+
     /**
      * @reason Gets replaced with our implementation.
      */
     @Redirect(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getAttackDamage(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityGroup;)F"))
-    public float voidedAttackDamage(ItemStack is, EntityGroup g)  {
+    public float voidedAttackDamage(ItemStack is, EntityGroup g) {
         return 0;
     }
 
@@ -53,8 +64,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         ReelismUtils.forEachEnchantment(is, (en, lvl) -> {
             if (en instanceof ExtendedDamageEnchantment) {
                 mut.add(((ExtendedDamageEnchantment) en).reelism$getAttackDamage(lvl, e));
-            }
-            else {
+            } else {
                 mut.add(en.getAttackDamage(lvl, e instanceof LivingEntity ? ((LivingEntity) e).getGroup() : EntityGroup.DEFAULT));
             }
         });
@@ -79,8 +89,33 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         if (mut.getValue() == 0)
             return f;
         else if (mut.getValue() > 0)
-            return f + (float)(mut.getValue() * mut.getValue() + 1);
+            return f + (float) (mut.getValue() * mut.getValue() + 1);
         else
-            return f - (float)(-mut.getValue() * -mut.getValue() + 1);
+            return f - (float) (-mut.getValue() * -mut.getValue() + 1);
     }
+
+    @Inject(method = "addExperienceLevels", at = @At("HEAD"), cancellable = true)
+    public void addExperienceLevels(int levels, CallbackInfo cb) {
+        if (Reelism.CONFIG.gemOfHoldingItem) {
+            addExperience(ReelismUtils.getExperienceFromLevels(levels));
+            cb.cancel();
+        }
+    }
+
+    @Inject(method = "addExperience", at = @At("HEAD"), cancellable = true)
+    public void replaceAddExperience(int xp, CallbackInfo cb) {
+        if (Reelism.CONFIG.gemOfHoldingItem) {
+            for (int i = 0; i < inventory.size(); i++) {
+                ItemStack is = inventory.getStack(i);
+                if (is.getItem() == ReeItems.GEM_OF_HOLDING) {
+                    xp -= GemOfHoldingItem.fill(is, xp);
+                    if (xp <= 0)
+                        return;
+                }
+            }
+            cb.cancel();
+        }
+    }
+
+
 }
