@@ -52,7 +52,7 @@ public class ClientRuntimeResources {
                     l.entry("block.minecraft.tnt", "Powder Keg");
                     l.entry("item.minecraft.tnt_minecart", "Minecart with Powder Keg");
                 }
-                if (Reelism.CONFIG.smiteIsFungicide) {
+                if (Reelism.CONFIG.enchantments.smiteIsFungicide) {
                     l.entry("enchantment.minecraft.smite", "Fungicide");
                 }
             });
@@ -62,7 +62,7 @@ public class ClientRuntimeResources {
                     l.entry("block.minecraft.tnt", "Пороховая бочка");
                     l.entry("item.minecraft.tnt_minecart", "Вагонетка с пороховой бочкой");
                 }
-                if (Reelism.CONFIG.smiteIsFungicide) {
+                if (Reelism.CONFIG.enchantments.smiteIsFungicide) {
                     l.entry("enchantment.minecraft.smite", "Фунгицид");
                 }
             });

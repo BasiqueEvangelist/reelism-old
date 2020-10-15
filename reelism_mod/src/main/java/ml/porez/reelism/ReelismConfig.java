@@ -28,8 +28,6 @@ public class ReelismConfig implements ConfigData {
     public boolean torchesBurnOut = true;
     @ConfigEntry.Gui.RequiresRestart
     public boolean tntIsPowderKeg = true;
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean smiteIsFungicide = true;
     @ConfigEntry.Category("enchantments")
     @ConfigEntry.Gui.TransitiveObject
     public EnchantmentConfig enchantments = new EnchantmentConfig();
@@ -58,6 +56,8 @@ public class ReelismConfig implements ConfigData {
         public boolean silkTouchDecreasesSpeed = true;
         @ConfigEntry.Gui.RequiresRestart
         public boolean tunnelingEnchantment = true;
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean smiteIsFungicide = true;
     }
 
     public static class FunnyLightningConfig {
