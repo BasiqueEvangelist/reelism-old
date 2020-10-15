@@ -110,8 +110,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 ItemStack is = inventory.getStack(i);
                 if (is.getItem() == ReeItems.GEM_OF_HOLDING) {
                     xp -= GemOfHoldingItem.fill(is, xp);
-                    if (xp <= 0)
+                    if (xp <= 0) {
+                        cb.cancel();
                         return;
+                    }
                 }
             }
             cb.cancel();

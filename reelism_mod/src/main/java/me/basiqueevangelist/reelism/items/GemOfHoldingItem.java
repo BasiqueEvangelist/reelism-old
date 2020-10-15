@@ -57,7 +57,7 @@ public class GemOfHoldingItem extends Item {
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         int current = getCharge(stack);
         tooltip.add(new LiteralText(
-                (float) current / (float) MAX_CHARGE * 100 + "%" + (context.isAdvanced() ? current : "")));
+                (float) current / (float) MAX_CHARGE * 100 + "%" + (context.isAdvanced() ? " (" + current + ")" : "")));
     }
 
     @Override
