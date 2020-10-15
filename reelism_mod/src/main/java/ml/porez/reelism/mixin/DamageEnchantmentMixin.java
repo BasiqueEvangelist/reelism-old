@@ -5,7 +5,7 @@ import ml.porez.reelism.items.BattleAxeItem;
 import net.minecraft.enchantment.DamageEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.entity.EntityGroup;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -15,9 +15,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(DamageEnchantment.class)
 public abstract class DamageEnchantmentMixin extends Enchantment implements ExtendedDamageEnchantment {
@@ -33,10 +31,12 @@ public abstract class DamageEnchantmentMixin extends Enchantment implements Exte
     }
 
     @Override
-    public float reelism$getAttackDamage(int level, LivingEntity e) {
+    public float reelism$getAttackDamage(int level, Entity e) {
         if (e.getType() == EntityType.CREEPER && typeIndex == 1)
             return level * 2.5F;
-        return getAttackDamage(level, e.getGroup());
+        if (e instanceof LivingEntity)
+            return getAttackDamage(level, ((LivingEntity) e).getGroup());
+        return 0;
     }
 
     @Override

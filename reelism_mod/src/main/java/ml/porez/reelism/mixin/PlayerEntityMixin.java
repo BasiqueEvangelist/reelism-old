@@ -48,15 +48,14 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @ModifyVariable(method = "attack", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getAttackDamage(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityGroup;)F"), ordinal = 1)
     public float addStuff(float f, Entity e) {
-        LivingEntity liv = (LivingEntity)e; // We already know it's a LivingEntity.
         ItemStack is = getMainHandStack();
         MutableFloat mut = new MutableFloat(f);
         ReelismUtils.forEachEnchantment(is, (en, lvl) -> {
             if (en instanceof ExtendedDamageEnchantment) {
-                mut.add(((ExtendedDamageEnchantment) en).reelism$getAttackDamage(lvl, liv));
+                mut.add(((ExtendedDamageEnchantment) en).reelism$getAttackDamage(lvl, e));
             }
             else {
-                mut.add(en.getAttackDamage(lvl, liv.getGroup()));
+                mut.add(en.getAttackDamage(lvl, e instanceof LivingEntity ? ((LivingEntity) e).getGroup() : EntityGroup.DEFAULT));
             }
         });
         return mut.floatValue();
