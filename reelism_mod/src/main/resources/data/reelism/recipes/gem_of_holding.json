@@ -2,15 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     " L ",
-    "LEL",
+    "LDL",
     " L "
   ],
   "key": {
     "L": {
       "item": "minecraft:lapis_lazuli"
     },
-    "E": {
-      "item": "minecraft:emerald"
+    "D": {
+      "item": "minecraft:diamond"
     }
   },
   "result": {
