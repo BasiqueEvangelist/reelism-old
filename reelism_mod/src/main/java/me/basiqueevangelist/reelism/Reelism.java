@@ -1,5 +1,7 @@
 package me.basiqueevangelist.reelism;
 
+import me.basiqueevangelist.reelism.potion.ReePotions;
+import me.basiqueevangelist.reelism.potion.ReeStatusEffects;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.Toml4jConfigSerializer;
 import me.basiqueevangelist.reelism.enchantment.ReeEnchantments;
@@ -28,6 +30,8 @@ public class Reelism implements ModInitializer {
 		BookUpgradeRecipe.register();
 		ReeItems.register();
 		ReeEnchantments.register();
+		ReeStatusEffects.register();
+		ReePotions.register();
 
 		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, manager, success) -> {
 			if (Reelism.CONFIG.autoUnlockRecipes)

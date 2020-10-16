@@ -32,6 +32,8 @@ public class ReelismConfig implements ConfigData {
     @ConfigEntry.Gui.TransitiveObject
     public EnchantmentConfig enchantments = new EnchantmentConfig();
     public boolean unbreakableAnvils = true;
+    @ConfigEntry.Gui.RequiresRestart
+    public boolean transportationStatusEffect = true;
 
     public static class BattleAxeConfig {
         @ConfigEntry.Gui.RequiresRestart

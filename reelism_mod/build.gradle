@@ -12,6 +12,10 @@ group = project.maven_group
 
 repositories {
 	jcenter()
+	maven {
+		name = "Ladysnake Libs"
+		url = 'https://dl.bintray.com/ladysnake/libs'
+	}
 }
 
 dependencies {
@@ -39,6 +43,11 @@ dependencies {
 
 	modImplementation 'com.lettuce.fudge:artifice:0.13.2+1.16.3'
 	include 'com.lettuce.fudge:artifice:0.13.2+1.16.3'
+
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.6.0"
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.6.0"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.6.0"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.6.0"
 }
 
 processResources {
