@@ -1,10 +1,10 @@
 package me.basiqueevangelist.reelism.components;
 
-import nerdhub.cardinal.components.api.component.Component;
+import dev.onyxstudios.cca.api.v3.component.ComponentV3;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 
-public interface TransportationHolder extends Component {
+public interface TransportationHolder extends ComponentV3 {
     Identifier getWorld();
 
     void setWorld(Identifier dim);

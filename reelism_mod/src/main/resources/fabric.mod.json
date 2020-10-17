@@ -18,11 +18,19 @@
     ],
     "modmenu": [
       "me.basiqueevangelist.reelism.ReelismModMenu"
+    ],
+    "cardinal-components-entity": [
+      "me.basiqueevangelist.reelism.components.ReeComponents"
     ]
   },
   "mixins": [
     "reelism.mixins.json"
   ],
+  "custom": {
+    "cardinal-components": [
+      "reelism:transportation"
+    ]
+  },
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",

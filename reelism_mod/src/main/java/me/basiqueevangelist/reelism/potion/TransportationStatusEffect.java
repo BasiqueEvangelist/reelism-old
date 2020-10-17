@@ -33,7 +33,6 @@ public class TransportationStatusEffect extends StatusEffect {
     }
 
     public static void register() {
-        EntityComponentCallback.event(LivingEntity.class).register((e, components) -> components.put(ReeComponents.TRANSPORTATION, new TransportationComponent()));
         ServerTickEvents.END_SERVER_TICK.register((s) -> {
             for (LivingEntity e : toBeApplied) {
                 if (toBeRemoved.contains(e))

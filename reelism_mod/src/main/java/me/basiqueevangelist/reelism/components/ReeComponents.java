@@ -1,10 +1,20 @@
 package me.basiqueevangelist.reelism.components;
 
+import dev.onyxstudios.cca.api.v3.component.ComponentKey;
+import dev.onyxstudios.cca.api.v3.component.ComponentRegistryV3;
+import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
+import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import me.basiqueevangelist.reelism.Reelism;
-import nerdhub.cardinal.components.api.ComponentRegistry;
-import nerdhub.cardinal.components.api.ComponentType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 
-public class ReeComponents {
-    public static final ComponentType<TransportationComponent> TRANSPORTATION = ComponentRegistry.INSTANCE.registerIfAbsent(new Identifier(Reelism.NAMESPACE, "transportation"), TransportationComponent.class);
+public class ReeComponents implements EntityComponentInitializer {
+    public static final ComponentKey<TransportationHolder> TRANSPORTATION = ComponentRegistryV3.INSTANCE.getOrCreate(new Identifier(Reelism.NAMESPACE, "transportation"), TransportationHolder.class);
+
+    @Override
+    public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
+        if (Reelism.CONFIG.transportationStatusEffect) {
+            registry.registerFor(LivingEntity.class, TRANSPORTATION, (e) -> new TransportationComponent());
+        }
+    }
 }

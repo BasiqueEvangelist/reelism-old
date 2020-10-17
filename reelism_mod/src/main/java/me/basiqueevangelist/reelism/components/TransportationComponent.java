@@ -4,30 +4,26 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
-import org.jetbrains.annotations.NotNull;
 
 public class TransportationComponent implements TransportationHolder {
     Identifier world = World.OVERWORLD.getValue();
     Vec3d position = Vec3d.ZERO;
 
     @Override
-    public void fromTag(CompoundTag tag) {
+    public void readFromNbt(CompoundTag tag) {
         world = new Identifier(tag.getString("World"));
         position = new Vec3d(
-            tag.getDouble("PosX"),
-            tag.getDouble("PosY"),
-            tag.getDouble("PosZ"));
+                tag.getDouble("PosX"),
+                tag.getDouble("PosY"),
+                tag.getDouble("PosZ"));
     }
 
     @Override
-    @NotNull
-    public CompoundTag toTag(CompoundTag tag) {
+    public void writeToNbt(CompoundTag tag) {
         tag.putString("World", world.toString());
         tag.putDouble("PosX", position.getX());
         tag.putDouble("PosY", position.getY());
         tag.putDouble("PosZ", position.getZ());
-        return tag;
     }
 
     @Override
