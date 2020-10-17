@@ -1,9 +1,7 @@
 package me.basiqueevangelist.reelism.potion;
 
 import me.basiqueevangelist.reelism.components.ReeComponents;
-import me.basiqueevangelist.reelism.components.TransportationComponent;
 import me.basiqueevangelist.reelism.components.TransportationHolder;
-import nerdhub.cardinal.components.api.event.EntityComponentCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
