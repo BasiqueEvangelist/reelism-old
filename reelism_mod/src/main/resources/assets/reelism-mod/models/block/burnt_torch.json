@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_torch",
   "textures": {
-    "torch": "reelism:block/burnt_torch"
+    "torch": "reelism-mod:block/burnt_torch"
   }
 }

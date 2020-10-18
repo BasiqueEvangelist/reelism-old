@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "X ",
-    "X#",
+    "X#"
   ],
   "key": {
     "#": {
       "item": "minecraft:stick"
     },
     "X": {
-      "tag": "minecraft:stone_tool_materials"
+      "item": "minecraft:diamond"
     }
   },
   "result": {
-    "item": "reelism:stone_battle_axe"
+    "item": "reelism-mod:diamond_battle_axe"
   }
 }

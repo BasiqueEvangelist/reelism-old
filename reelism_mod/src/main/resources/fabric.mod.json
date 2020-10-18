@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "reelism",
+  "id": "reelism-mod",
   "version": "${version}",
-  "name": "Reelism",
+  "name": "ReelismMod",
   "description": "It's time for your fantasy flattening!",
   "authors": [
     "BasiqueEvangelist",
@@ -28,12 +28,14 @@
   ],
   "custom": {
     "cardinal-components": [
-      "reelism:transportation"
-    ]
+      "reelism-mod:transportation"
+    ],
+    "modmenu:parent": "reelism"
   },
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
     "minecraft": "1.16.x"
-  }
+  },
+  "license": "LGPL-3.0-only"
 }

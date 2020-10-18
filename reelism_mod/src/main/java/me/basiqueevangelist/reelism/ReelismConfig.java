@@ -4,7 +4,7 @@ import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
 
-@Config(name = "reelism")
+@Config(name = "reelism-mod")
 public class ReelismConfig implements ConfigData {
     public boolean replaceXpOrbBehavior = true;
     public boolean disableMending = true;

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "reelism:item/crystal_of_power_1"
+    "layer0": "reelism-mod:item/crystal_of_power_1"
   }
 }

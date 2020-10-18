@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "reelism:item/golden_battle_axe"
+    "layer0": "reelism-mod:item/stone_battle_axe"
   }
 }

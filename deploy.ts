@@ -8,7 +8,7 @@ import { zip } from "./.malanya/zip"
 var buildInfo = <BuildInformation>JSON.parse(fs.readFileSync("buildinfo.json", "utf-8"));
 
 pathEx.removeDir("out");
-const resultPath = path.join("out", "reelism_data");
+const resultPath = path.join("out", "reelism");
 fs.mkdirSync(resultPath, { recursive: true });
 
 let includedMods = [];
@@ -55,25 +55,23 @@ for (const dp of datapacks) {
 fs.unlinkSync(path.join(resultPath, "pack.mcmeta"));
 let fabricModJson = {
     schemaVersion: 1,
-    id: "reelism-data",
+    id: "reelism",
     version: "1.0.0",
-    name: "Reelism Data",
-    description: "It's time for your fantasy flattening! (resources and data)",
+    name: "Reelism",
+    description: "It's time for your fantasy flattening!",
     authors: [
         "BasiqueEvangelist",
         "Jetsparrow"
     ],
     environment: "*",
-    custom: {
-        "modmenu:parent": "reelism"
-    },
     depends: {
         fabricloader: ">=0.7.4",
         fabric: "*",
         minecraft: "1.16.x",
-        reelism: "*",
+        "reelism-mod": "*",
         datapackify: "*"
     },
+    license: "LGPL-3.0-only",
     jars: []
 };
 for (const file of includedMods) {
@@ -83,6 +81,6 @@ for (const file of includedMods) {
 }
 fs.writeFileSync(path.join(resultPath, "fabric.mod.json"), JSON.stringify(fabricModJson, null, 2));
 fs.copyFileSync("LICENSE", path.join(resultPath, "LICENSE"));
-zip(resultPath, path.join("out", "reelism_data.jar"));
-fs.copyFileSync(path.join("out", "reelism_data.jar"), path.join(buildInfo.modpath, "reelism_data.jar"));
+zip(resultPath, path.join("out", "reelism.jar"));
+fs.copyFileSync(path.join("out", "reelism.jar"), path.join(buildInfo.modpath, "reelism.jar"));
 console.log("Copied to output directory");

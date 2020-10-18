@@ -9,10 +9,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "minecraft:iron_ingot"
+      "tag": "minecraft:stone_tool_materials"
     }
   },
   "result": {
-    "item": "reelism:iron_battle_axe"
+    "item": "reelism-mod:stone_battle_axe"
   }
 }

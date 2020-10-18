@@ -9,10 +9,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "minecraft:diamond"
+      "tag": "minecraft:planks"
     }
   },
   "result": {
-    "item": "reelism:diamond_battle_axe"
+    "item": "reelism-mod:wooden_battle_axe"
   }
 }

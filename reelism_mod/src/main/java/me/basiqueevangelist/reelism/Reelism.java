@@ -16,7 +16,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
 public class Reelism implements ModInitializer {
-	public static final String NAMESPACE = "reelism";
+	public static final String NAMESPACE = "reelism-mod";
 
 	public static final ItemGroup GROUP = FabricItemGroupBuilder.build(new Identifier(NAMESPACE, "reelism"),
 			() -> new ItemStack(Items.CREEPER_HEAD));

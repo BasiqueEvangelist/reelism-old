@@ -9,10 +9,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "tag": "minecraft:planks"
+      "item": "minecraft:iron_ingot"
     }
   },
   "result": {
-    "item": "reelism:wooden_battle_axe"
+    "item": "reelism-mod:iron_battle_axe"
   }
 }
