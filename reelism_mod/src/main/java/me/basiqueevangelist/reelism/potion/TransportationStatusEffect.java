@@ -31,7 +31,8 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
     private static final List<LivingEntity> toBeApplied = new ArrayList<>();
     private static final List<LivingEntity> toBeRemoved = new ArrayList<>();
 
-    public static final ChunkTicketType<Integer> TICKET_TYPE = ChunkTicketType.create("reelism-mod:transportation", Integer::compareTo, 100);
+    public static final ChunkTicketType<Integer> TICKET_TYPE = ChunkTicketType.create("reelism-mod:transportation",
+            Integer::compareTo, 300);
 
     public static final RegistryKey<World> DESTINATION = World.END;
 
@@ -48,7 +49,8 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
 
     private static Entity doTeleport(Entity e, ServerWorld to, double x, double y, double z, float yaw, float pitch) {
         to.getProfiler().push("doTeleport");
-        ((ServerWorld)e.getEntityWorld()).getChunkManager().addTicket(TICKET_TYPE, new ChunkPos(e.getBlockPos()), 3, e.getEntityId());
+        ((ServerWorld) e.getEntityWorld()).getChunkManager().addTicket(TICKET_TYPE, new ChunkPos(e.getBlockPos()), 3,
+                e.getEntityId());
         if (e instanceof ServerPlayerEntity) {
             ((ServerPlayerEntity) e).teleport(to, x, y, z, yaw, pitch);
         } else {
@@ -82,9 +84,10 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
                     holder.setWorld(e.getEntityWorld().getRegistryKey().getValue());
                     holder.setPosition(e.getPos());
                     createCloudFor(e);
-                    TeleportTarget target = ((EntityAccessor)e).reelism$getTeleportTarget(sw);
+                    TeleportTarget target = ((EntityAccessor) e).reelism$getTeleportTarget(sw);
                     e.setVelocity(target.velocity);
-                    doTeleport(e, sw, target.position.x, target.position.y, target.position.z, target.yaw, target.pitch);
+                    doTeleport(e, sw, target.position.x, target.position.y, target.position.z, target.yaw,
+                            target.pitch);
                 }
             }
             for (LivingEntity e : toBeRemoved) {
