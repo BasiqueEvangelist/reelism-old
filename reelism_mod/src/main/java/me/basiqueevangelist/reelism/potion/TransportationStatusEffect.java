@@ -3,6 +3,7 @@ package me.basiqueevangelist.reelism.potion;
 import me.basiqueevangelist.reelism.access.ExtendedStatusEffect;
 import me.basiqueevangelist.reelism.components.ReeComponents;
 import me.basiqueevangelist.reelism.components.TransportationHolder;
+import me.basiqueevangelist.reelism.mixin.EntityAccessor;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -16,6 +17,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
     private static final Random RANDOM = new Random();
     private static final List<LivingEntity> toBeApplied = new ArrayList<>();
     private static final List<LivingEntity> toBeRemoved = new ArrayList<>();
+
+    public static final RegistryKey<World> DESTINATION = World.END;
 
     protected TransportationStatusEffect() {
         super(StatusEffectType.NEUTRAL, 0);
@@ -38,21 +42,44 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
                 0.5, 0.5, 0.5, speed);
     }
 
+    private static Entity doTeleport(Entity e, ServerWorld to, double x, double y, double z, float yaw, float pitch) {
+        to.getProfiler().push("doTeleport");
+        if (e instanceof ServerPlayerEntity) {
+            ((ServerPlayerEntity) e).teleport(to, x, y, z, yaw, pitch);
+        } else {
+            e.detach();
+            Entity old = e;
+            e = e.getType().create(to);
+            if (e == null) {
+                to.getProfiler().pop();
+                return e;
+            }
+
+            e.copyFrom(old);
+            e.refreshPositionAndAngles(x, y, z, yaw, pitch);
+            e.setHeadYaw(yaw);
+            to.onDimensionChanged(e);
+            old.removed = true;
+        }
+        to.getProfiler().pop();
+        return e;
+    }
+
     public static void register() {
         ServerTickEvents.END_SERVER_TICK.register((s) -> {
             for (LivingEntity e : toBeApplied) {
                 if (toBeRemoved.contains(e))
                     continue;
 
-                ServerWorld sw = s.getWorld(World.END);
+                ServerWorld sw = s.getWorld(DESTINATION);
                 if (e.getEntityWorld() != sw) {
                     TransportationHolder holder = ReeComponents.TRANSPORTATION.get(e);
                     holder.setWorld(e.getEntityWorld().getRegistryKey().getValue());
                     holder.setPosition(e.getPos());
                     createCloudFor(e);
-                    e.moveToWorld(sw);
-                } else {
-
+                    TeleportTarget target = ((EntityAccessor)e).reelism$getTeleportTarget(sw);
+                    e.setVelocity(target.velocity);
+                    doTeleport(e, sw, target.position.x, target.position.y, target.position.z, target.yaw, target.pitch);
                 }
             }
             for (LivingEntity e : toBeRemoved) {
@@ -62,21 +89,7 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
                 ServerWorld w = s.getWorld(RegistryKey.of(Registry.DIMENSION, holder.getWorld()));
                 Vec3d pos = holder.getPosition();
                 createCloudFor(e);
-                if (e instanceof ServerPlayerEntity) {
-                    ((ServerPlayerEntity) e).teleport(w, pos.x, pos.y, pos.z, e.yaw, e.pitch);
-                } else {
-                    e.detach();
-                    Entity old = e;
-                    e = (LivingEntity) e.getType().create(w);
-                    if (e == null) {
-                        return;
-                    }
-
-                    e.copyFrom(old);
-                    e.refreshPositionAfterTeleport(pos);
-                    w.onDimensionChanged(e);
-                    old.removed = true;
-                }
+                e = (LivingEntity) doTeleport(e, w, pos.x, pos.y, pos.z, e.yaw, e.pitch);
                 e.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 10 * 20));
                 e.setPos(pos.x, pos.y, pos.z);
             }
@@ -92,7 +105,7 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
 
     @Override
     public void reelism$onEffectApplied(LivingEntity e, int amplifier) {
-        ServerWorld sw = e.getServer().getWorld(World.END);
+        ServerWorld sw = e.getServer().getWorld(DESTINATION);
         if (e.getEntityWorld() == sw) {
             e.removeStatusEffectInternal(ReeStatusEffects.TRANSPORTATION);
             e.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 10 * 20));
@@ -104,7 +117,7 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
     public void reelism$onEffectRemoved(LivingEntity e, int amplifier) {
         TransportationHolder holder = ReeComponents.TRANSPORTATION.get(e);
         ServerWorld w = e.getServer().getWorld(RegistryKey.of(Registry.DIMENSION, holder.getWorld()));
-        if (holder.getWorld().equals(World.END.getValue()))
+        if (holder.getWorld().equals(DESTINATION.getValue()))
             return;
         toBeRemoved.add(e);
     }

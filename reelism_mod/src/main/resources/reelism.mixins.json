@@ -13,6 +13,7 @@
     "CreeperEntityMixin",
     "DamageEnchantmentMixin",
     "EnchantmentHelperMixin",
+    "EntityAccessor",
     "ExperienceOrbEntityMixin",
     "ExplosionMixin",
     "HostileEntityMixin",
