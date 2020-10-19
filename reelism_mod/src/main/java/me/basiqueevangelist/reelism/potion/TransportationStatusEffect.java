@@ -13,7 +13,9 @@ import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -28,6 +30,8 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
     private static final Random RANDOM = new Random();
     private static final List<LivingEntity> toBeApplied = new ArrayList<>();
     private static final List<LivingEntity> toBeRemoved = new ArrayList<>();
+
+    public static final ChunkTicketType<Integer> TICKET_TYPE = ChunkTicketType.create("reelism-mod:transportation", Integer::compareTo, 100);
 
     public static final RegistryKey<World> DESTINATION = World.END;
 
@@ -44,6 +48,7 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
 
     private static Entity doTeleport(Entity e, ServerWorld to, double x, double y, double z, float yaw, float pitch) {
         to.getProfiler().push("doTeleport");
+        ((ServerWorld)e.getEntityWorld()).getChunkManager().addTicket(TICKET_TYPE, new ChunkPos(e.getBlockPos()), 3, e.getEntityId());
         if (e instanceof ServerPlayerEntity) {
             ((ServerPlayerEntity) e).teleport(to, x, y, z, yaw, pitch);
         } else {
