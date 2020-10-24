@@ -52,5 +52,6 @@
   "text.autoconfig.reelism-mod.option.torchesBurnOut": "Torches burn out",
   "text.autoconfig.reelism-mod.option.tntIsPowderKeg": "Tnt replaced by powder keg",
   "text.autoconfig.reelism-mod.option.unbreakableAnvils": "Unbreakable anvils",
-  "text.autoconfig.reelism-mod.option.transportationStatusEffect": "Transportation status effect"
+  "text.autoconfig.reelism-mod.option.transportationStatusEffect": "Transportation status effect",
+  "text.autoconfig.reelism-mod.option.betterFishing": "Better fishing"
 }

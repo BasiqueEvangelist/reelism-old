@@ -1,13 +1,21 @@
 package me.basiqueevangelist.reelism;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
 public class ReelismUtils {
     private ReelismUtils() {
@@ -41,5 +49,20 @@ public class ReelismUtils {
             }
         }
         return total;
+    }
+
+    public static <T extends Entity> T getClosestEntity(List<? extends T> entities, Predicate<T> predicate, double x, double y, double z) {
+        double d = Double.MAX_VALUE;
+        T selected = null;
+        for (T e : entities) {
+            if (predicate.test(e)) {
+                double dist = e.squaredDistanceTo(x, y, z);
+                if (dist < d) {
+                    d = e.squaredDistanceTo(x, y, z);
+                    selected = e;
+                }
+            }
+        }
+        return selected;
     }
 }

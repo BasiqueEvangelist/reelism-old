@@ -23,6 +23,7 @@
       "me.basiqueevangelist.reelism.components.ReeComponents"
     ]
   },
+  "accessWidener": "reelism-mod.accesswidener",
   "mixins": [
     "reelism.mixins.json"
   ],

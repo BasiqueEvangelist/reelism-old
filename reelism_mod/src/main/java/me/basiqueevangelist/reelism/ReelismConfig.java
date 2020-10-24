@@ -34,6 +34,7 @@ public class ReelismConfig implements ConfigData {
     public boolean unbreakableAnvils = true;
     @ConfigEntry.Gui.RequiresRestart
     public boolean transportationStatusEffect = true;
+    public boolean betterFishing = true;
 
     public static class BattleAxeConfig {
         @ConfigEntry.Gui.RequiresRestart
