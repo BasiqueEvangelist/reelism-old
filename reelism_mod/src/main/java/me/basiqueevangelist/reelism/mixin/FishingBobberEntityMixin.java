@@ -6,18 +6,21 @@ import me.basiqueevangelist.reelism.access.FishEntityAccess;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.FishEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
@@ -28,6 +31,8 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
     @Shadow private Entity hookedEntity;
 
     @Shadow protected abstract void updateHookedEntityId();
+
+    @Shadow @Nullable public abstract PlayerEntity getPlayerOwner();
 
     public FishingBobberEntityMixin(EntityType<? extends ProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -72,6 +77,13 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
             hookedEntity.setVelocity(hookedEntity.getVelocity().add(diffX * 0.1D, diffY * 0.1D + Math.sqrt(Math.sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ)) * 0.08D, diffZ * 0.1D));
             if (isInWater(hookedEntity))
                 ((FishEntityAccess) hookedEntity).reelism$pullOut();
+        }
+    }
+
+    @Inject(method = "use", at = @At("TAIL"), cancellable = true)
+    private void transformDurabilityLost(CallbackInfoReturnable<Integer> cb) {
+        if (Reelism.CONFIG.betterFishing && !this.world.isClient && getPlayerOwner() != null && hookedEntity != null) {
+            cb.setReturnValue(1);
         }
     }
 }
