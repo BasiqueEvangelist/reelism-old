@@ -8,7 +8,7 @@ public class ReeStatusEffects {
     public static final TransportationStatusEffect TRANSPORTATION = new TransportationStatusEffect();
 
     public static void register() {
-        if (Reelism.CONFIG.transportationStatusEffect) {
+        if (Reelism.CONFIG.surreelism.transportationStatusEffect) {
             Registry.register(Registry.STATUS_EFFECT, new Identifier(Reelism.NAMESPACE, "transportation"), TRANSPORTATION);
             TransportationStatusEffect.register();
         }

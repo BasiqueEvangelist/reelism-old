@@ -10,7 +10,7 @@ public class ReePotions {
     public static final Potion TRANSPORTATION = new Potion(new StatusEffectInstance(ReeStatusEffects.TRANSPORTATION, 8 * 60 * 20));
 
     public static void register() {
-        if (Reelism.CONFIG.transportationStatusEffect) {
+        if (Reelism.CONFIG.surreelism.transportationStatusEffect) {
             Registry.register(Registry.POTION, new Identifier(Reelism.NAMESPACE, "transportation"), TRANSPORTATION);
         }
     }

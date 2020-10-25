@@ -13,7 +13,7 @@ public class ReeComponents implements EntityComponentInitializer {
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
-        if (Reelism.CONFIG.transportationStatusEffect) {
+        if (Reelism.CONFIG.surreelism.transportationStatusEffect) {
             registry.registerFor(LivingEntity.class, TRANSPORTATION, (e) -> new TransportationComponent());
         }
     }

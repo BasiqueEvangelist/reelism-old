@@ -28,13 +28,18 @@ public class ReelismConfig implements ConfigData {
     public boolean torchesBurnOut = true;
     @ConfigEntry.Gui.RequiresRestart
     public boolean tntIsPowderKeg = true;
-    @ConfigEntry.Category("enchantments")
-    @ConfigEntry.Gui.TransitiveObject
+    @ConfigEntry.Gui.CollapsibleObject
     public EnchantmentConfig enchantments = new EnchantmentConfig();
     public boolean unbreakableAnvils = true;
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean transportationStatusEffect = true;
     public boolean betterFishing = true;
+    @ConfigEntry.Category("surreelism")
+    @ConfigEntry.Gui.TransitiveObject
+    public SurreelismConfig surreelism = new SurreelismConfig();
+
+    public static class SurreelismConfig {
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean transportationStatusEffect = true;
+    }
 
     public static class BattleAxeConfig {
         @ConfigEntry.Gui.RequiresRestart

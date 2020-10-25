@@ -14,8 +14,8 @@
   "enchantment.reelism-mod.tunneling": "Tunneling",
   "itemGroup.reelism-mod.reelism": "Reelism",
   "text.autoconfig.reelism-mod.title": "ReelismMod Configuration",
-  "text.autoconfig.reelism-mod.category.default": "General",
-  "text.autoconfig.reelism-mod.category.enchantments": "Enchantments",
+  "text.autoconfig.reelism-mod.category.default": "Reelism",
+  "text.autoconfig.reelism-mod.category.surreelism": "Surreelism",
   "text.autoconfig.reelism-mod.option.replaceXpOrbBehavior": "Replace vanilla xp orb behavior",
   "text.autoconfig.reelism-mod.option.disableMending": "Disable mending",
   "text.autoconfig.reelism-mod.option.noEnchantedBooks": "Non-enchantable books",
@@ -38,6 +38,7 @@
   "text.autoconfig.reelism-mod.option.battleAxe.netherite": "Netherite battle axe",
   "text.autoconfig.reelism-mod.option.battleAxe.breaksShields": "Break shields",
   "text.autoconfig.reelism-mod.option.disableSleep": "Disable sleep",
+  "text.autoconfig.reelism-mod.option.enchantments": "Enchantments",
   "text.autoconfig.reelism-mod.option.enchantments.noSilkTouchOnShovels": "No silk touch on shovels",
   "text.autoconfig.reelism-mod.option.enchantments.fortuneEfficiencyConflict": "Fortune and efficiency conflict",
   "text.autoconfig.reelism-mod.option.enchantments.silkTouchEfficiencyConflict": "Silk touch and efficiency conflict",
@@ -45,6 +46,7 @@
   "text.autoconfig.reelism-mod.option.enchantments.silkTouchDecreasesSpeed": "Silk touch decreases speed",
   "text.autoconfig.reelism-mod.option.enchantments.tunnelingEnchantment": "Tunneling enchantment",
   "text.autoconfig.reelism-mod.option.enchantments.smiteIsFungicide": "Smite replaced by fungicide",
+  "text.autoconfig.reelism-mod.option.surreelism.transportationStatusEffect": "Transportation status effect",
   "text.autoconfig.reelism-mod.option.plantCreepers": "Plant creepers",
   "text.autoconfig.reelism-mod.option.searchByEnglishAlso": "Search by english as well",
   "text.autoconfig.reelism-mod.option.spawnLightLevel": "Minimum non-spawning light level",
@@ -52,6 +54,5 @@
   "text.autoconfig.reelism-mod.option.torchesBurnOut": "Torches burn out",
   "text.autoconfig.reelism-mod.option.tntIsPowderKeg": "Tnt replaced by powder keg",
   "text.autoconfig.reelism-mod.option.unbreakableAnvils": "Unbreakable anvils",
-  "text.autoconfig.reelism-mod.option.transportationStatusEffect": "Transportation status effect",
   "text.autoconfig.reelism-mod.option.betterFishing": "Better fishing"
 }
