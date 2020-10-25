@@ -39,6 +39,11 @@ public class ReelismConfig implements ConfigData {
     public static class SurreelismConfig {
         @ConfigEntry.Gui.RequiresRestart
         public boolean transportationStatusEffect = true;
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean commonStrongholds = true;
+        public boolean netherPortalsDisabled = true;
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean endPortalsTpIntoNether = true;
     }
 
     public static class BattleAxeConfig {

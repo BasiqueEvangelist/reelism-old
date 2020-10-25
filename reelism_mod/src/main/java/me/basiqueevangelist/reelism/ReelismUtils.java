@@ -2,17 +2,16 @@ package me.basiqueevangelist.reelism;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.border.WorldBorder;
+import net.minecraft.world.dimension.DimensionType;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
@@ -64,5 +63,14 @@ public class ReelismUtils {
             }
         }
         return selected;
+    }
+
+    public static BlockPos getDimensionScaled(BlockPos original, WorldBorder wb, DimensionType from, DimensionType to) {
+        double westBound = Math.max(-2.9999872E7D, wb.getBoundWest() + 16.0D);
+        double northBound = Math.max(-2.9999872E7D, wb.getBoundNorth() + 16.0D);
+        double eastBound = Math.min(2.9999872E7D, wb.getBoundEast() - 16.0D);
+        double southBound = Math.min(2.9999872E7D, wb.getBoundSouth() - 16.0D);
+        double ratio = DimensionType.method_31109(from, to);
+        return new BlockPos(MathHelper.clamp(original.getX() * ratio, westBound, eastBound), original.getY(), MathHelper.clamp(original.getZ() * ratio, northBound, southBound));
     }
 }
