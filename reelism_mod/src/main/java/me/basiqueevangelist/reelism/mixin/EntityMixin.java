@@ -29,6 +29,7 @@ public abstract class EntityMixin {
 
             if (to != null) {
                 StrongholdPortalLocation found = StrongholdPortalLocation.findPortal(destination, to);
+                found.lightPortal(destination);
                 tp.setReturnValue(new TeleportTarget(Vec3d.ofCenter(found.position), Vec3d.ZERO, found.orientation.getOpposite().asRotation(), 0));
             }
         }
