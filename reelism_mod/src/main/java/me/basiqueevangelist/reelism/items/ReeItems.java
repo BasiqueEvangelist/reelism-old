@@ -11,7 +11,7 @@ import net.minecraft.util.registry.Registry;
 
 public class ReeItems {
     public static final GemOfHoldingItem GEM_OF_HOLDING = new GemOfHoldingItem(
-            new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON).group(Reelism.GROUP));
+            new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON).group(ItemGroup.MISC));
     public static final BattleAxeItem WOODEN_BATTLE_AXE = new BattleAxeItem(ToolMaterials.WOOD, 6.0F, -3.2F,
             new FabricItemSettings().group(ItemGroup.COMBAT));
     public static final BattleAxeItem STONE_BATTLE_AXE = new BattleAxeItem(ToolMaterials.STONE, 7.0F, -3.2F,
