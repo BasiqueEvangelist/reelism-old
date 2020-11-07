@@ -3,8 +3,11 @@ package me.basiqueevangelist.reelism.mixin;
 import me.basiqueevangelist.reelism.Reelism;
 import me.basiqueevangelist.reelism.access.FishEntityAccess;
 import me.basiqueevangelist.reelism.ai.FollowBobberGoal;
+import me.basiqueevangelist.reelism.ai.NewFishMoveControl;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.passive.FishEntity;
@@ -17,6 +20,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FishEntity.class)
 public abstract class FishEntityMixin extends WaterCreatureEntity implements FishEntityAccess {
@@ -36,6 +40,18 @@ public abstract class FishEntityMixin extends WaterCreatureEntity implements Fis
     public void addGoals(CallbackInfo cb) {
         if (Reelism.CONFIG.betterFishing)
             goalSelector.add(1, new FollowBobberGoal((FishEntity)(Object) this));
+    }
+
+    @Inject(method = "<init>", at = @At("TAIL"))
+    public void replaceMoveControl(CallbackInfo cb) {
+        if (Reelism.CONFIG.betterFishing)
+            moveControl = new NewFishMoveControl((FishEntity)(Object)this);
+    }
+
+    @Inject(method = "createFishAttributes", at = @At("TAIL"))
+    private static void addAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cb) {
+        if (Reelism.CONFIG.betterFishing)
+            cb.getReturnValue().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.2000000476837158D);
     }
 
     @Inject(method = "tickMovement", at = @At("HEAD"))

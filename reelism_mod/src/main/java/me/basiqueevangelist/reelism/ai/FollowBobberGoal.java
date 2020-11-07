@@ -46,17 +46,9 @@ public class FollowBobberGoal extends Goal {
             fish.getNavigation().stop();
     }
 
-    private BlockPos getBobberPos(FishingBobberEntity bobber) {
-        BlockPos pos = bobber.getBlockPos();
-        while (bobber.world.getFluidState(pos).isIn(FluidTags.WATER)) {
-            pos = pos.up();
-        }
-        return pos.down();
-    }
-
     @Override
     public void start() {
-        Path p = fish.getNavigation().findPathTo(getBobberPos(bobber), 0);
+        Path p = fish.getNavigation().findPathTo(bobber.getBlockPos().up(), 0);
         fish.getNavigation().startMovingAlong(p, 1.6D);
     }
 }
