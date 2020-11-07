@@ -5,7 +5,9 @@ import me.basiqueevangelist.reelism.access.FishEntityAccess;
 import me.basiqueevangelist.reelism.ai.FollowBobberGoal;
 import me.basiqueevangelist.reelism.ai.NewFishMoveControl;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -19,8 +21,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.function.Predicate;
 
 @Mixin(FishEntity.class)
 public abstract class FishEntityMixin extends WaterCreatureEntity implements FishEntityAccess {
@@ -40,6 +45,14 @@ public abstract class FishEntityMixin extends WaterCreatureEntity implements Fis
     public void addGoals(CallbackInfo cb) {
         if (Reelism.CONFIG.betterFishing)
             goalSelector.add(1, new FollowBobberGoal((FishEntity)(Object) this));
+    }
+
+    @ModifyArg(method = "initGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ai/goal/FleeEntityGoal;<init>(Lnet/minecraft/entity/mob/PathAwareEntity;Ljava/lang/Class;FDDLjava/util/function/Predicate;)V"))
+    public Predicate<LivingEntity> fearPlayersInWater(Predicate<LivingEntity> old) {
+        if (!Reelism.CONFIG.betterFishing)
+            return old;
+
+        return old.and(Entity::isTouchingWater);
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
