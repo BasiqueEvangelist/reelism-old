@@ -9,6 +9,7 @@ import me.sargunvohra.mcmods.autoconfig1u.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
+import org.apache.logging.log4j.LogManager;
 
 public class Reelism implements ModInitializer {
 	public static final String NAMESPACE = "reelism-mod";
@@ -18,6 +19,8 @@ public class Reelism implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		LogManager.getLogger("ReelismMod").info("It's time for your fantasy flattening!");
+
 		RuntimeResources.register();
 		BookUpgradeRecipe.register();
 		ReeItems.register();
