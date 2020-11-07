@@ -5,10 +5,7 @@ import me.basiqueevangelist.reelism.items.BattleAxeItem;
 import net.minecraft.enchantment.DamageEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import org.spongepowered.asm.mixin.Final;
@@ -36,9 +33,7 @@ public abstract class DamageEnchantmentMixin extends Enchantment implements Exte
     public float reelism$getAttackDamage(int level, Entity e) {
         if (e.getType() == EntityType.CREEPER && typeIndex == 1)
             return level * 2.5F;
-        if (e instanceof LivingEntity)
-            return getAttackDamage(level, ((LivingEntity) e).getGroup());
-        return 0;
+        return getAttackDamage(level, e instanceof LivingEntity ? ((LivingEntity) e).getGroup() : EntityGroup.DEFAULT);
     }
 
     @Override
