@@ -51,6 +51,9 @@
 	"advancements.story.upgrade_tools.title": "Stone Age",
 	"advancements.story.upgrade_tools.description": "Create a stone adze",
 	"advancements.story.smelt_iron.title": "The Iron is Hot",
-	"advancements.story.smelt_iron.description": "Construct a blast furnace"
-
+	"advancements.story.smelt_iron.description": "Construct a blast furnace",
+	"advancements.story.get_armor.title": "Not Naked",
+	"advancements.story.get_armor.description": "Get a piece of wool armor",
+	"advancements.story.get_gem_of_holding.title": "It Beckons Me",
+	"advancements.story.get_gem_of_holding.description": "Create a gem of holding"
 }

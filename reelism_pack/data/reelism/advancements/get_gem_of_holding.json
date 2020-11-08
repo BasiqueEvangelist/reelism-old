@@ -1,0 +1,36 @@
+{
+    "parent": "minecraft:story/mine_diamond",
+    "display": {
+        "icon": {
+            "item": "reelism-mod:gem_of_holding",
+            "nbt": "{Charge:100}"
+        },
+        "title": {
+            "translate": "advancements.story.get_gem_of_holding.title"
+        },
+        "description": {
+            "translate": "advancements.story.get_gem_of_holding.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "gem_of_holding": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "reelism-mod:gem_of_holding"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "gem_of_holding"
+        ]
+    ]
+}

@@ -47,5 +47,9 @@
 	"advancements.story.upgrade_tools.title": "Каменный век",
 	"advancements.story.upgrade_tools.description": "Сделайте каменное тесло",
 	"advancements.story.smelt_iron.title": "Пока железо горячо",
-	"advancements.story.smelt_iron.description": "Постройте плавильную печь"
+	"advancements.story.smelt_iron.description": "Постройте плавильную печь",
+	"advancements.story.get_armor.title": "Не голый",
+	"advancements.story.get_armor.description": "Приобретите шерстяную броню",
+	"advancements.story.get_gem_of_holding.title": "Оно зовет меня",
+	"advancements.story.get_gem_of_holding.description": "Сделайте кристал-хранитель"
 }
