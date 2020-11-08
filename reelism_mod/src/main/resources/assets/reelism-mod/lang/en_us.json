@@ -49,6 +49,7 @@
   "text.autoconfig.reelism-mod.option.surreelism.commonStrongholds": "Strongholds as common as villages",
   "text.autoconfig.reelism-mod.option.surreelism.netherPortalsDisabled": "Nether portals are disabled",
   "text.autoconfig.reelism-mod.option.surreelism.endPortalsTpIntoNether": "End portals teleport into nether",
+  "text.autoconfig.reelism-mod.option.surreelism.endPortalsGenerateOpen": "End portals generate open",
   "text.autoconfig.reelism-mod.option.plantCreepers": "Plant creepers",
   "text.autoconfig.reelism-mod.option.searchByEnglishAlso": "Search by english as well",
   "text.autoconfig.reelism-mod.option.spawnLightLevel": "Minimum non-spawning light level",

@@ -38,6 +38,7 @@
     "ServerPlayerEntityMixin",
     "SilkTouchEnchantmentMixin",
     "StrongholdFeatureMixin",
+    "StrongholdPortalRoomMixin",
     "StructuresConfigMixin",
     "SwordItemMixin",
     "TntBlockMixin",

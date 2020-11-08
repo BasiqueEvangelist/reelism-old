@@ -45,6 +45,7 @@ public class ReelismConfig implements ConfigData {
         public boolean netherPortalsDisabled = true;
         @ConfigEntry.Gui.RequiresRestart
         public boolean endPortalsTpIntoNether = true;
+        public boolean endPortalsGenerateOpen = true;
     }
 
     public static class BattleAxeConfig {
