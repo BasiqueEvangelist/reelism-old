@@ -1,14 +1,12 @@
 package me.basiqueevangelist.reelism.ai;
 
 import me.basiqueevangelist.reelism.Reelism;
-import me.basiqueevangelist.reelism.ReelismUtils;
+import me.basiqueevangelist.reelism.util.EntityUtils;
 import me.basiqueevangelist.reelism.mixin.FishingBobberEntityAccessor;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class FollowBobberGoal extends Goal {
             return false;
 
         List<FishingBobberEntity> bobbers = fish.world.getEntitiesIncludingUngeneratedChunks(FishingBobberEntity.class, fish.getBoundingBox().expand(5, 5, 5));
-        bobber = ReelismUtils.getClosestEntity(bobbers, this::matchesBobber, fish.getX(), fish.getY(), fish.getZ());
+        bobber = EntityUtils.getClosestEntity(bobbers, this::matchesBobber, fish.getX(), fish.getY(), fish.getZ());
         return bobber != null;
     }
 

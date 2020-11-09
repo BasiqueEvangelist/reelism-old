@@ -1,6 +1,6 @@
 package me.basiqueevangelist.reelism.mixin;
 
-import me.basiqueevangelist.reelism.ReelismUtils;
+import me.basiqueevangelist.reelism.util.DimensionUtils;
 import me.basiqueevangelist.reelism.structures.StrongholdPortalLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
@@ -25,7 +25,7 @@ public abstract class EntityMixin {
     public void netherTeleportTarget(ServerWorld destination, CallbackInfoReturnable<TeleportTarget> tp) {
         if (destination.getRegistryKey() == World.NETHER && world.getRegistryKey() == World.OVERWORLD
          || destination.getRegistryKey() == World.OVERWORLD && world.getRegistryKey() == World.NETHER) {
-            BlockPos to = destination.locateStructure(StructureFeature.STRONGHOLD, ReelismUtils.getDimensionScaled(getBlockPos(), world.getWorldBorder(), world.getDimension(), destination.getDimension()), 1000, false);
+            BlockPos to = destination.locateStructure(StructureFeature.STRONGHOLD, DimensionUtils.getDimensionScaled(getBlockPos(), world.getWorldBorder(), world.getDimension(), destination.getDimension()), 1000, false);
 
             if (to != null) {
                 StrongholdPortalLocation found = StrongholdPortalLocation.findPortal(destination, to);

@@ -1,7 +1,7 @@
 package me.basiqueevangelist.reelism.mixin;
 
 import me.basiqueevangelist.reelism.Reelism;
-import me.basiqueevangelist.reelism.ReelismUtils;
+import me.basiqueevangelist.reelism.util.EnchantmentUtils;
 import me.basiqueevangelist.reelism.items.GemOfHoldingItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.AnvilScreenHandler;
@@ -23,7 +23,7 @@ public class AnvilScreenHandlerMixin {
     public void canTakeOutput(PlayerEntity player, boolean present, CallbackInfoReturnable<Boolean> cb) {
         if (Reelism.CONFIG.gemOfHoldingItem)
             cb.setReturnValue((player.abilities.creativeMode || GemOfHoldingItem
-                    .getTotalExperience(player.inventory) >= ReelismUtils.getExperienceFromLevels(levelCost.get()))
+                    .getTotalExperience(player.inventory) >= EnchantmentUtils.getExperienceFromLevels(levelCost.get()))
                     && levelCost.get() > 0);
     }
 }

@@ -1,7 +1,7 @@
 package me.basiqueevangelist.reelism.mixin;
 
 import me.basiqueevangelist.reelism.Reelism;
-import me.basiqueevangelist.reelism.ReelismUtils;
+import me.basiqueevangelist.reelism.util.EntityUtils;
 import me.basiqueevangelist.reelism.access.FishEntityAccess;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -49,7 +49,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
         if (Reelism.CONFIG.betterFishing && state == FishingBobberEntity.State.BOBBING) {
             if (!world.isClient) {
                 List<FishEntity> fish = world.getEntitiesIncludingUngeneratedChunks(FishEntity.class, this.getBoundingBox().expand(0.5));
-                FishEntity closestFish = ReelismUtils.getClosestEntity(fish, this::isInWater, getX(), getY(), getZ());
+                FishEntity closestFish = EntityUtils.getClosestEntity(fish, this::isInWater, getX(), getY(), getZ());
                 if (closestFish != null) {
                     hookedEntity = closestFish;
                     updateHookedEntityId();

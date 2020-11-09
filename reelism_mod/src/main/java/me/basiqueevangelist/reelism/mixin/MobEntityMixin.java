@@ -1,6 +1,6 @@
 package me.basiqueevangelist.reelism.mixin;
 
-import me.basiqueevangelist.reelism.ReelismUtils;
+import me.basiqueevangelist.reelism.util.EnchantmentUtils;
 import me.basiqueevangelist.reelism.access.ExtendedDamageEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
@@ -34,7 +34,7 @@ public abstract class MobEntityMixin extends LivingEntity {
         LivingEntity liv = (LivingEntity) e; // We already know it's a LivingEntity.
         ItemStack is = getMainHandStack();
         MutableFloat mut = new MutableFloat(f);
-        ReelismUtils.forEachEnchantment(is, (en, lvl) -> {
+        EnchantmentUtils.forEachEnchantment(is, (en, lvl) -> {
             if (en instanceof ExtendedDamageEnchantment) {
                 mut.add(((ExtendedDamageEnchantment) en).reelism$getAttackDamage(lvl, liv));
             } else {

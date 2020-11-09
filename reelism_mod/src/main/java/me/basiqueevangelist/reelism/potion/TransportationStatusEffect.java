@@ -4,18 +4,16 @@ import me.basiqueevangelist.reelism.access.ExtendedStatusEffect;
 import me.basiqueevangelist.reelism.components.ReeComponents;
 import me.basiqueevangelist.reelism.components.TransportationHolder;
 import me.basiqueevangelist.reelism.mixin.EntityAccessor;
+import me.basiqueevangelist.reelism.util.EntityUtils;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -31,9 +29,6 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
     private static final List<LivingEntity> toBeApplied = new ArrayList<>();
     private static final List<LivingEntity> toBeRemoved = new ArrayList<>();
 
-    public static final ChunkTicketType<Integer> TICKET_TYPE = ChunkTicketType.create("reelism-mod:transportation",
-            Integer::compareTo, 300);
-
     public static final RegistryKey<World> DESTINATION = World.END;
 
     protected TransportationStatusEffect() {
@@ -45,31 +40,6 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
         ServerWorld sw = (ServerWorld) e.getEntityWorld();
         sw.spawnParticles(ParticleTypes.EFFECT, e.getParticleX(0.5D), e.getRandomBodyY(), e.getParticleZ(0.5D), 100,
                 0.5, 0.5, 0.5, speed);
-    }
-
-    private static Entity doTeleport(Entity e, ServerWorld to, double x, double y, double z, float yaw, float pitch) {
-        to.getProfiler().push("doTeleport");
-        ((ServerWorld) e.getEntityWorld()).getChunkManager().addTicket(TICKET_TYPE, new ChunkPos(e.getBlockPos()), 3,
-                e.getEntityId());
-        if (e instanceof ServerPlayerEntity) {
-            ((ServerPlayerEntity) e).teleport(to, x, y, z, yaw, pitch);
-        } else {
-            e.detach();
-            Entity old = e;
-            e = e.getType().create(to);
-            if (e == null) {
-                to.getProfiler().pop();
-                return e;
-            }
-
-            e.copyFrom(old);
-            e.refreshPositionAndAngles(x, y, z, yaw, pitch);
-            e.setHeadYaw(yaw);
-            to.onDimensionChanged(e);
-            old.removed = true;
-        }
-        to.getProfiler().pop();
-        return e;
     }
 
     public static void register() {
@@ -86,7 +56,7 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
                     createCloudFor(e);
                     TeleportTarget target = ((EntityAccessor) e).reelism$getTeleportTarget(sw);
                     e.setVelocity(target.velocity);
-                    doTeleport(e, sw, target.position.x, target.position.y, target.position.z, target.yaw,
+                    EntityUtils.doTeleport(e, sw, target.position.x, target.position.y, target.position.z, target.yaw,
                             target.pitch);
                 }
             }
@@ -97,7 +67,7 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
                 ServerWorld w = s.getWorld(RegistryKey.of(Registry.DIMENSION, holder.getWorld()));
                 Vec3d pos = holder.getPosition();
                 createCloudFor(e);
-                e = (LivingEntity) doTeleport(e, w, pos.x, pos.y, pos.z, e.yaw, e.pitch);
+                e = (LivingEntity) EntityUtils.doTeleport(e, w, pos.x, pos.y, pos.z, e.yaw, e.pitch);
                 e.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 10 * 20));
                 e.setPos(pos.x, pos.y, pos.z);
             }

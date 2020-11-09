@@ -1,7 +1,7 @@
 package me.basiqueevangelist.reelism.mixin;
 
 import me.basiqueevangelist.reelism.Reelism;
-import me.basiqueevangelist.reelism.ReelismUtils;
+import me.basiqueevangelist.reelism.util.EnchantmentUtils;
 import me.basiqueevangelist.reelism.access.ExtendedDamageEnchantment;
 import me.basiqueevangelist.reelism.access.SpeedEnchantment;
 import me.basiqueevangelist.reelism.items.BattleAxeItem;
@@ -61,7 +61,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     public float addStuff(float f, Entity e) {
         ItemStack is = getMainHandStack();
         MutableFloat mut = new MutableFloat(f);
-        ReelismUtils.forEachEnchantment(is, (en, lvl) -> {
+        EnchantmentUtils.forEachEnchantment(is, (en, lvl) -> {
             if (en instanceof ExtendedDamageEnchantment) {
                 mut.add(((ExtendedDamageEnchantment) en).reelism$getAttackDamage(lvl, e));
             } else {
@@ -82,7 +82,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     public float changeSpeed(float f, BlockState bs) {
         MutableInt mut = new MutableInt(EnchantmentHelper.getEfficiency(this));
         ItemStack main = this.getMainHandStack();
-        ReelismUtils.forEachEnchantment(main, (en, lvl) -> {
+        EnchantmentUtils.forEachEnchantment(main, (en, lvl) -> {
             if (en instanceof SpeedEnchantment)
                 mut.add(((SpeedEnchantment) en).reelism$getEfficiencyLevels(main, lvl));
         });
@@ -98,7 +98,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "addExperienceLevels", at = @At("HEAD"), cancellable = true)
     public void addExperienceLevels(int levels, CallbackInfo cb) {
         if (Reelism.CONFIG.gemOfHoldingItem) {
-            addExperience(ReelismUtils.getExperienceFromLevels(levels));
+            addExperience(EnchantmentUtils.getExperienceFromLevels(levels));
             cb.cancel();
         }
     }
