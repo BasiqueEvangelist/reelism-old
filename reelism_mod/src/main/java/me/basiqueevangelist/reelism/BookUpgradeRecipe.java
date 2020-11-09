@@ -18,8 +18,7 @@ import java.util.Map;
 
 public class BookUpgradeRecipe extends SmithingRecipe {
     public static void register() {
-        Registry.register(Registry.RECIPE_SERIALIZER,
-                new Identifier(Reelism.NAMESPACE, "smithing_special_book_upgrade"), Serializer.INSTANCE);
+        Registry.register(Registry.RECIPE_SERIALIZER, Reelism.id( "smithing_special_book_upgrade"), Serializer.INSTANCE);
     }
 
     public BookUpgradeRecipe(Identifier id) {

@@ -11,7 +11,7 @@ public class ReePotions {
 
     public static void register() {
         if (Reelism.CONFIG.surreelism.transportationStatusEffect) {
-            Registry.register(Registry.POTION, new Identifier(Reelism.NAMESPACE, "transportation"), TRANSPORTATION);
+            Registry.register(Registry.POTION, Reelism.id("transportation"), TRANSPORTATION);
         }
     }
 }

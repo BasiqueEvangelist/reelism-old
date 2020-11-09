@@ -9,7 +9,7 @@ public class ReeStatusEffects {
 
     public static void register() {
         if (Reelism.CONFIG.surreelism.transportationStatusEffect) {
-            Registry.register(Registry.STATUS_EFFECT, new Identifier(Reelism.NAMESPACE, "transportation"), TRANSPORTATION);
+            Registry.register(Registry.STATUS_EFFECT, Reelism.id("transportation"), TRANSPORTATION);
             TransportationStatusEffect.register();
         }
     }

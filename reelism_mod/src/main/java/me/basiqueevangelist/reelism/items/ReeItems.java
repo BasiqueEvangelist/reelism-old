@@ -27,21 +27,21 @@ public class ReeItems {
 
     public static void register() {
         if (Reelism.CONFIG.gemOfHoldingItem)
-            Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "gem_of_holding"), GEM_OF_HOLDING);
+            Registry.register(Registry.ITEM, Reelism.id("gem_of_holding"), GEM_OF_HOLDING);
 
         if (Reelism.CONFIG.battleAxe.wooden)
-            Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "wooden_battle_axe"), WOODEN_BATTLE_AXE);
+            Registry.register(Registry.ITEM, Reelism.id("wooden_battle_axe"), WOODEN_BATTLE_AXE);
         if (Reelism.CONFIG.battleAxe.stone)
-            Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "stone_battle_axe"), STONE_BATTLE_AXE);
+            Registry.register(Registry.ITEM, Reelism.id("stone_battle_axe"), STONE_BATTLE_AXE);
         if (Reelism.CONFIG.battleAxe.golden)
-            Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "golden_battle_axe"), GOLDEN_BATTLE_AXE);
+            Registry.register(Registry.ITEM, Reelism.id("golden_battle_axe"), GOLDEN_BATTLE_AXE);
         if (Reelism.CONFIG.battleAxe.iron)
-            Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "iron_battle_axe"), IRON_BATTLE_AXE);
+            Registry.register(Registry.ITEM, Reelism.id("iron_battle_axe"), IRON_BATTLE_AXE);
         if (Reelism.CONFIG.battleAxe.diamond)
-            Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "diamond_battle_axe"),
+            Registry.register(Registry.ITEM, Reelism.id("diamond_battle_axe"),
                     DIAMOND_BATTLE_AXE);
         if (Reelism.CONFIG.battleAxe.netherite)
-            Registry.register(Registry.ITEM, new Identifier(Reelism.NAMESPACE, "netherite_battle_axe"),
+            Registry.register(Registry.ITEM, Reelism.id("netherite_battle_axe"),
                     NETHERITE_BATTLE_AXE);
     }
 }

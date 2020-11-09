@@ -9,6 +9,7 @@ import me.sargunvohra.mcmods.autoconfig1u.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 
 public class Reelism implements ModInitializer {
@@ -16,6 +17,10 @@ public class Reelism implements ModInitializer {
 
 	public static final ReelismConfig CONFIG = AutoConfig.register(ReelismConfig.class, Toml4jConfigSerializer::new)
 			.getConfig();
+
+	public static Identifier id(String path) {
+		return new Identifier(NAMESPACE, path);
+	}
 
 	@Override
 	public void onInitialize() {

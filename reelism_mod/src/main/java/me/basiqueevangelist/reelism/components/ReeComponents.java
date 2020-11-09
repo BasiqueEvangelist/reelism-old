@@ -9,7 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 
 public class ReeComponents implements EntityComponentInitializer {
-    public static final ComponentKey<TransportationHolder> TRANSPORTATION = ComponentRegistryV3.INSTANCE.getOrCreate(new Identifier(Reelism.NAMESPACE, "transportation"), TransportationHolder.class);
+    public static final ComponentKey<TransportationHolder> TRANSPORTATION = ComponentRegistryV3.INSTANCE.getOrCreate(Reelism.id("transportation"), TransportationHolder.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {

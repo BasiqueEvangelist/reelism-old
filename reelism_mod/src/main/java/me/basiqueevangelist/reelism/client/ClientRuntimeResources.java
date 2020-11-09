@@ -8,11 +8,11 @@ import net.minecraft.util.math.Direction;
 
 public class ClientRuntimeResources {
     public static void register() {
-        Artifice.registerAssets(new Identifier(Reelism.NAMESPACE, "runtime_resources"), b -> {
+        Artifice.registerAssets(Reelism.id("runtime_resources"), b -> {
             if (Reelism.CONFIG.torchesBurnOut) {
                 b.addBlockState(new Identifier("torch"), s -> {
                     s.variant("age=25", v -> {
-                        v.model(new Identifier("reelism-mod:block/burnt_torch"));
+                        v.model(Reelism.id("block/burnt_torch"));
                     });
                     for (int i = 0; i < 25; i++)
                         s.variant("age=" + i, v -> {
@@ -31,7 +31,7 @@ public class ClientRuntimeResources {
                             });
                         }
                         s.variant("facing=" + dir.asString() + ",age=25", v -> {
-                            v.model(new Identifier("reelism-mod:block/burnt_wall_torch"));
+                            v.model(Reelism.id("block/burnt_wall_torch"));
                             v.rotationY(yRot);
                         });
                     }
@@ -40,9 +40,9 @@ public class ClientRuntimeResources {
             if (Reelism.CONFIG.tntIsPowderKeg) {
                 b.addBlockModel(new Identifier("tnt"), m -> {
                     m.parent(new Identifier("block/cube_bottom_top"));
-                    m.texture("top", new Identifier("reelism-mod:block/powder_keg_top"));
-                    m.texture("bottom", new Identifier("reelism-mod:block/powder_keg_bottom"));
-                    m.texture("side", new Identifier("reelism-mod:block/powder_keg_side"));
+                    m.texture("top", Reelism.id("block/powder_keg_top"));
+                    m.texture("bottom", Reelism.id("block/powder_keg_bottom"));
+                    m.texture("side", Reelism.id("block/powder_keg_side"));
                 });
             }
 

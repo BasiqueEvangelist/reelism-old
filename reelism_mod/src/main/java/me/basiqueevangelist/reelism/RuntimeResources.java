@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 
 public class RuntimeResources {
     public static void register() {
-        Artifice.registerData(new Identifier(Reelism.NAMESPACE, "runtime_data"), b -> {
+        Artifice.registerData(Reelism.id("runtime_data"), b -> {
             if (Reelism.CONFIG.torchesBurnOut) {
                 b.addLootTable(new Identifier("blocks/torch"), l -> {
                     l.type(new Identifier("block"));

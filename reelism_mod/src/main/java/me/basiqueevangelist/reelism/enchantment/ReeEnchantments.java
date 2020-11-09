@@ -12,7 +12,7 @@ public class ReeEnchantments {
 
     public static void register() {
         if (Reelism.CONFIG.enchantments.tunnelingEnchantment) {
-            Registry.register(Registry.ENCHANTMENT, new Identifier(Reelism.NAMESPACE, "tunneling"), TUNNELING);
+            Registry.register(Registry.ENCHANTMENT, Reelism.id("tunneling"), TUNNELING);
             TunnelingEnchantment.register();
         }
     }
