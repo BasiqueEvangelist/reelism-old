@@ -76,11 +76,27 @@ function removeSurvivesExplosion(item: Item) {
         item.data = assumeConditionTrue(c => c.condition == "minecraft:survives_explosion")(item);
 }
 
+const BLACKLISTED_ADVANCEMENTS = [
+    "minecraft:husbandry/break_diamond_hoe.json",
+    "minecraft:husbandry/obtain_netherite_hoe.json",
+    "minecraft:story/enchant_item.json",
+    "minecraft:story/enter_the_nether.json",
+    "minecraft:story/form_obsidian.json",
+    "minecraft:story/enchant_item.json",
+    "minecraft:story/shiny_gear.json"
+];
+
+function deleteAdvancements(item: Item) {
+    if (item.type == "advancements" && BLACKLISTED_ADVANCEMENTS.includes(item.namespace + ":" + item.subpath))
+        item.data = {};
+}
+
 function pipeline(item) {
     noLowTempSmelting(item);
     noOverworldGoldArmor(item);
     noStrangeSilkTouch(item);
     removeSurvivesExplosion(item);
+    deleteAdvancements(item);
     return item.data;
 }
 
