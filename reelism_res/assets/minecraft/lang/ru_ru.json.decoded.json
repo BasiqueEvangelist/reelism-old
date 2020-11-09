@@ -51,5 +51,7 @@
 	"advancements.story.get_armor.title": "Не голый",
 	"advancements.story.get_armor.description": "Приобретите шерстяную броню",
 	"advancements.story.get_gem_of_holding.title": "Оно зовет меня",
-	"advancements.story.get_gem_of_holding.description": "Сделайте кристал-хранитель"
+	"advancements.story.get_gem_of_holding.description": "Сделайте кристал-хранитель",
+	"advancements.story.get_anvil.title": "Ремонт",
+	"advancements.story.get_anvil.description": "Постройте наковальню"
 }
