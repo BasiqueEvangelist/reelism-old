@@ -57,5 +57,9 @@
 	"advancements.story.get_gem_of_holding.title": "It Beckons Me",
 	"advancements.story.get_gem_of_holding.description": "Create a gem of holding",
 	"advancements.story.get_anvil.title": "It's Hammer Time!",
-	"advancements.story.get_anvil.description": "Construct an anvil"
+	"advancements.story.get_anvil.description": "Construct an anvil",
+	"advancements.story.enter_stronghold.title": "The Shores of Hell",
+	"advancements.story.enter_stronghold.description": "Enter a stronghold",
+	"advancements.story.enter_the_nether.title": "Fire and Brimstone",
+	"advancements.story.enter_the_nether.description": "Enter the Nether"
 }

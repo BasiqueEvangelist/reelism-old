@@ -53,5 +53,9 @@
 	"advancements.story.get_gem_of_holding.title": "Оно зовет меня",
 	"advancements.story.get_gem_of_holding.description": "Сделайте кристал-хранитель",
 	"advancements.story.get_anvil.title": "Ремонт",
-	"advancements.story.get_anvil.description": "Постройте наковальню"
+	"advancements.story.get_anvil.description": "Постройте наковальню",
+	"advancements.story.enter_stronghold.title": "Берега ада",
+	"advancements.story.enter_stronghold.description": "Войдите в крепость",
+	"advancements.story.enter_the_nether.title": "Огонь и сера",
+	"advancements.story.enter_the_nether.description": "Войдите в незер"
 }

@@ -83,7 +83,9 @@ const BLACKLISTED_ADVANCEMENTS = [
     "minecraft:story/enter_the_nether.json",
     "minecraft:story/form_obsidian.json",
     "minecraft:story/enchant_item.json",
-    "minecraft:story/shiny_gear.json"
+    "minecraft:story/shiny_gear.json",
+    "minecraft:story/follow_ender_eye.json",
+    "minecraft:story/enter_the_end.json"
 ];
 
 function deleteAdvancements(item: Item) {

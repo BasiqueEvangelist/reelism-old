@@ -1,0 +1,33 @@
+{
+    "parent": "minecraft:story/iron_tools",
+    "display": {
+        "icon": {
+            "item": "minecraft:end_portal_frame"
+        },
+        "title": {
+            "translate": "advancements.story.enter_stronghold.title"
+        },
+        "description": {
+            "translate": "advancements.story.enter_stronghold.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "in_stronghold": {
+            "trigger": "minecraft:location",
+            "conditions": {
+                "location": {
+                    "feature": "stronghold"
+                }
+            }
+        }
+    },
+    "requirements": [
+        [
+            "in_stronghold"
+        ]
+    ]
+}
