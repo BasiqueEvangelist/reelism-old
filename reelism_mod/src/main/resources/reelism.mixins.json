@@ -17,7 +17,7 @@
     "DamageEnchantmentMixin",
     "DefaultBiomeCreatorMixin",
     "EnchantmentHelperMixin",
-    "EndPortalBlockMixin",
+    "EndPortalBlockEntityRendererMixin",
     "EntityAccessor",
     "EntityMixin",
     "ExperienceOrbEntityMixin",

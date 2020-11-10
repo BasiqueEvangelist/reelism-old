@@ -1,11 +1,12 @@
 package me.basiqueevangelist.reelism.items;
 
 import me.basiqueevangelist.reelism.Reelism;
+import me.basiqueevangelist.reelism.block.ReeBlocks;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ToolMaterials;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
@@ -24,6 +25,7 @@ public class ReeItems {
             new FabricItemSettings().group(ItemGroup.COMBAT));
     public static final BattleAxeItem NETHERITE_BATTLE_AXE = new BattleAxeItem(ToolMaterials.NETHERITE, 5.0F, -3.0F,
             new FabricItemSettings().group(ItemGroup.COMBAT));
+    public static final BlockItem NETHER_PORTAL_FRAME = new BlockItem(ReeBlocks.NETHER_PORTAL_FRAME, new FabricItemSettings().group(ItemGroup.DECORATIONS));
 
     public static void register() {
         if (Reelism.CONFIG.gemOfHoldingItem)
@@ -43,5 +45,8 @@ public class ReeItems {
         if (Reelism.CONFIG.battleAxe.netherite)
             Registry.register(Registry.ITEM, Reelism.id("netherite_battle_axe"),
                     NETHERITE_BATTLE_AXE);
+
+        if (Reelism.CONFIG.surreelism.altNetherPortals)
+            Registry.register(Registry.ITEM, Reelism.id("nether_portal_frame"), NETHER_PORTAL_FRAME);
     }
 }

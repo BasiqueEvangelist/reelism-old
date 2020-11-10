@@ -44,7 +44,7 @@ public class ReelismConfig implements ConfigData {
         public boolean commonStrongholds = true;
         public boolean netherPortalsDisabled = true;
         @ConfigEntry.Gui.RequiresRestart
-        public boolean endPortalsTpIntoNether = true;
+        public boolean altNetherPortals = true;
         public boolean endPortalsGenerateOpen = true;
     }
 

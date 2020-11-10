@@ -1,7 +1,8 @@
 package me.basiqueevangelist.reelism.mixin;
 
-import me.basiqueevangelist.reelism.util.DimensionUtils;
+import me.basiqueevangelist.reelism.Reelism;
 import me.basiqueevangelist.reelism.structures.StrongholdPortalLocation;
+import me.basiqueevangelist.reelism.util.DimensionUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -29,7 +30,8 @@ public abstract class EntityMixin {
 
             if (to != null) {
                 StrongholdPortalLocation found = StrongholdPortalLocation.findPortal(destination, to);
-                found.lightPortal(destination);
+                if (!Reelism.CONFIG.surreelism.altNetherPortals)
+                    found.lightPortal(destination);
                 tp.setReturnValue(new TeleportTarget(Vec3d.ofCenter(found.position), Vec3d.ZERO, found.orientation.getOpposite().asRotation(), 0));
             }
         }

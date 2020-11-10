@@ -1,5 +1,7 @@
 package me.basiqueevangelist.reelism;
 
+import me.basiqueevangelist.reelism.block.ReeBlocks;
+import me.basiqueevangelist.reelism.blockentity.ReeBlockEntities;
 import me.basiqueevangelist.reelism.enchantment.ReeEnchantments;
 import me.basiqueevangelist.reelism.items.ReeItems;
 import me.basiqueevangelist.reelism.potion.ReePotions;
@@ -29,6 +31,8 @@ public class Reelism implements ModInitializer {
 		RuntimeResources.register();
 		BookUpgradeRecipe.register();
 		ReeItems.register();
+		ReeBlocks.register();
+		ReeBlockEntities.register();
 		ReeEnchantments.register();
 		ReeStatusEffects.register();
 		ReePotions.register();
