@@ -46,6 +46,8 @@ public class ReelismConfig implements ConfigData {
         @ConfigEntry.Gui.RequiresRestart
         public boolean altNetherPortals = true;
         public boolean endPortalsGenerateOpen = true;
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean surfaceStrongholdPiece = true;
     }
 
     public static class BattleAxeConfig {

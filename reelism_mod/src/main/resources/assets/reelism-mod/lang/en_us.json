@@ -53,6 +53,7 @@
   "text.autoconfig.reelism-mod.option.surreelism.netherPortalsDisabled": "Nether portals are disabled",
   "text.autoconfig.reelism-mod.option.surreelism.altNetherPortals": "Alternate nether portals",
   "text.autoconfig.reelism-mod.option.surreelism.endPortalsGenerateOpen": "End portals generate open",
+  "text.autoconfig.reelism-mod.option.surreelism.surfaceStrongholdPiece": "Surface stronghold piece",
   "text.autoconfig.reelism-mod.option.plantCreepers": "Plant creepers",
   "text.autoconfig.reelism-mod.option.searchByEnglishAlso": "Search by english as well",
   "text.autoconfig.reelism-mod.option.spawnLightLevel": "Minimum non-spawning light level",
