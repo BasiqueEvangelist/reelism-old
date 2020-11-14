@@ -10,29 +10,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
 
-@Mixin(AbstractBlock.class)
-public class AbstractBlockMixin {
+@Mixin(AbstractBlock.AbstractBlockState.class)
+public abstract class AbstractBlockStateMixin {
+    @Shadow protected abstract BlockState asBlockState();
+
     @Inject(method = "calcBlockBreakingDelta", at = @At("TAIL"), cancellable = true)
-    public void checkTunneling(BlockState state, PlayerEntity player, BlockView world, BlockPos pos,
+    public void checkTunneling(PlayerEntity player, BlockView world, BlockPos pos,
             CallbackInfoReturnable<Float> cb) {
         ItemStack main = player.getMainHandStack();
         Map<Enchantment, Integer> ench = EnchantmentHelper.get(main);
         if (ench.containsKey(ReeEnchantments.TUNNELING)) {
             BlockState other = world.getBlockState(pos.down());
-            if (main.getMiningSpeedMultiplier(other) > 1.0F && main.getMiningSpeedMultiplier(state) > 1.0F) {
-                float hardness = other.getHardness(world, pos);
-                if (hardness != -1) {
-                    int eff = player.isUsingEffectiveTool(other) ? 30 : 100;
-                    cb.setReturnValue(Math.min(cb.getReturnValueF(),
-                            player.getBlockBreakingSpeed(other) / hardness / (float) eff));
-                }
-            }
+            if (main.getMiningSpeedMultiplier(other) > 1.0F && main.getMiningSpeedMultiplier(asBlockState()) > 1.0F)
+                cb.setReturnValue(Math.min(cb.getReturnValueF(), other.getBlock().calcBlockBreakingDelta(other, player, world, pos.down())));
         }
     }
 }
