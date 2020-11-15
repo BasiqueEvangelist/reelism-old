@@ -27,6 +27,7 @@
     "FishingBobberEntityMixin",
     "HostileEntityMixin",
     "ItemRendererMixin",
+    "LivingEntityAccessor",
     "LivingEntityMixin",
     "LuckEnchantmentMixin",
     "MiningToolItemMixin",

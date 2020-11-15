@@ -32,6 +32,7 @@ public class ReelismConfig implements ConfigData {
     public EnchantmentConfig enchantments = new EnchantmentConfig();
     public boolean unbreakableAnvils = true;
     public boolean betterFishing = true;
+    public boolean fishPulledOutAsItems = true;
     @ConfigEntry.Category("surreelism")
     @ConfigEntry.Gui.TransitiveObject
     public SurreelismConfig surreelism = new SurreelismConfig();

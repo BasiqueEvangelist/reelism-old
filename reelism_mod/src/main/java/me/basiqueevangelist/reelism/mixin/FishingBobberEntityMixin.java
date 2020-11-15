@@ -5,11 +5,19 @@ import me.basiqueevangelist.reelism.util.EntityUtils;
 import me.basiqueevangelist.reelism.access.FishEntityAccess;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextTypes;
+import net.minecraft.stat.Stats;
 import net.minecraft.tag.FluidTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -33,6 +41,8 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
     @Shadow protected abstract void updateHookedEntityId();
 
     @Shadow @Nullable public abstract PlayerEntity getPlayerOwner();
+
+    @Shadow private boolean inOpenWater;
 
     public FishingBobberEntityMixin(EntityType<? extends ProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -70,13 +80,32 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
     @Inject(method = "pullHookedEntity", at = @At("HEAD"), cancellable = true)
     private void pullEntity(CallbackInfo cb) {
         if (Reelism.CONFIG.betterFishing && getOwner() != null && hookedEntity instanceof FishEntity) {
-            Entity owner = getOwner();
-            double diffX = owner.getX() - this.getX();
-            double diffY = owner.getY() - this.getY();
-            double diffZ = owner.getZ() - this.getZ();
-            hookedEntity.setVelocity(hookedEntity.getVelocity().add(diffX * 0.1D, diffY * 0.1D + Math.sqrt(Math.sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ)) * 0.08D, diffZ * 0.1D));
-            if (isInWater(hookedEntity))
-                ((FishEntityAccess) hookedEntity).reelism$pullOut();
+            if (getOwner() instanceof PlayerEntity)
+                ((PlayerEntity) getOwner()).increaseStat(Stats.FISH_CAUGHT, 1);
+            if (Reelism.CONFIG.fishPulledOutAsItems) {
+                Identifier lootTableId = ((LivingEntity)hookedEntity).getLootTable();
+                LootTable lootTable = getServer().getLootManager().getTable(lootTableId);
+                LootContext ctx = ((LivingEntityAccessor)hookedEntity).reelism$getLootContextBuilder(true, DamageSource.FALL).build(LootContextTypes.ENTITY);
+                lootTable.generateLoot(ctx, (stack) -> {
+                    Entity owner = getOwner();
+                    double diffX = owner.getX() - this.getX();
+                    double diffY = owner.getY() - this.getY();
+                    double diffZ = owner.getZ() - this.getZ();
+                    ItemEntity ie = new ItemEntity(world, getX(), getY(), getZ(), stack);
+                    ie.setVelocity(hookedEntity.getVelocity().add(diffX * 0.1D, diffY * 0.1D + Math.sqrt(Math.sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ)) * 0.08D, diffZ * 0.1D));
+                    world.spawnEntity(ie);
+                });
+                hookedEntity.remove();
+            }
+            else {
+                Entity owner = getOwner();
+                double diffX = owner.getX() - this.getX();
+                double diffY = owner.getY() - this.getY();
+                double diffZ = owner.getZ() - this.getZ();
+                hookedEntity.setVelocity(hookedEntity.getVelocity().add(diffX * 0.1D, diffY * 0.1D + Math.sqrt(Math.sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ)) * 0.08D, diffZ * 0.1D));
+                if (isInWater(hookedEntity))
+                    ((FishEntityAccess) hookedEntity).reelism$pullOut();
+            }
         }
     }
 
