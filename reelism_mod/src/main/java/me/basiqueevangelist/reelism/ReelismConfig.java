@@ -28,6 +28,7 @@ public class ReelismConfig implements ConfigData {
     public boolean torchesBurnOut = true;
     @ConfigEntry.Gui.RequiresRestart
     public boolean tntIsPowderKeg = true;
+    public boolean merchantsUseGold = false;
     @ConfigEntry.Gui.CollapsibleObject
     public EnchantmentConfig enchantments = new EnchantmentConfig();
     public boolean unbreakableAnvils = true;

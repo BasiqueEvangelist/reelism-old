@@ -30,6 +30,7 @@
     "LivingEntityAccessor",
     "LivingEntityMixin",
     "LuckEnchantmentMixin",
+    "MerchantEntityMixin",
     "MiningToolItemMixin",
     "MobEntityMixin",
     "MooshroomEntityMixin",
@@ -45,6 +46,7 @@
     "SwordItemMixin",
     "TntBlockMixin",
     "TorchBlockMixin",
+    "ItemStackAccessor",
     "VillagerEntityMixin",
     "WallTorchBlockMixin"
   ],
