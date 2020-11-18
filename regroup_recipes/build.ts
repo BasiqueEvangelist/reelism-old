@@ -1,5 +1,4 @@
-import * as fs from "fs";
-import { BuildInformation } from "../.malanya/types"
+import * as path from "path";
 import { run } from "../.malanya"
 
 function groupBanners(item) {
@@ -46,11 +45,9 @@ function pipeline(item) {
     return item.data;
 }
 
-const buildinfo = <BuildInformation>JSON.parse(fs.readFileSync("../buildinfo.json", "utf-8"));
-
 var packInfo =
 {
-    basedOn: buildinfo.original_datapack,
+    basedOn: path.resolve("../out"),
     pipeline: pipeline
 };
 

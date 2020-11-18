@@ -1,5 +1,4 @@
-import * as fs from "fs";
-import { BuildInformation } from "../.malanya/types"
+import * as path from "path";
 import { Item, run } from "../.malanya"
 import { assumeConditionTrue, purgeItem } from "../.malanya/lootTables";
 
@@ -102,11 +101,9 @@ function pipeline(item) {
     return item.data;
 }
 
-const buildinfo = <BuildInformation>JSON.parse(fs.readFileSync("../buildinfo.json", "utf-8"));
-
 var packInfo =
 {
-    basedOn: [buildinfo.original_datapack, buildinfo.datapackify_datapack],
+    basedOn: [path.resolve("../out"), path.resolve("../Datapackify/src/main/resources")],
     pipeline: pipeline
 };
 

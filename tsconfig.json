@@ -3,8 +3,9 @@
         "module": "CommonJS",
         "moduleResolution": "node",
         "noImplicitAny": false,
+        "target": "ES2017",
         "lib": [
-            "ES2015"
+            "ES2017"
         ]
     },
     "include": [
