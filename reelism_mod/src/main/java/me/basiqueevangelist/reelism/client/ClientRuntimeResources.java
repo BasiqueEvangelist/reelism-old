@@ -7,8 +7,6 @@ import net.minecraft.client.resource.language.LanguageDefinition;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 
-import java.io.IOException;
-
 public class ClientRuntimeResources {
     public static void register() {
         ArtificeResourcePack arp = ArtificeResourcePack.ofAssets(b -> {
@@ -159,11 +157,6 @@ public class ClientRuntimeResources {
                 }
             }
         });
-        try {
-            arp.dumpResources("runtimeResources");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         Artifice.registerAssets(Reelism.id("runtime_resources"), arp);
     }
 
