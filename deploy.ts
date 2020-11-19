@@ -6,8 +6,6 @@ import { BuildInformation, VersionManifest } from "./.malanya/types";
 import { zip, unzipAt } from "./.malanya/zip"
 import { getVersions, pull, download } from "./.malanya/versions"
 
-var buildInfo = <BuildInformation>JSON.parse(fs.readFileSync("buildinfo.json", "utf-8"));
-
 (async function () {
     pathEx.removeDir("out/reelism");
     const resultPath = path.join("out", "reelism");
@@ -47,10 +45,7 @@ var buildInfo = <BuildInformation>JSON.parse(fs.readFileSync("buildinfo.json", "
             const bins = fs.readdirSync(binsPath);
             const bin = bins.find(x => /[a-z0-9]+-[0-9]+\.[0-9]+\.[0-9]+\.jar/.test(x));
             const binPath = path.join(binsPath, bin);
-            const outPath = path.join(buildInfo.modpath, bin);
 
-            if (fs.existsSync(outPath))
-                fs.unlinkSync(outPath);
             fs.copyFileSync(binPath, path.join(resultPath, bin));
             includedMods.push(bin);
             console.log(`[${dp}] Copied to output directory`);
@@ -98,8 +93,12 @@ var buildInfo = <BuildInformation>JSON.parse(fs.readFileSync("buildinfo.json", "
     fs.writeFileSync(path.join(resultPath, "fabric.mod.json"), JSON.stringify(fabricModJson, null, 2));
     fs.copyFileSync("LICENSE", path.join(resultPath, "LICENSE"));
     zip(resultPath, path.join("out", "reelism.jar"));
-    fs.copyFileSync(path.join("out", "reelism.jar"), path.join(buildInfo.modpath, "reelism.jar"));
-    console.log("> Copied to output directory");
+    if (fs.existsSync("buildinfo.json")) {
+        var buildInfo = <BuildInformation>JSON.parse(fs.readFileSync("buildinfo.json", "utf-8"));
+
+        fs.copyFileSync(path.join("out", "reelism.jar"), path.join(buildInfo.modpath, "reelism.jar"));
+        console.log("> Copied to output directory");
+    }
 })().catch(e => {
     console.error(e);
 });
