@@ -54,17 +54,17 @@ public class ReelismConfig implements ConfigData {
 
     public static class BattleAxeConfig {
         @ConfigEntry.Gui.RequiresRestart
-        public boolean wooden = true;
+        public boolean wooden = false;
         @ConfigEntry.Gui.RequiresRestart
-        public boolean stone = true;
+        public boolean stone = false;
         @ConfigEntry.Gui.RequiresRestart
-        public boolean golden = true;
+        public boolean golden = false;
         @ConfigEntry.Gui.RequiresRestart
         public boolean iron = true;
         @ConfigEntry.Gui.RequiresRestart
         public boolean diamond = true;
         @ConfigEntry.Gui.RequiresRestart
-        public boolean netherite = true;
+        public boolean netherite = false;
         public boolean breaksShields = true;
     }
 
