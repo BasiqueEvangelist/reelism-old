@@ -11,6 +11,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.dimension.DimensionType;
+import org.apache.commons.lang3.mutable.MutableInt;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -48,5 +49,25 @@ public final class EnchantmentUtils {
             }
         }
         return total;
+    }
+
+    public static int getRepairCostFor(ItemStack stack) {
+        MutableInt base = new MutableInt(0);
+        forEachEnchantment(stack, (ench, lvl) -> {
+            switch(ench.getRarity()) {
+                case COMMON:
+                    base.add(lvl);
+                    break;
+                case UNCOMMON:
+                    base.add(2 * lvl);
+                    break;
+                case RARE:
+                    base.add(4 * lvl);
+                    break;
+                case VERY_RARE:
+                    base.add(8 * lvl);
+            }
+        });
+        return base.getValue();
     }
 }

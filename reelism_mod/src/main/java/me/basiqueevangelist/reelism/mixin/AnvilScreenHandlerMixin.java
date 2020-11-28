@@ -4,6 +4,7 @@ import me.basiqueevangelist.reelism.Reelism;
 import me.basiqueevangelist.reelism.util.EnchantmentUtils;
 import me.basiqueevangelist.reelism.items.GemOfHoldingItem;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.AnvilScreenHandler;
 import net.minecraft.screen.Property;
 import org.spongepowered.asm.mixin.Final;
@@ -24,6 +25,14 @@ public class AnvilScreenHandlerMixin {
             cb.setReturnValue((player.abilities.creativeMode || GemOfHoldingItem
                     .getTotalExperience(player.inventory) >= EnchantmentUtils.getExperienceFromLevels(levelCost.get()))
                     && levelCost.get() > 0);
+    }
+
+    @Redirect(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getRepairCost()I"))
+    public int getRepairCost(ItemStack is) {
+        if (!Reelism.CONFIG.altRepairCosts)
+            return is.getRepairCost();
+
+        return EnchantmentUtils.getRepairCostFor(is);
     }
 
     @Redirect(method = "updateResult",

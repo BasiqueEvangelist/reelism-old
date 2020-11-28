@@ -39,6 +39,7 @@ public class ReelismConfig implements ConfigData {
     public SurreelismConfig surreelism = new SurreelismConfig();
     public boolean armorBasedLoot = true;
     public boolean noMaxAnvilLevel = true;
+    public boolean altRepairCosts = true;
 
     public static class SurreelismConfig {
         @ConfigEntry.Gui.RequiresRestart
