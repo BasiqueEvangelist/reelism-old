@@ -64,5 +64,6 @@
   "text.autoconfig.reelism-mod.option.betterFishing": "Better fishing",
   "text.autoconfig.reelism-mod.option.fishPulledOutAsItems": "Fish pulled out as items",
   "text.autoconfig.reelism-mod.option.armorBasedLoot": "Armor based loot",
-  "text.autoconfig.reelism-mod.option.merchantsUseGold": "Merchants use gold"
+  "text.autoconfig.reelism-mod.option.merchantsUseGold": "Merchants use gold",
+  "text.autoconfig.reelism-mod.option.noMaxAnvilLevel": "No max level for anvils"
 }

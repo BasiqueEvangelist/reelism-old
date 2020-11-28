@@ -38,6 +38,7 @@ public class ReelismConfig implements ConfigData {
     @ConfigEntry.Gui.TransitiveObject
     public SurreelismConfig surreelism = new SurreelismConfig();
     public boolean armorBasedLoot = true;
+    public boolean noMaxAnvilLevel = true;
 
     public static class SurreelismConfig {
         @ConfigEntry.Gui.RequiresRestart

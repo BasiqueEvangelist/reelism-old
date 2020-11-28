@@ -27,6 +27,7 @@
     "FishingBobberEntityMixin",
     "HostileEntityMixin",
     "ItemRendererMixin",
+    "ItemStackAccessor",
     "LivingEntityAccessor",
     "LivingEntityMixin",
     "LuckEnchantmentMixin",
@@ -46,13 +47,13 @@
     "SwordItemMixin",
     "TntBlockMixin",
     "TorchBlockMixin",
-    "ItemStackAccessor",
     "VillagerEntityMixin",
     "WallTorchBlockMixin"
   ],
   "client": [
     "client.LanguageManagerMixin",
-    "client.MinecraftClientMixin"
+    "client.MinecraftClientMixin",
+    "client.AnvilScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
