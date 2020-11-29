@@ -40,6 +40,9 @@ public class ReelismConfig implements ConfigData {
     public boolean armorBasedLoot = true;
     public boolean noMaxAnvilLevel = true;
     public boolean altRepairCosts = true;
+    public double ladderSpeedMultiplier = 3;
+    @ConfigEntry.BoundedDiscrete(min = -90, max = 90)
+    public float ladderDownPitch = 45;
 
     public static class SurreelismConfig {
         @ConfigEntry.Gui.RequiresRestart

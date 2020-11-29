@@ -66,5 +66,7 @@
   "text.autoconfig.reelism-mod.option.armorBasedLoot": "Armor based loot",
   "text.autoconfig.reelism-mod.option.merchantsUseGold": "Merchants use gold",
   "text.autoconfig.reelism-mod.option.noMaxAnvilLevel": "No max level for anvils",
-  "text.autoconfig.reelism-mod.option.altRepairCosts": "Alternate repair costs"
+  "text.autoconfig.reelism-mod.option.altRepairCosts": "Alternate repair costs",
+  "text.autoconfig.reelism-mod.option.ladderSpeedMultiplier": "Ladder speed multiplier when looking down",
+  "text.autoconfig.reelism-mod.option.ladderDownPitch": "Ladder down pitch"
 }
