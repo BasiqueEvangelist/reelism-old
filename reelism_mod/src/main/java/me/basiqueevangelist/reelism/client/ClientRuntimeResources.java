@@ -1,7 +1,6 @@
 package me.basiqueevangelist.reelism.client;
 
 import com.swordglowsblue.artifice.api.Artifice;
-import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import me.basiqueevangelist.reelism.Reelism;
 import net.minecraft.client.resource.language.LanguageDefinition;
 import net.minecraft.util.Identifier;
@@ -9,7 +8,7 @@ import net.minecraft.util.math.Direction;
 
 public class ClientRuntimeResources {
     public static void register() {
-        ArtificeResourcePack arp = ArtificeResourcePack.ofAssets(b -> {
+        Artifice.registerAssetPack(Reelism.id("runtime_resources"), b -> {
             if (Reelism.CONFIG.torchesBurnOut) {
                 b.addBlockState(new Identifier("torch"), s -> {
                     s.variant("age=25", v -> {
@@ -157,7 +156,6 @@ public class ClientRuntimeResources {
                 }
             }
         });
-        Artifice.registerAssets(Reelism.id("runtime_resources"), arp);
     }
 
     private static final int[] DIRECTION_TO_Y = new int[] { 90, 180, 270, 0 };
