@@ -21,6 +21,9 @@
     ],
     "cardinal-components-entity": [
       "me.basiqueevangelist.reelism.components.ReeComponents"
+    ],
+    "cardinal-components-chunk": [
+      "me.basiqueevangelist.reelism.components.ReeComponents"
     ]
   },
   "accessWidener": "reelism-mod.accesswidener",
@@ -29,7 +32,8 @@
   ],
   "custom": {
     "cardinal-components": [
-      "reelism-mod:transportation"
+      "reelism-mod:transportation",
+      "reelism-mod:spawn_frequency"
     ],
     "modmenu:parent": "reelism",
     "lithium:options": {

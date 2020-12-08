@@ -2,6 +2,7 @@ package me.basiqueevangelist.reelism;
 
 import me.basiqueevangelist.reelism.block.ReeBlocks;
 import me.basiqueevangelist.reelism.blockentity.ReeBlockEntities;
+import me.basiqueevangelist.reelism.command.SpawnFrequencyCommand;
 import me.basiqueevangelist.reelism.enchantment.ReeEnchantments;
 import me.basiqueevangelist.reelism.items.ReeItems;
 import me.basiqueevangelist.reelism.potion.ReePotions;
@@ -10,6 +11,7 @@ import me.basiqueevangelist.reelism.structures.ReeStructurePools;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -38,6 +40,9 @@ public class Reelism implements ModInitializer {
 		ReeStatusEffects.register();
 		ReePotions.register();
 		ReeStructurePools.register();
+		CommandRegistrationCallback.EVENT.register((cmd, dedicated) -> {
+			SpawnFrequencyCommand.register(cmd);
+		});
 
 		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, manager, success) -> {
 			if (Reelism.CONFIG.autoUnlockRecipes)

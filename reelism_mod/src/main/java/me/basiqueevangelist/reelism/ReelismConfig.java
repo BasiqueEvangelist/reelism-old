@@ -43,6 +43,8 @@ public class ReelismConfig implements ConfigData {
     public double ladderSpeedMultiplier = 3;
     @ConfigEntry.BoundedDiscrete(min = -90, max = 90)
     public float ladderDownPitch = 45;
+    @ConfigEntry.Gui.RequiresRestart
+    public boolean randomSpawnFrequencies = true;
 
     public static class SurreelismConfig {
         @ConfigEntry.Gui.RequiresRestart

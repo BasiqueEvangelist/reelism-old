@@ -40,6 +40,7 @@
     "PlayerManagerMixin",
     "ServerPlayerEntityMixin",
     "SilkTouchEnchantmentMixin",
+    "SpawnHelperMixin",
     "StrongholdFeatureMixin",
     "StrongholdFeatureMixin$Start",
     "StrongholdPortalRoomMixin",
@@ -48,12 +49,13 @@
     "TntBlockMixin",
     "TorchBlockMixin",
     "VillagerEntityMixin",
-    "WallTorchBlockMixin"
+    "WallTorchBlockMixin",
+    "WeightedPickerEntryAccessor"
   ],
   "client": [
+    "client.AnvilScreenMixin",
     "client.LanguageManagerMixin",
-    "client.MinecraftClientMixin",
-    "client.AnvilScreenMixin"
+    "client.MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
