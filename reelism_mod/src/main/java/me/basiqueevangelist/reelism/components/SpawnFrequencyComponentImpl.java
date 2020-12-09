@@ -1,18 +1,18 @@
 package me.basiqueevangelist.reelism.components;
 
+import it.unimi.dsi.fastutil.doubles.DoubleLists;
 import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
+import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.chunk.WorldChunk;
 import net.minecraft.world.gen.ChunkRandom;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class SpawnFrequencyComponentImpl implements SpawnFrequencyComponent {
@@ -34,6 +34,9 @@ public class SpawnFrequencyComponentImpl implements SpawnFrequencyComponent {
 
     @Override
     public Object2FloatMap<Identifier> getSpawnFrequencies() {
+        if (spawnFrequencies.isEmpty())
+            generate(((StructureWorldAccess)provider.getWorld()).getSeed(), provider.getPos().x, provider.getPos().z);
+
         return spawnFrequencies;
     }
 
@@ -72,13 +75,13 @@ public class SpawnFrequencyComponentImpl implements SpawnFrequencyComponent {
         spawnFrequencies.clear();
         average = 0;
         ChunkRandom r = new ChunkRandom();
-//        for (Identifier generateFor : GENERATED_IDS) {
+
         for (EntityType<?> et : Registry.ENTITY_TYPE) {
             if (et.getSpawnGroup() != SpawnGroup.MISC && et.getSpawnGroup() != SpawnGroup.AMBIENT) {
                 Identifier id = Registry.ENTITY_TYPE.getId(et);
 
                 r.setPopulationSeed(worldSeed * id.hashCode(), chunkX, chunkZ);
-                OctavePerlinNoiseSampler s = new OctavePerlinNoiseSampler(r, Arrays.asList(1, 2, 3));
+                DoublePerlinNoiseSampler s = DoublePerlinNoiseSampler.method_30846(r, 1, DoubleLists.singleton(2));
                 average *= spawnFrequencies.size();
                 spawnFrequencies.put(id, Math.abs((float)s.sample(chunkX, 0, chunkZ)));
                 average /= spawnFrequencies.size();
