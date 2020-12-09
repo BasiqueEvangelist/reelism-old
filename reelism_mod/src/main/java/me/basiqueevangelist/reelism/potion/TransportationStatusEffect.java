@@ -2,7 +2,7 @@ package me.basiqueevangelist.reelism.potion;
 
 import me.basiqueevangelist.reelism.access.ExtendedStatusEffect;
 import me.basiqueevangelist.reelism.components.ReeComponents;
-import me.basiqueevangelist.reelism.components.TransportationHolder;
+import me.basiqueevangelist.reelism.components.TransportationComponent;
 import me.basiqueevangelist.reelism.mixin.EntityAccessor;
 import me.basiqueevangelist.reelism.util.EntityUtils;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -12,7 +12,6 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
@@ -50,9 +49,9 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
 
                 ServerWorld sw = s.getWorld(DESTINATION);
                 if (e.getEntityWorld() != sw) {
-                    TransportationHolder holder = ReeComponents.TRANSPORTATION.get(e);
-                    holder.setWorld(e.getEntityWorld().getRegistryKey().getValue());
-                    holder.setPosition(e.getPos());
+                    TransportationComponent component = ReeComponents.TRANSPORTATION.get(e);
+                    component.setWorld(e.getEntityWorld().getRegistryKey().getValue());
+                    component.setPosition(e.getPos());
                     createCloudFor(e);
                     TeleportTarget target = ((EntityAccessor) e).reelism$getTeleportTarget(sw);
                     e.setVelocity(target.velocity);
@@ -63,9 +62,9 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
             for (LivingEntity e : toBeRemoved) {
                 if (toBeApplied.contains(e))
                     continue;
-                TransportationHolder holder = ReeComponents.TRANSPORTATION.get(e);
-                ServerWorld w = s.getWorld(RegistryKey.of(Registry.DIMENSION, holder.getWorld()));
-                Vec3d pos = holder.getPosition();
+                TransportationComponent component = ReeComponents.TRANSPORTATION.get(e);
+                ServerWorld w = s.getWorld(RegistryKey.of(Registry.DIMENSION, component.getWorld()));
+                Vec3d pos = component.getPosition();
                 createCloudFor(e);
                 e = (LivingEntity) EntityUtils.doTeleport(e, w, pos.x, pos.y, pos.z, e.yaw, e.pitch);
                 e.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 10 * 20));
@@ -93,9 +92,8 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
 
     @Override
     public void reelism$onEffectRemoved(LivingEntity e, int amplifier) {
-        TransportationHolder holder = ReeComponents.TRANSPORTATION.get(e);
-        ServerWorld w = e.getServer().getWorld(RegistryKey.of(Registry.DIMENSION, holder.getWorld()));
-        if (holder.getWorld().equals(DESTINATION.getValue()))
+        TransportationComponent component = ReeComponents.TRANSPORTATION.get(e);
+        if (component.getWorld().equals(DESTINATION.getValue()))
             return;
         toBeRemoved.add(e);
     }

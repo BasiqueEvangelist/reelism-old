@@ -11,13 +11,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.chunk.WorldChunk;
 
 public class ReeComponents implements EntityComponentInitializer, ChunkComponentInitializer {
-    public static final ComponentKey<TransportationHolder> TRANSPORTATION = ComponentRegistryV3.INSTANCE.getOrCreate(Reelism.id("transportation"), TransportationHolder.class);
-    public static final ComponentKey<SpawnFrequencyHolder> SPAWN_FREQUENCY = ComponentRegistryV3.INSTANCE.getOrCreate(Reelism.id("spawn_frequency"), SpawnFrequencyHolder.class);
+    public static final ComponentKey<TransportationComponent> TRANSPORTATION = ComponentRegistryV3.INSTANCE.getOrCreate(Reelism.id("transportation"), TransportationComponent.class);
+    public static final ComponentKey<SpawnFrequencyComponent> SPAWN_FREQUENCY = ComponentRegistryV3.INSTANCE.getOrCreate(Reelism.id("spawn_frequency"), SpawnFrequencyComponent.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
         if (Reelism.CONFIG.surreelism.transportationStatusEffect) {
-            registry.registerFor(LivingEntity.class, TRANSPORTATION, (e) -> new TransportationComponent());
+            registry.registerFor(LivingEntity.class, TRANSPORTATION, (e) -> new TransportationComponentImpl());
         }
     }
 
@@ -26,9 +26,9 @@ public class ReeComponents implements EntityComponentInitializer, ChunkComponent
         if (Reelism.CONFIG.randomSpawnFrequencies) {
             registry.register(SPAWN_FREQUENCY, chunk -> {
                 if (chunk instanceof WorldChunk) {
-                    return new SpawnFrequencyComponent((WorldChunk) chunk);
+                    return new SpawnFrequencyComponentImpl((WorldChunk) chunk);
                 } else {
-                    return new DummySpawnFrequencyComponent();
+                    return new DummySpawnFrequencyComponentImpl();
                 }
             });
         }
