@@ -45,7 +45,7 @@ public abstract class CreeperEntityMixin extends HostileEntity {
             tracker.set(data, to);
     }
 
-    @Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/CreeperEntity;remove()V"))
+    @Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/CreeperEntity;discard()V"))
     public void poisonCloud(CallbackInfo cb) {
         if (Reelism.CONFIG.plantCreepers) {
             AreaEffectCloudEntity cloud = new AreaEffectCloudEntity(world, getX(), getY() + 0.25, getZ());
@@ -60,7 +60,7 @@ public abstract class CreeperEntityMixin extends HostileEntity {
     }
 
     @Unique
-    private static final List<Block> REPLACABLE_BLOCKS = ImmutableList.of(Blocks.GRASS_BLOCK, Blocks.GRASS_PATH,
+    private static final List<Block> REPLACABLE_BLOCKS = ImmutableList.of(Blocks.GRASS_BLOCK, Blocks.DIRT_PATH,
             Blocks.PODZOL);
 
     @Shadow

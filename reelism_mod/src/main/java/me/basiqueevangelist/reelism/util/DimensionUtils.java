@@ -15,7 +15,7 @@ public final class DimensionUtils {
         double northBound = Math.max(-2.9999872E7D, wb.getBoundNorth() + 16.0D);
         double eastBound = Math.min(2.9999872E7D, wb.getBoundEast() - 16.0D);
         double southBound = Math.min(2.9999872E7D, wb.getBoundSouth() - 16.0D);
-        double ratio = DimensionType.method_31109(from, to);
+        double ratio = DimensionType.getCoordinateScaleFactor(from, to);
         return new BlockPos(MathHelper.clamp(original.getX() * ratio, westBound, eastBound), original.getY(), MathHelper.clamp(original.getZ() * ratio, northBound, southBound));
     }
 }

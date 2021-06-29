@@ -2,12 +2,9 @@ package me.basiqueevangelist.reelism.mixin;
 
 import me.basiqueevangelist.reelism.Reelism;
 import me.basiqueevangelist.reelism.items.GemOfHoldingItem;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ExperienceOrbEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
@@ -20,18 +17,19 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Map;
-import java.util.function.Predicate;
-
 @Mixin(ExperienceOrbEntity.class)
-public class ExperienceOrbEntityMixin {
+public abstract class ExperienceOrbEntityMixin {
     @Shadow
     private PlayerEntity target;
 
     @Shadow
     private int amount;
 
-    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getClosestPlayer(Lnet/minecraft/entity/Entity;D)Lnet/minecraft/entity/player/PlayerEntity;"))
+    @Shadow protected abstract int repairPlayerGears(PlayerEntity player, int amount);
+
+    @Shadow private int pickingCount;
+
+    @Redirect(method = "expensiveUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getClosestPlayer(Lnet/minecraft/entity/Entity;D)Lnet/minecraft/entity/player/PlayerEntity;"))
     public PlayerEntity onlyPlayersWithGemsOfHolding(World w, Entity e, double maxDistance) {
         return w.getClosestPlayer(e.getX(), e.getY(), e.getZ(), maxDistance,
                 delegateToVanilla() ? EntityPredicates.EXCEPT_SPECTATOR : (en) -> {
@@ -42,7 +40,7 @@ public class ExperienceOrbEntityMixin {
                 });
     }
 
-    @Inject(method = "tick", at = @At("HEAD"))
+    @Inject(method = "expensiveUpdate", at = @At("HEAD"))
     public void checkTargetHasGem(CallbackInfo cb) {
         if (!delegateToVanilla() && target != null)
             if (!GemOfHoldingItem.doGravitate((ExperienceOrbEntity) (Object) this, target))
@@ -60,11 +58,10 @@ public class ExperienceOrbEntityMixin {
             cb.cancel();
     }
 
-    @Redirect(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;chooseEquipmentWith(Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/entity/LivingEntity;Ljava/util/function/Predicate;)Ljava/util/Map$Entry;"))
-    public Map.Entry<EquipmentSlot, ItemStack> disableMending(Enchantment enchantment, LivingEntity entity,
-            Predicate<ItemStack> condition) {
-        return Reelism.CONFIG.disableMending ? null
-                : EnchantmentHelper.chooseEquipmentWith(enchantment, entity, condition);
+    @Redirect(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ExperienceOrbEntity;repairPlayerGears(Lnet/minecraft/entity/player/PlayerEntity;I)I"))
+    public int disableMending(ExperienceOrbEntity experienceOrbEntity, PlayerEntity player, int amount) {
+        return Reelism.CONFIG.disableMending ? amount
+                : repairPlayerGears(player, amount);
     }
 
     @Redirect(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;addExperience(I)V"))
@@ -77,10 +74,11 @@ public class ExperienceOrbEntityMixin {
         this.amount -= GemOfHoldingItem.fill(is, amount);
     }
 
-    @Redirect(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ExperienceOrbEntity;remove()V"))
+    @Redirect(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ExperienceOrbEntity;discard()V"))
     public void removeIfEmpty(ExperienceOrbEntity experienceOrbEntity) {
+        pickingCount = 0;
         if (delegateToVanilla() || amount <= 0)
-            ((ExperienceOrbEntity) (Object) this).remove();
+            ((ExperienceOrbEntity) (Object) this).discard();
     }
 
     @Unique

@@ -14,7 +14,7 @@ public class ReeStructurePools {
             StructurePools.register(new StructurePool(
                 Reelism.id("stronghold/upper_base"),
                 new Identifier("empty"),
-                ImmutableList.of(Pair.of(StructurePoolElement.method_30434("reelism-mod:stronghold/base_low"), 1)),
+                ImmutableList.of(Pair.of(StructurePoolElement.ofSingle("reelism-mod:stronghold/base_low"), 1)),
                 StructurePool.Projection.RIGID
             ));
     }

@@ -28,7 +28,7 @@ public class StrongholdPortalRoomMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;with(Lnet/minecraft/state/property/Property;Ljava/lang/Comparable;)Ljava/lang/Object;"),
             slice = @Slice(
                     from = @At(value = "INVOKE", target = "Ljava/util/Random;nextFloat()F"),
-                    to = @At(value = "INVOKE", target = "Lnet/minecraft/structure/StrongholdGenerator$PortalRoom;applyYTransform(I)I")
+                    to = @At(value = "INVOKE", target = "Lnet/minecraft/structure/StrongholdGenerator$PortalRoom;offsetPos(III)Lnet/minecraft/util/math/BlockPos$Mutable;")
             ))
     public Object removeEye(BlockState state, Property<Boolean> property, Comparable<?> c) {
         if (!Reelism.CONFIG.surreelism.altNetherPortals)

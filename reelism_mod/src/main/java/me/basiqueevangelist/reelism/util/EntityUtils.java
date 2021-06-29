@@ -20,7 +20,7 @@ public final class EntityUtils {
     public static Entity doTeleport(Entity e, ServerWorld to, double x, double y, double z, float yaw, float pitch) {
         to.getProfiler().push("doTeleport");
         ((ServerWorld) e.getEntityWorld()).getChunkManager().addTicket(TICKET_TYPE, new ChunkPos(e.getBlockPos()), 3,
-                e.getEntityId());
+                e.getId());
         if (e instanceof ServerPlayerEntity) {
             ((ServerPlayerEntity) e).teleport(to, x, y, z, yaw, pitch);
         } else {
@@ -37,7 +37,7 @@ public final class EntityUtils {
                 e.refreshPositionAndAngles(x, y, z, yaw, pitch);
                 e.setHeadYaw(yaw);
                 to.onDimensionChanged(e);
-                old.removed = true;
+                old.remove(Entity.RemovalReason.CHANGED_DIMENSION);
             } else {
                 e.teleport(x, y, z);
                 e.setHeadYaw(yaw);

@@ -18,7 +18,7 @@ public class ClientReelism implements ClientModInitializer {
         ClientRuntimeResources.register();
         if (Reelism.CONFIG.gemOfHoldingItem)
             FabricModelPredicateProviderRegistry.register(ReeItems.GEM_OF_HOLDING, Reelism.id("charge"),
-                    (stack, world, entity) -> (float) GemOfHoldingItem.getCharge(stack) / (float) GemOfHoldingItem.MAX_CHARGE);
+                    (stack, world, entity, seed) -> (float) GemOfHoldingItem.getCharge(stack) / (float) GemOfHoldingItem.MAX_CHARGE);
         if (Reelism.CONFIG.surreelism.altNetherPortals)
             BlockEntityRendererRegistry.INSTANCE.register(ReeBlockEntities.NETHER_PORTAL, EndPortalBlockEntityRenderer::new);
     }

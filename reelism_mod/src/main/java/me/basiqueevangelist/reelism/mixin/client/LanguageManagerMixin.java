@@ -16,7 +16,7 @@ import java.util.List;
 
 @Mixin(LanguageManager.class)
 public class LanguageManagerMixin {
-    @Inject(method = "apply", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "reload", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILHARD)
     public void loadAlternateTranslations(ResourceManager res, CallbackInfo cb, LanguageDefinition en,
             List<LanguageDefinition> lan, TranslationStorage translat) {
         ClientReelism.ENGLISH = TranslationStorage.load(res, ImmutableList.of(en));

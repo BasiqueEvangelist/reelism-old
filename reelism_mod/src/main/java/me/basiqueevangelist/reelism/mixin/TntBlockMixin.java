@@ -3,8 +3,8 @@ package me.basiqueevangelist.reelism.mixin;
 import me.basiqueevangelist.reelism.Reelism;
 import me.basiqueevangelist.reelism.access.BlockSettingsAccess;
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.TntBlock;
 import net.minecraft.sound.BlockSoundGroup;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +20,7 @@ public class TntBlockMixin {
 
         set.strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
         ((BlockSettingsAccess) set).reelism$setMaterial(Material.WOOD)
-                .reelism$setMaterialColorFactory(state -> MaterialColor.WOOD);
+                .reelism$setMapColorFactory(state -> MapColor.OAK_TAN);
         return set;
     }
 }

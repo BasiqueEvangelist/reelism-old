@@ -27,14 +27,14 @@ public class FollowBobberGoal extends Goal {
         if (!Reelism.CONFIG.betterFishing)
             return false;
 
-        List<FishingBobberEntity> bobbers = fish.world.getEntitiesIncludingUngeneratedChunks(FishingBobberEntity.class, fish.getBoundingBox().expand(5, 5, 5));
+        List<FishingBobberEntity> bobbers = fish.world.getEntitiesByClass(FishingBobberEntity.class, fish.getBoundingBox().expand(5, 5, 5), this::matchesBobber);
         bobber = EntityUtils.getClosestEntity(bobbers, this::matchesBobber, fish.getX(), fish.getY(), fish.getZ());
         return bobber != null;
     }
 
     @Override
     public boolean shouldContinue() {
-        return !bobber.removed && matchesBobber(bobber) && bobber.squaredDistanceTo(fish) < 8 * 8 && fish.getNavigation().isFollowingPath();
+        return !bobber.isRemoved() && matchesBobber(bobber) && bobber.squaredDistanceTo(fish) < 8 * 8 && fish.getNavigation().isFollowingPath();
     }
 
     @Override

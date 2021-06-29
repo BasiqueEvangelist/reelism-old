@@ -22,8 +22,8 @@ public class MerchantEntityMixin {
                 ((ItemStackAccessor)(Object)o.getOriginalFirstBuyItem()).reelism$setItem(Items.GOLD_NUGGET);
             if (o.getSecondBuyItem() != null && o.getSecondBuyItem().getItem() == Items.EMERALD)
                 ((ItemStackAccessor)(Object)o.getSecondBuyItem()).reelism$setItem(Items.GOLD_NUGGET);
-            if (o.getMutableSellItem() != null && o.getMutableSellItem().getItem() == Items.EMERALD)
-                ((ItemStackAccessor)(Object)o.getMutableSellItem()).reelism$setItem(Items.GOLD_NUGGET);
+            if (o.getSellItem() != null && o.getSellItem().getItem() == Items.EMERALD)
+                ((ItemStackAccessor)(Object)o.getSellItem()).reelism$setItem(Items.GOLD_NUGGET);
         }
         return o;
     }

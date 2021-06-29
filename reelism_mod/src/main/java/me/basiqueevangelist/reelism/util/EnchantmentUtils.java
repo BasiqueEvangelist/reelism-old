@@ -3,8 +3,8 @@ package me.basiqueevangelist.reelism.util;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -24,9 +24,9 @@ public final class EnchantmentUtils {
 
     public static void forEachEnchantment(ItemStack is, BiConsumer<Enchantment, Integer> c) {
         if (!is.isEmpty()) {
-            ListTag enchs = is.getEnchantments();
+            NbtList enchs = is.getEnchantments();
             for (int i = 0; i < enchs.size(); i++) {
-                CompoundTag ench = enchs.getCompound(i);
+                NbtCompound ench = enchs.getCompound(i);
                 Identifier enchId = new Identifier(ench.getString("id"));
                 int enchLevel = ench.getInt("lvl");
                 Registry.ENCHANTMENT.getOrEmpty(enchId).ifPresent(enchInst -> {

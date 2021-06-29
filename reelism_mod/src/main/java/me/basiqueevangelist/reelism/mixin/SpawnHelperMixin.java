@@ -23,18 +23,20 @@ import java.util.Random;
 
 @Mixin(SpawnHelper.class)
 public abstract class SpawnHelperMixin {
-    @Redirect(method = "pickRandomSpawnEntry", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/collection/WeightedPicker;getRandom(Ljava/util/Random;Ljava/util/List;)Lnet/minecraft/util/collection/WeightedPicker$Entry;"))
-    private static WeightedPicker.Entry pickEntry(Random r, List<SpawnSettings.SpawnEntry> entries, ServerWorld serverWorld, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, SpawnGroup spawnGroup, Random random, BlockPos blockPos) {
-        if (!Reelism.CONFIG.randomSpawnFrequencies)
-            return WeightedPicker.getRandom(r, entries);
+    // TODO: fix this.
 
-        WorldChunk chunk = serverWorld.getChunk(blockPos.getX() >> 4, blockPos.getZ() >> 4);
-        SpawnFrequencyComponent sfc = ReeComponents.SPAWN_FREQUENCY.get(chunk);
-
-        ArrayList<WeightedSpawnEntry> newEntries = new ArrayList<>();
-        for (SpawnSettings.SpawnEntry se : entries) {
-            newEntries.add(new WeightedSpawnEntry(se, sfc));
-        }
-        return WeightedPicker.getRandom(r, newEntries).getEntry();
-    }
+//    @Redirect(method = "pickRandomSpawnEntry", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/collection/WeightedPicker;getRandom(Ljava/util/Random;Ljava/util/List;)Lnet/minecraft/util/collection/WeightedPicker$Entry;"))
+//    private static WeightedPicker.Entry pickEntry(Random r, List<SpawnSettings.SpawnEntry> entries, ServerWorld serverWorld, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, SpawnGroup spawnGroup, Random random, BlockPos blockPos) {
+//        if (!Reelism.CONFIG.randomSpawnFrequencies)
+//            return WeightedPicker.getRandom(r, entries);
+//
+//        WorldChunk chunk = serverWorld.getChunk(blockPos.getX() >> 4, blockPos.getZ() >> 4);
+//        SpawnFrequencyComponent sfc = ReeComponents.SPAWN_FREQUENCY.get(chunk);
+//
+//        ArrayList<WeightedSpawnEntry> newEntries = new ArrayList<>();
+//        for (SpawnSettings.SpawnEntry se : entries) {
+//            newEntries.add(new WeightedSpawnEntry(se, sfc));
+//        }
+//        return WeightedPicker.getRandom(r, newEntries).getEntry();
+//    }
 }

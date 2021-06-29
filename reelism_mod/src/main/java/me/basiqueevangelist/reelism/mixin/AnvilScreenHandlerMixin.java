@@ -22,8 +22,8 @@ public class AnvilScreenHandlerMixin {
     @Inject(method = "canTakeOutput", at = @At("HEAD"), cancellable = true)
     public void canTakeOutput(PlayerEntity player, boolean present, CallbackInfoReturnable<Boolean> cb) {
         if (Reelism.CONFIG.gemOfHoldingItem)
-            cb.setReturnValue((player.abilities.creativeMode || GemOfHoldingItem
-                    .getTotalExperience(player.inventory) >= EnchantmentUtils.getExperienceFromLevels(levelCost.get()))
+            cb.setReturnValue((player.getAbilities().creativeMode || GemOfHoldingItem
+                    .getTotalExperience(player.getInventory()) >= EnchantmentUtils.getExperienceFromLevels(levelCost.get()))
                     && levelCost.get() > 0);
     }
 

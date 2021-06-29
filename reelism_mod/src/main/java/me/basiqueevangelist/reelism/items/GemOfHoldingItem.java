@@ -6,7 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
@@ -45,7 +45,7 @@ public class GemOfHoldingItem extends Item {
     }
 
     public static int getCharge(ItemStack is) {
-        CompoundTag tag = is.getTag();
+        NbtCompound tag = is.getTag();
         return tag == null ? 0 : tag.getInt("Charge");
     }
 
@@ -63,6 +63,22 @@ public class GemOfHoldingItem extends Item {
     @Override
     public UseAction getUseAction(ItemStack stack) {
         return UseAction.BLOCK;
+    }
+
+    @Override
+    public boolean isItemBarVisible(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int getItemBarStep(ItemStack stack) {
+        return Math.round((float)getCharge(stack) * 13.0F / MAX_CHARGE);
+    }
+
+    @Override
+    public int getItemBarColor(ItemStack stack) {
+        float hue = Math.max(0.0F, (float)getCharge(stack) / MAX_CHARGE);
+        return MathHelper.hsvToRgb(hue / 3.0F, 1.0F, 1.0F);
     }
 
     @Override

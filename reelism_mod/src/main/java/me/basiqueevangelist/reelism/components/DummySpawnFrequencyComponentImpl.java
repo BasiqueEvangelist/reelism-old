@@ -2,7 +2,7 @@ package me.basiqueevangelist.reelism.components;
 
 import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import it.unimi.dsi.fastutil.objects.Object2FloatMaps;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 
 public class DummySpawnFrequencyComponentImpl implements SpawnFrequencyComponent {
@@ -23,12 +23,12 @@ public class DummySpawnFrequencyComponentImpl implements SpawnFrequencyComponent
     }
 
     @Override
-    public void readFromNbt(CompoundTag tag) {
+    public void readFromNbt(NbtCompound tag) {
 
     }
 
     @Override
-    public void writeToNbt(CompoundTag tag) {
+    public void writeToNbt(NbtCompound tag) {
 
     }
 }

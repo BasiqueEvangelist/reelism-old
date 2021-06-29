@@ -14,10 +14,10 @@ import java.util.Optional;
 
 @Mixin(AbstractFireBlock.class)
 public class AbstractFireBlockMixin {
-    @Redirect(method = "onBlockAdded", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/dimension/AreaHelper;method_30485(Lnet/minecraft/world/WorldAccess;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction$Axis;)Ljava/util/Optional;"))
+    @Redirect(method = "onBlockAdded", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/dimension/AreaHelper;getNewPortal(Lnet/minecraft/world/WorldAccess;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction$Axis;)Ljava/util/Optional;"))
     private Optional<AreaHelper> checkPortal(WorldAccess worldAccess, BlockPos blockPos, Direction.Axis axis)  {
         if (Reelism.CONFIG.surreelism.netherPortalsDisabled)
             return Optional.empty();
-        return AreaHelper.method_30485(worldAccess, blockPos, axis);
+        return AreaHelper.getNewPortal(worldAccess, blockPos, axis);
     }
 }

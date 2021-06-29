@@ -1,6 +1,6 @@
 package me.basiqueevangelist.reelism.components;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -10,7 +10,7 @@ public class TransportationComponentImpl implements TransportationComponent {
     Vec3d position = Vec3d.ZERO;
 
     @Override
-    public void readFromNbt(CompoundTag tag) {
+    public void readFromNbt(NbtCompound tag) {
         world = new Identifier(tag.getString("World"));
         position = new Vec3d(
                 tag.getDouble("PosX"),
@@ -19,7 +19,7 @@ public class TransportationComponentImpl implements TransportationComponent {
     }
 
     @Override
-    public void writeToNbt(CompoundTag tag) {
+    public void writeToNbt(NbtCompound tag) {
         tag.putString("World", world.toString());
         tag.putDouble("PosX", position.getX());
         tag.putDouble("PosY", position.getY());

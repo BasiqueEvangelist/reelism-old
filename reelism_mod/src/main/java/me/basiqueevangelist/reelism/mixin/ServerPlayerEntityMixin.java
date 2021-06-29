@@ -36,7 +36,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity {
     @Inject(method = "teleport", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/server/PlayerManager;sendPlayerStatus(Lnet/minecraft/server/network/ServerPlayerEntity;)V"))
     public void afterCrossDimensionalTeleport(CallbackInfo cb) {
         for (StatusEffectInstance eff : getStatusEffects()) {
-            networkHandler.sendPacket(new EntityStatusEffectS2CPacket(this.getEntityId(), eff));
+            networkHandler.sendPacket(new EntityStatusEffectS2CPacket(this.getId(), eff));
         }
     }
 }

@@ -63,10 +63,10 @@ public class TransportationStatusEffect extends StatusEffect implements Extended
                 if (toBeApplied.contains(e))
                     continue;
                 TransportationComponent component = ReeComponents.TRANSPORTATION.get(e);
-                ServerWorld w = s.getWorld(RegistryKey.of(Registry.DIMENSION, component.getWorld()));
+                ServerWorld w = s.getWorld(RegistryKey.of(Registry.WORLD_KEY, component.getWorld()));
                 Vec3d pos = component.getPosition();
                 createCloudFor(e);
-                e = (LivingEntity) EntityUtils.doTeleport(e, w, pos.x, pos.y, pos.z, e.yaw, e.pitch);
+                e = (LivingEntity) EntityUtils.doTeleport(e, w, pos.x, pos.y, pos.z, e.getYaw(), e.getPitch());
                 e.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 10 * 20));
                 e.setPos(pos.x, pos.y, pos.z);
             }

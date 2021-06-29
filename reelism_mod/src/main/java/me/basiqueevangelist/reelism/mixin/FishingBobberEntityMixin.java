@@ -18,6 +18,7 @@ import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.stat.Stats;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.TypeFilter;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -38,11 +39,11 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
 
     @Shadow private Entity hookedEntity;
 
-    @Shadow protected abstract void updateHookedEntityId();
-
     @Shadow @Nullable public abstract PlayerEntity getPlayerOwner();
 
     @Shadow private boolean inOpenWater;
+
+    @Shadow protected abstract void updateHookedEntityId(@Nullable Entity entity);
 
     public FishingBobberEntityMixin(EntityType<? extends ProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -58,11 +59,11 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
     private void onTick(CallbackInfo cb) {
         if (Reelism.CONFIG.betterFishing && state == FishingBobberEntity.State.BOBBING) {
             if (!world.isClient) {
-                List<FishEntity> fish = world.getEntitiesIncludingUngeneratedChunks(FishEntity.class, this.getBoundingBox().expand(0.5));
+                List<FishEntity> fish = world.getEntitiesByType(TypeFilter.instanceOf(FishEntity.class), this.getBoundingBox().expand(0.5), this::isInWater);
                 FishEntity closestFish = EntityUtils.getClosestEntity(fish, this::isInWater, getX(), getY(), getZ());
                 if (closestFish != null) {
                     hookedEntity = closestFish;
-                    updateHookedEntityId();
+                    updateHookedEntityId(closestFish);
                 }
             }
             if (hookedEntity != null) {
@@ -95,7 +96,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
                     ie.setVelocity(hookedEntity.getVelocity().add(diffX * 0.1D, diffY * 0.1D + Math.sqrt(Math.sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ)) * 0.08D, diffZ * 0.1D));
                     world.spawnEntity(ie);
                 });
-                hookedEntity.remove();
+                hookedEntity.discard();
             }
             else {
                 Entity owner = getOwner();

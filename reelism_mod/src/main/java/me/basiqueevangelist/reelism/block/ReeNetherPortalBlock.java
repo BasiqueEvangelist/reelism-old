@@ -29,8 +29,8 @@ public class ReeNetherPortalBlock extends BlockWithEntity {
         super(settings);
     }
 
-    public BlockEntity createBlockEntity(BlockView world) {
-        return new ReeNetherPortalBlockEntity();
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new ReeNetherPortalBlockEntity(pos, state);
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {

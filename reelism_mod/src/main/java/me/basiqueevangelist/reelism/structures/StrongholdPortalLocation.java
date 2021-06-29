@@ -33,9 +33,9 @@ public class StrongholdPortalLocation {
             if (p instanceof StrongholdGenerator.PortalRoom) {
                 BlockBox b = p.getBoundingBox();
                 return new StrongholdPortalLocation(new BlockPos(
-                        b.minX + (b.maxX - b.minX) / 2,
-                        b.minY + (b.maxY - b.minY) / 2 + 1,
-                        b.minZ + (b.maxZ - b.minZ) / 2), p.getFacing());
+                        b.getMinX() + (b.getMaxX() - b.getMinX()) / 2,
+                        b.getMinY() + (b.getMaxY() - b.getMinY()) / 2 + 1,
+                        b.getMinZ() + (b.getMaxZ() - b.getMinZ()) / 2), p.getFacing());
             }
         }
         throw new RuntimeException("Could not find stronghold portal room!");

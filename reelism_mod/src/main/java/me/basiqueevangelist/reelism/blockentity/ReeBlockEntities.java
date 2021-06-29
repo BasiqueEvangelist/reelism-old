@@ -2,6 +2,7 @@ package me.basiqueevangelist.reelism.blockentity;
 
 import me.basiqueevangelist.reelism.Reelism;
 import me.basiqueevangelist.reelism.block.ReeBlocks;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.registry.Registry;
 
@@ -10,7 +11,7 @@ public final class ReeBlockEntities {
         throw new AssertionError();
     }
 
-    public static BlockEntityType<ReeNetherPortalBlockEntity> NETHER_PORTAL = BlockEntityType.Builder.create(ReeNetherPortalBlockEntity::new, ReeBlocks.NETHER_PORTAL).build(null);
+    public static BlockEntityType<ReeNetherPortalBlockEntity> NETHER_PORTAL = FabricBlockEntityTypeBuilder.create(ReeNetherPortalBlockEntity::new, ReeBlocks.NETHER_PORTAL).build(null);
 
     public static void register() {
         if (Reelism.CONFIG.surreelism.altNetherPortals) {

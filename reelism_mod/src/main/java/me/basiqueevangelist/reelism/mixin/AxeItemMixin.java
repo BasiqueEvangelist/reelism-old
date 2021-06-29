@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.tag.Tag;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 @Mixin(AxeItem.class)
 public abstract class AxeItemMixin extends MiningToolItem {
-    protected AxeItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, Set<Block> effectiveBlocks,
+    protected AxeItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, Tag<Block> effectiveBlocks,
             Settings settings) {
         super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
     }

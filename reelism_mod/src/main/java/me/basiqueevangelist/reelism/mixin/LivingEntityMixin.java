@@ -32,9 +32,9 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "onStatusEffectApplied", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/effect/StatusEffect;onApplied(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/attribute/AttributeContainer;I)V"))
-    public void onApply(StatusEffectInstance inst, CallbackInfo cb) {
-        if (inst.getEffectType() instanceof ExtendedStatusEffect) {
-            ((ExtendedStatusEffect) inst.getEffectType()).reelism$onEffectApplied((LivingEntity)(Object) this, inst.getAmplifier());
+    public void onApply(StatusEffectInstance effect, Entity source, CallbackInfo ci) {
+        if (effect.getEffectType() instanceof ExtendedStatusEffect) {
+            ((ExtendedStatusEffect) effect.getEffectType()).reelism$onEffectApplied((LivingEntity)(Object) this, effect.getAmplifier());
         }
     }
 
@@ -46,15 +46,15 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "onStatusEffectUpgraded", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/effect/StatusEffect;onRemoved(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/attribute/AttributeContainer;I)V"))
-    public void onUpgraded(StatusEffectInstance inst, boolean reapply, CallbackInfo cb) {
-        if (inst.getEffectType() instanceof ExtendedStatusEffect) {
-            ((ExtendedStatusEffect) inst.getEffectType()).reelism$onEffectUpgraded((LivingEntity)(Object) this, inst.getAmplifier());
+    public void onUpgraded(StatusEffectInstance effect, boolean reapplyEffect, Entity source, CallbackInfo ci) {
+        if (effect.getEffectType() instanceof ExtendedStatusEffect) {
+            ((ExtendedStatusEffect) effect.getEffectType()).reelism$onEffectUpgraded((LivingEntity)(Object) this, effect.getAmplifier());
         }
     }
 
     @Redirect(method = "applyClimbingSpeed", at = @At(value = "INVOKE", target = "Ljava/lang/Math;max(DD)D"))
     public double doubleIfLookingDown(double motY, double y) {
         double orig = Math.max(motY, y);
-        return orig * (pitch >= Reelism.CONFIG.ladderDownPitch && orig < 0 ? Reelism.CONFIG.ladderSpeedMultiplier : 1);
+        return orig * (getPitch() >= Reelism.CONFIG.ladderDownPitch && orig < 0 ? Reelism.CONFIG.ladderSpeedMultiplier : 1);
     }
 }

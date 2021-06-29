@@ -26,7 +26,6 @@
     "FishingBobberEntityAccessor",
     "FishingBobberEntityMixin",
     "HostileEntityMixin",
-    "ItemRendererMixin",
     "ItemStackAccessor",
     "LivingEntityAccessor",
     "LivingEntityMixin",

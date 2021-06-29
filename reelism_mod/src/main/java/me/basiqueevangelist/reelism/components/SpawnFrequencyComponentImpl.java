@@ -5,7 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.util.registry.Registry;
@@ -46,7 +46,7 @@ public class SpawnFrequencyComponentImpl implements SpawnFrequencyComponent {
     }
 
     @Override
-    public void readFromNbt(CompoundTag tag) {
+    public void readFromNbt(NbtCompound tag) {
         spawnFrequencies.clear();
         average = 0;
         for (String key : tag.getKeys()) {
@@ -65,7 +65,7 @@ public class SpawnFrequencyComponentImpl implements SpawnFrequencyComponent {
     }
 
     @Override
-    public void writeToNbt(CompoundTag tag) {
+    public void writeToNbt(NbtCompound tag) {
         for (Object2FloatMap.Entry<Identifier> entry : spawnFrequencies.object2FloatEntrySet()) {
             tag.putFloat(entry.getKey().toString(), entry.getFloatValue());
         }
@@ -81,7 +81,7 @@ public class SpawnFrequencyComponentImpl implements SpawnFrequencyComponent {
                 Identifier id = Registry.ENTITY_TYPE.getId(et);
 
                 r.setPopulationSeed(worldSeed * id.hashCode(), chunkX, chunkZ);
-                DoublePerlinNoiseSampler s = DoublePerlinNoiseSampler.method_30846(r, 1, DoubleLists.singleton(2));
+                DoublePerlinNoiseSampler s = DoublePerlinNoiseSampler.create(r, 1, DoubleLists.singleton(2));
                 average *= spawnFrequencies.size();
                 spawnFrequencies.put(id, Math.abs((float)s.sample(chunkX, 0, chunkZ)));
                 average /= spawnFrequencies.size();
