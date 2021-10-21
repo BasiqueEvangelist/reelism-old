@@ -8,6 +8,13 @@
     },
     "result": {
         "item": "minecraft:enchanted_book",
-        "nbt": "{StoredEnchantments:[{id:\"minecraft:sharpness\", lvl:1}]}"
+        "data": {
+            "StoredEnchantments": [
+                {
+                    "id": "minecraft:sharpness",
+                    "lvl": 1
+                }
+            ]
+        }
     }
 }

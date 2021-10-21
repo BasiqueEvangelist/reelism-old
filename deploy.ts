@@ -14,7 +14,7 @@ import { getVersions, pull, download } from "./.malanya/versions"
     if (!fs.existsSync("out/data")) {
         const versionList = await getVersions();
         console.log("> Downloaded version list");
-        const version = versionList.versions.find(x => x.id == versionList.latest.release);
+        const version = versionList.versions.find(x => x.id === "1.17.1");
         const versionManifest = <VersionManifest>await pull(version.url);
         console.log("> Downloaded version manifest");
         await download(versionManifest.downloads["client"].url, path.join("out", "client.jar"));
@@ -78,7 +78,7 @@ import { getVersions, pull, download } from "./.malanya/versions"
         depends: {
             fabricloader: ">=0.7.4",
             fabric: "*",
-            minecraft: "1.16.x",
+            minecraft: "1.17.x",
             "reelism-mod": "*",
             datapackify: "*"
         },

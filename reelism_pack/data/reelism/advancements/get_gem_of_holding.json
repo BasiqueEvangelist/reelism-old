@@ -22,7 +22,9 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "reelism-mod:gem_of_holding"
+                        "items": [
+                            "reelism-mod:gem_of_holding"
+                        ]
                     }
                 ]
             }

@@ -37,7 +37,7 @@ function pipeline(item) {
 
 var packInfo =
 {
-    basedOn: path.resolve("../Datapackify/src/main/resources"),
+    basedOn: path.resolve("../Datapackify/src/main/resources/builtin_data"),
     pipeline: pipeline
 };
 
